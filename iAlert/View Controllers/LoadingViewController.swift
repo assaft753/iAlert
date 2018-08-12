@@ -17,23 +17,37 @@ class LoadingViewController: UIViewController {
     let MAX_DiSTANCE:Double = 10000
     var safePlaces:[SafePlace]!
     let locationManager = CLLocationManager()
+    let pulsator = Pulsator()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialPulseAnimation()
-        locationManager.delegate = self
+        print("viewDidLoad!!!!!!!!!!!!!")
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        locationManager.delegate = self
+        print("viewWillAppear!!!!!!!!!!!!!!!! \(self.navigationController!.viewControllers)")
+        pulsator.start()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        locationManager.delegate = nil
+        print("viewWillDisappear!!!!!!!!!!!!!!!! \(self.navigationController!.viewControllers)")
         
     }
     
     func initialPulseAnimation()
     {
-        let pulsator = Pulsator()
         pulsator.position = radioTowerImage.center
         pulseContainer.layer.addSublayer(pulsator)
         pulsator.radius = 240.0
         pulsator.numPulse = 5
         pulsator.backgroundColor = UIColor.white.cgColor
-        pulsator.start()
     }
     
     func calculateAndPush(safePlaces:[SafePlace])
@@ -53,29 +67,36 @@ class LoadingViewController: UIViewController {
     
     private func nearestSafePlace(from safePlaces:[SafePlace],currentLocation:CLLocation)
     {
+        let viewController:UIViewController!
         
         if safePlaces.count == 0
         {
-             print("enter2")
+            print("enter2")
             let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
-            push(viewController: instructionViewController)
-            return
+            viewController = instructionViewController
+            //push(viewController: instructionViewController)
         }
+            
         else if let safePlace = calculate(from: safePlaces, currentLocation: currentLocation)
         {
+            print("enter4")
             print(safePlace)
             let mapViewController = storyboard!.instantiateViewController(withIdentifier: "Map Controller") as! MapViewController
             
             mapViewController.currentCoordinate = currentLocation.coordinate
             mapViewController.destinationCoordinate = safePlace.coordinate.coordinate
             mapViewController.address = safePlace.address
-            
-            push(viewController: mapViewController)
-            return
+            viewController = mapViewController
+            //push(viewController: mapViewController)
         }
-        print("enter1")
-        let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
-        push(viewController: instructionViewController)
+            
+        else
+        {
+            print("enter1")
+            let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
+            viewController = instructionViewController
+        }
+        push(viewController: viewController)
         
         
     }
@@ -94,13 +115,13 @@ class LoadingViewController: UIViewController {
             }
         }
         return minSafePlace
-//        let safe = SafePlace(longitude: 34.80996975251469, latitude: 32.05411042165174, address: "Ma'apilei Egoz St 76, Tel Aviv-Yafo, Israel")
-//        return nil
+        //        let safe = SafePlace(longitude: 34.80996975251469, latitude: 32.05411042165174, address: "Ma'apilei Egoz St 76, Tel Aviv-Yafo, Israel")
+        //        return nil
     }
     
     private func push(viewController:UIViewController)
     {
-         print("enter3")
+        print("enter3")
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -108,6 +129,9 @@ class LoadingViewController: UIViewController {
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        /*let alert = UIAlertController(title: "d", message: "d", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)*/
         manager.stopUpdatingLocation()
         guard let currentLocation = locations.first else { return }
         nearestSafePlace(from: self.safePlaces, currentLocation: currentLocation)

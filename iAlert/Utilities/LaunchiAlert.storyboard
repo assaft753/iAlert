@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,15 +26,14 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="NrH-XO-LSf"/>
                                             <constraint firstAttribute="height" constant="80" id="hae-rZ-7Qb"/>
-                                            <constraint firstAttribute="width" secondItem="0cg-mO-ppI" secondAttribute="height" multiplier="1:1" id="qGB-by-Z7W"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96078431369999995" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" red="0.96078431369999995" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="0cg-mO-ppI" firstAttribute="centerY" secondItem="XWY-r4-acC" secondAttribute="centerY" id="OFJ-dR-zQT"/>
-                                    <constraint firstItem="0cg-mO-ppI" firstAttribute="centerX" secondItem="XWY-r4-acC" secondAttribute="centerX" id="PDf-mO-yBW"/>
+                                    <constraint firstItem="0cg-mO-ppI" firstAttribute="centerX" secondItem="XWY-r4-acC" secondAttribute="centerX" id="CTC-Wq-rPc"/>
+                                    <constraint firstItem="0cg-mO-ppI" firstAttribute="centerY" secondItem="XWY-r4-acC" secondAttribute="centerY" id="Rfe-rz-KLc"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="clH-gp-HFQ"/>
                             </view>

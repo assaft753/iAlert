@@ -15,7 +15,6 @@ class MapViewController: UIViewController {
 
     @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
-    @IBAction func startBtn(_ sender: UIButton) {  }
     @IBOutlet weak var timeLeftLabel: UILabel!
     
     let locationManager = CLLocationManager()
@@ -31,16 +30,48 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //locationManager.requestAlwaysAuthorization()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
         locationManager.startUpdatingHeading()
+        locationManager.dismissHeadingCalibrationDisplay()
+        mapView.showsCompass = false
+    }
+    
+    @IBAction func finishBtn(_ sender: UIButton) {
+        speechSyntheizer.stopSpeaking(at: .immediate)
+        locationManager.stopUpdatingLocation()
+        locationManager.stopUpdatingHeading()
+        locationManager.monitoredRegions.forEach({self.locationManager.stopMonitoring(for: $0)})
+        locationManager.delegate = nil
+        mapView.delegate = nil
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         showDirections()
+        addMapViewLocationButton()
+        mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
+    }
+    
+    func addMapViewLocationButton()
+    {
+        let trackingButton: MKUserTrackingBarButtonItem = MKUserTrackingBarButtonItem.init(mapView: mapView)
+        let originPoint: CGPoint = CGPoint(x: mapView.bounds.width-70,y: mapView.bounds.height-85)
+        
+        let roundedSquare: UIView = UIView(frame: CGRect(origin: originPoint, size: CGSize(width: 55, height: 55)))
+        
+        roundedSquare.backgroundColor = UIColor.clear
+        roundedSquare.layer.cornerRadius = 10
+        roundedSquare.layer.masksToBounds = true
+        
+        let toolBarFrame = CGRect(origin: CGPoint(x: 0, y: 0) , size: CGSize(width: 55, height: 55))
+        let toolbar = UIToolbar.init(frame: toolBarFrame)
+        let flex: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
+        toolbar.items = [flex,trackingButton,flex]
+        roundedSquare.addSubview(toolbar)
+        mapView.addSubview(roundedSquare)
     }
     
     @objc
@@ -54,15 +85,14 @@ class MapViewController: UIViewController {
     
     func showDirections() {
         let direction = setDirectionsValues()
-        
         direction.calculate { (response, _) in
             guard let response = response else {return}
             guard let primaryRoute = response.routes.first else {return}
-            self.mapView.add(primaryRoute.polyline) // Call the renderer extension
+            self.mapView.add(primaryRoute.polyline)
             
             //Get fresh directions
             //To avoid doubles
-            //self.locationManager.monitoredRegions.forEach({self.locationManager.stopMonitoring(for: $0)})
+            self.locationManager.monitoredRegions.forEach({self.locationManager.stopMonitoring(for: $0)})
             
             //Turn by turn directions
             self.turnByTurnDirections(primaryRoute: primaryRoute)
@@ -79,7 +109,6 @@ class MapViewController: UIViewController {
         //This will make zoom in automaticly when running the application
         let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
         mapView.setRegion(region, animated: true)
-        mapView.userTrackingMode = .followWithHeading
         
         let directionsRequest = MKDirectionsRequest()
         
@@ -135,17 +164,6 @@ class MapViewController: UIViewController {
 
 //This extension will happen when updating location from viewDidLoad - to get user current location
 extension MapViewController: CLLocationManagerDelegate{
-    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
-        
-        //Get user current location
-        guard let currentLocation = locations.first else { return }
-        currentCoordinate = currentLocation.coordinate
-        
-        //Zoom in to user location
-//        mapView.userTrackingMode = .followWithHeading //The followWithHeading means that when ever you move the phone it will point the map in the direction that you are looking instead of just pointing it to north
-    }*/
-    
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         print("stepCounter = \(stepCounter)")
         stepCounter += 1
@@ -165,11 +183,6 @@ extension MapViewController: CLLocationManagerDelegate{
             locationManager.monitoredRegions.forEach({self.locationManager.stopMonitoring(for: $0)})
         }
     }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        mapView.camera.heading = newHeading.magneticHeading
-        mapView.setCamera(mapView.camera, animated: true)
-    }
 }
 
 //This extension will happen when we want to display things on the screen
@@ -178,7 +191,7 @@ extension MapViewController: MKMapViewDelegate{
         //This extension will happen when we want to display the location on the screen
         if overlay is MKPolyline{
             let renderer = MKPolylineRenderer(overlay: overlay)
-            renderer.strokeColor = .blue
+            renderer.strokeColor = #colorLiteral(red: 0.9786400199, green: 0.3367310166, blue: 0.3028771579, alpha: 1)
             renderer.lineWidth = 7
             return renderer
         }
@@ -186,9 +199,6 @@ extension MapViewController: MKMapViewDelegate{
         //This extension will happen when we want to display the directions on the screen
         if overlay is MKCircle{
             let renderer = MKCircleRenderer(overlay: overlay)
-          //  renderer.strokeColor = .red
-//            renderer.fillColor = .red
-//            renderer.alpha = 0.5
             return renderer
         }
         return MKOverlayRenderer()

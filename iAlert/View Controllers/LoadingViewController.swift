@@ -14,7 +14,7 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var radioTowerImage: UIImageView!
     @IBOutlet weak var pulseContainer: UIView!
     
-    let MAX_DiSTANCE:Double = 10000
+    let MAX_DISTANCE:Double = 20000
     var safePlaces:[SafePlace]!
     let locationManager = CLLocationManager()
     let pulsator = Pulsator()
@@ -23,21 +23,18 @@ class LoadingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initialPulseAnimation()
-        print("viewDidLoad!!!!!!!!!!!!!")
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         locationManager.delegate = self
-        print("viewWillAppear!!!!!!!!!!!!!!!! \(self.navigationController!.viewControllers)")
         pulsator.start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         locationManager.delegate = nil
-        print("viewWillDisappear!!!!!!!!!!!!!!!! \(self.navigationController!.viewControllers)")
         
     }
     
@@ -74,7 +71,6 @@ class LoadingViewController: UIViewController {
             print("enter2")
             let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
             viewController = instructionViewController
-            //push(viewController: instructionViewController)
         }
             
         else if let safePlace = calculate(from: safePlaces, currentLocation: currentLocation)
@@ -87,7 +83,6 @@ class LoadingViewController: UIViewController {
             mapViewController.destinationCoordinate = safePlace.coordinate.coordinate
             mapViewController.address = safePlace.address
             viewController = mapViewController
-            //push(viewController: mapViewController)
         }
             
         else
@@ -108,7 +103,7 @@ class LoadingViewController: UIViewController {
         for safePlace in safePlaces
         {
             let distance = currentLocation.distance(from: safePlace.coordinate)
-            if distance <= MAX_DiSTANCE && distance < minDistance
+            if distance <= MAX_DISTANCE && distance < minDistance
             {
                 minSafePlace = safePlace
                 minDistance = distance

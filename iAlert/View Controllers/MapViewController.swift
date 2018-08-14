@@ -17,6 +17,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLeftLabel: UILabel!
     
+    @IBOutlet weak var blurOverlay: UIView!
     let locationManager = CLLocationManager()
     var currentCoordinate: CLLocationCoordinate2D!
     var destinationCoordinate:CLLocationCoordinate2D!
@@ -30,6 +31,14 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let blurEffect = UIBlurEffect(style: .light)
+        let visualEffectView = UIVisualEffectView(effect: blurEffect)
+        visualEffectView.frame = blurOverlay.bounds
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurOverlay.addSubview(visualEffectView)
+        
+        
+        
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()

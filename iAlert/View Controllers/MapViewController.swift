@@ -12,12 +12,13 @@ import CoreLocation
 import AVFoundation
 
 class MapViewController: UIViewController {
-
+    
     @IBOutlet weak var directionsLabel: UILabel!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var timeLeftLabel: UILabel!
+    @IBOutlet var containerView: UIView!
     
-    @IBOutlet weak var blurOverlay: UIView!
+    @IBOutlet weak var directionView: UIView!
     let locationManager = CLLocationManager()
     var currentCoordinate: CLLocationCoordinate2D!
     var destinationCoordinate:CLLocationCoordinate2D!
@@ -31,14 +32,34 @@ class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createBlurView()
+        initLocationManager()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showDirections()
+        addMapViewLocationButton()
+        mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
+    }
+    
+    @IBAction func finishBtn(_ sender: UIButton) {
+        prepareForPop()
+        navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func createBlurView() {
+        let blurView = UIView(frame:directionView.bounds)
         let blurEffect = UIBlurEffect(style: .light)
         let visualEffectView = UIVisualEffectView(effect: blurEffect)
-        visualEffectView.frame = blurOverlay.bounds
+        visualEffectView.frame = blurView.bounds
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurOverlay.addSubview(visualEffectView)
-        
-        
-        
+        blurView.addSubview(visualEffectView)
+        blurView.backgroundColor = #colorLiteral(red: 0.9786400199, green: 0.3367310166, blue: 0.3028771579, alpha: 0.07)
+        containerView.insertSubview(blurView, belowSubview: directionView)
+    }
+    
+    func initLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
@@ -47,21 +68,14 @@ class MapViewController: UIViewController {
         mapView.showsCompass = false
     }
     
-    @IBAction func finishBtn(_ sender: UIButton) {
+    func prepareForPop()
+    {
         speechSyntheizer.stopSpeaking(at: .immediate)
         locationManager.stopUpdatingLocation()
         locationManager.stopUpdatingHeading()
         locationManager.monitoredRegions.forEach({self.locationManager.stopMonitoring(for: $0)})
         locationManager.delegate = nil
         mapView.delegate = nil
-        navigationController?.popToRootViewController(animated: true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        showDirections()
-        addMapViewLocationButton()
-        mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
     }
     
     func addMapViewLocationButton()

@@ -56,7 +56,6 @@ class LoadingViewController: UIViewController {
             {
                 self.safePlaces = safePlaces
                 locationManager.startUpdatingLocation()
-                
             }
         }
         
@@ -110,8 +109,6 @@ class LoadingViewController: UIViewController {
             }
         }
         return minSafePlace
-        //        let safe = SafePlace(longitude: 34.80996975251469, latitude: 32.05411042165174, address: "Ma'apilei Egoz St 76, Tel Aviv-Yafo, Israel")
-        //        return nil
     }
     
     private func push(viewController:UIViewController)
@@ -124,9 +121,6 @@ class LoadingViewController: UIViewController {
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        /*let alert = UIAlertController(title: "d", message: "d", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)*/
         manager.stopUpdatingLocation()
         guard let currentLocation = locations.first else { return }
         nearestSafePlace(from: self.safePlaces, currentLocation: currentLocation)

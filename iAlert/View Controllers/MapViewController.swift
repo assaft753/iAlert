@@ -55,7 +55,7 @@ class MapViewController: UIViewController {
         visualEffectView.frame = blurView.bounds
         visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         blurView.addSubview(visualEffectView)
-        blurView.backgroundColor = #colorLiteral(red: 0.9786400199, green: 0.3367310166, blue: 0.3028771579, alpha: 0.07)
+        blurView.backgroundColor = #colorLiteral(red: 0.9786400199, green: 0.3367310166, blue: 0.3028771579, alpha: 0.06903681505)
         containerView.insertSubview(blurView, belowSubview: directionView)
     }
     

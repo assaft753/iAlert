@@ -48,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             if let jsonString = userInfo["coords"] as? String,let safePlaces = SafePlace.parseSafePlaces(from: jsonString)
             {
+                sendPostRequest(sent: "enter calculateAndPush")
                 loadingViewCtrl.calculateAndPush(safePlaces: safePlaces)
             }
             
@@ -57,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func sendPostRequest(sent from:String)
     {
-        let url = URL(string: "http://192.168.1.105:3001/")!
+        let url = URL(string: "http://192.168.1.103:3001/")!
         var request = URLRequest(url: url)
         request.httpMethod="POST"
         var headers = request.allHTTPHeaderFields ?? [:]

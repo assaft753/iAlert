@@ -3,7 +3,6 @@
 //  iAlert
 //
 //  Created by Assaf Tayouri on 12/08/2018.
-//  Copyright © 2018 Lior Cohen. All rights reserved.
 //
 
 import Foundation

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gc3-Fg-RBp">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,18 +15,17 @@
             <objects>
                 <viewController storyboardIdentifier="Loading Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="HcB-GJ-lPg" customClass="LoadingViewController" customModule="iAlert" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4UN-QD-khn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A2A-Y2-ZdV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A2A-Y2-ZdV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTy-tV-V9p">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fm-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Zzx-GI-X88">
-                                        <rect key="frame" x="147.66666666666666" y="349" width="80" height="80"/>
+                                        <rect key="frame" x="147.5" y="293.5" width="80" height="80"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="80" id="3SZ-q0-ANg"/>
                                             <constraint firstAttribute="height" constant="80" id="hyU-Hk-mnL"/>
@@ -42,9 +41,17 @@
                         <color key="backgroundColor" red="0.96078431372549022" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.96078431372549022" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="fTy-tV-V9p" firstAttribute="top" secondItem="4UN-QD-khn" secondAttribute="top" id="2oZ-md-Uv6"/>
                             <constraint firstItem="fTy-tV-V9p" firstAttribute="leading" secondItem="run-U0-CF1" secondAttribute="leading" id="Gib-u6-sCK"/>
+                            <constraint firstItem="fTy-tV-V9p" firstAttribute="bottom" secondItem="run-U0-CF1" secondAttribute="bottom" id="GtS-Hn-WFy"/>
                             <constraint firstItem="fTy-tV-V9p" firstAttribute="trailing" secondItem="run-U0-CF1" secondAttribute="trailing" id="Ivl-hU-lrs"/>
+                            <constraint firstItem="A2A-Y2-ZdV" firstAttribute="top" secondItem="4UN-QD-khn" secondAttribute="top" id="ONm-zE-2yP"/>
+                            <constraint firstItem="A2A-Y2-ZdV" firstAttribute="bottom" secondItem="run-U0-CF1" secondAttribute="bottom" id="QBx-vu-e06"/>
+                            <constraint firstItem="fTy-tV-V9p" firstAttribute="leading" secondItem="run-U0-CF1" secondAttribute="leading" id="UbB-Mp-kxH"/>
+                            <constraint firstItem="A2A-Y2-ZdV" firstAttribute="leading" secondItem="run-U0-CF1" secondAttribute="leading" id="cbk-Kq-0kF"/>
                             <constraint firstItem="fTy-tV-V9p" firstAttribute="bottom" secondItem="run-U0-CF1" secondAttribute="bottom" id="g5h-eZ-uM0"/>
+                            <constraint firstItem="A2A-Y2-ZdV" firstAttribute="trailing" secondItem="run-U0-CF1" secondAttribute="trailing" id="llO-Sm-HTB"/>
+                            <constraint firstItem="fTy-tV-V9p" firstAttribute="trailing" secondItem="run-U0-CF1" secondAttribute="trailing" id="nU8-eD-jZr"/>
                             <constraint firstItem="fTy-tV-V9p" firstAttribute="top" secondItem="4UN-QD-khn" secondAttribute="top" id="vvs-8q-5ZF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="run-U0-CF1"/>
@@ -64,17 +71,17 @@
             <objects>
                 <viewController storyboardIdentifier="Map Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="MapViewController" customModule="iAlert" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsUserLocation="YES" showsCompass="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xX-A6-NVQ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="YGo-9b-mAd"/>
                                 </connections>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6J2-sY-xCn">
-                                <rect key="frame" x="0.0" y="24" width="375" height="145"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="92Y-37-Y81">
                                         <rect key="frame" x="313" y="28" width="54" height="40"/>
@@ -86,7 +93,7 @@
                                             <action selector="finishBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vzm-HD-Fyy"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="'lmf';bgmf;gmlf;gml;fgm;fmg;fmg;lkmf;lgbhmf;lkgm;lfmg;lkfmg;lkmfg;lkmf;lkgmf;lkgm;f" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dph-ZZ-o5m">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dph-ZZ-o5m">
                                         <rect key="frame" x="8" y="64" width="359" height="69"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
@@ -142,11 +149,11 @@
             <objects>
                 <viewController storyboardIdentifier="Instruction Controller" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gsp-Ds-PNg" customClass="InstructionsViewController" customModule="iAlert" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n46-lX-ioy">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="לא נמצא מקום מחסה קרוב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rra-Xe-i7n">
-                                <rect key="frame" x="83.666666666666671" y="115" width="207.66666666666663" height="25"/>
+                                <rect key="frame" x="84" y="115" width="207.5" height="25"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -158,19 +165,19 @@
                                 </constraints>
                             </imageView>
                             <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-pd-Qqp">
-                                <rect key="frame" x="16" y="198" width="343" height="560"/>
+                                <rect key="frame" x="16" y="198" width="343" height="449"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DIo-6p-MtV">
-                                        <rect key="frame" x="154.33333333333337" y="190.33333333333331" width="153.66666666666663" height="43.333333333333343"/>
+                                        <rect key="frame" x="154" y="190.5" width="154" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שכב על הבטן" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlE-Hf-VUK">
-                                                <rect key="frame" x="0.0" y="18.333333333333371" width="107.33333333333333" height="25"/>
+                                                <rect key="frame" x="0.0" y="18.5" width="107.5" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76O-gU-Qvf">
-                                                <rect key="frame" x="117.33333333333333" y="0.0" width="36.333333333333329" height="43.333333333333336"/>
+                                                <rect key="frame" x="117.5" y="0.0" width="36.5" height="43.5"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -178,16 +185,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iy9-z1-bPv">
-                                        <rect key="frame" x="15.666666666666657" y="263.66666666666669" width="292.33333333333337" height="43.333333333333314"/>
+                                        <rect key="frame" x="15.5" y="264" width="292.5" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הגן על הראש באמצעות הידיים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zze-60-CG7">
-                                                <rect key="frame" x="0.0" y="18.333333333333314" width="245" height="25"/>
+                                                <rect key="frame" x="0.0" y="18.5" width="245" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUq-1w-FLZ">
-                                                <rect key="frame" x="255.00000000000003" y="0.0" width="37.333333333333343" height="43.333333333333336"/>
+                                                <rect key="frame" x="255" y="0.0" width="37.5" height="43.5"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -195,16 +202,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-p2-M6b">
-                                        <rect key="frame" x="36.666666666666657" y="43.666666666666657" width="271.33333333333337" height="43.333333333333343"/>
+                                        <rect key="frame" x="36.5" y="43.5" width="271.5" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="חפש קיר בטון רחוק מזכוכיות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0s-nL-RG2">
-                                                <rect key="frame" x="0.0" y="18.333333333333343" width="230" height="25"/>
+                                                <rect key="frame" x="0.0" y="18.5" width="230" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDI-nY-kTA">
-                                                <rect key="frame" x="240.00000000000003" y="0.0" width="31.333333333333343" height="43.333333333333336"/>
+                                                <rect key="frame" x="240" y="0.0" width="31.5" height="43.5"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -212,16 +219,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tTo-22-jNj">
-                                        <rect key="frame" x="31.333333333333343" y="116.99999999999999" width="276.66666666666663" height="43.333333333333329"/>
+                                        <rect key="frame" x="31" y="117" width="277" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אם לא קיים, חפש מקום פתוח" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-uK-ZRZ">
-                                                <rect key="frame" x="0.0" y="18.333333333333314" width="230.33333333333334" height="25"/>
+                                                <rect key="frame" x="0.0" y="18.5" width="230.5" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnM-Fb-7Fh">
-                                                <rect key="frame" x="240.33333333333334" y="0.0" width="36.333333333333343" height="43.333333333333336"/>
+                                                <rect key="frame" x="240.5" y="0.0" width="36.5" height="43.5"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -229,19 +236,19 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fjY-FG-LGh">
-                                        <rect key="frame" x="28.666666666666657" y="337" width="279.33333333333337" height="68.333333333333314"/>
+                                        <rect key="frame" x="28.5" y="337.5" width="279.5" height="68.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-V4-97i">
-                                                <rect key="frame" x="0.0" y="0.0" width="279.33333333333331" height="43.333333333333336"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="279.5" height="43.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בהפוגה נסה להגיע לאזור מוגן" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-KL-QA0">
-                                                        <rect key="frame" x="0.0" y="18.333333333333371" width="234" height="25"/>
+                                                        <rect key="frame" x="0.0" y="18.5" width="234" height="25"/>
                                                         <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                         <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-DR-s5Y">
-                                                        <rect key="frame" x="244.00000000000003" y="0.0" width="35.333333333333343" height="43.333333333333336"/>
+                                                        <rect key="frame" x="244" y="0.0" width="35.5" height="43.5"/>
                                                         <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
                                                         <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -249,7 +256,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במהירות ובזהירות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-e6-8jJ">
-                                                <rect key="frame" x="67.999999999999986" y="43.333333333333371" width="143.66666666666663" height="25"/>
+                                                <rect key="frame" x="68" y="43.5" width="144" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -272,13 +279,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="פעל לפי ההוראות הבאות:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts2-Jv-3Lz">
-                                <rect key="frame" x="86.666666666666686" y="148" width="202" height="25"/>
+                                <rect key="frame" x="86.5" y="148" width="202" height="25"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfU-01-RGY">
-                                <rect key="frame" x="318" y="54" width="54" height="30"/>
+                                <rect key="frame" x="318" y="30" width="54" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3SW-83-hjG"/>
                                 </constraints>

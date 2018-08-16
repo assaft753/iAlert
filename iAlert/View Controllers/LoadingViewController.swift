@@ -3,7 +3,7 @@
 //  iAlert
 //
 //  Created by Assaf Tayouri on 11/08/2018.
-//  Copyright © 2018 Lior Cohen. All rights reserved.
+//  Copyright © 2018 Assaf Tayouri. All rights reserved.
 //
 
 import UIKit
@@ -20,6 +20,41 @@ class LoadingViewController: UIViewController {
     let pulsator = Pulsator()
     
     
+    private func sendPostRequest(sent from:String)
+    {
+        let url = URL(string: "http://192.168.1.103:3001/")!
+        var request = URLRequest(url: url)
+        request.httpMethod="POST"
+        var headers = request.allHTTPHeaderFields ?? [:]
+        headers["Content-Type"] = "application/json"
+        request.allHTTPHeaderFields = headers
+        let encoder = JSONEncoder()
+        do {
+            let dic:[String:String] = ["method":from]
+            let jsonData = try encoder.encode(dic)
+            request.httpBody = jsonData
+        } catch {
+            print("error in json \(error)")
+        }
+        
+        
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        let task = session.dataTask(with: request) { (responseData, response, responseError) in
+            if let error = responseError
+            {
+                print("error in session \(error)")
+            }
+            
+            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
+                print("response: ", utf8Representation)
+            } else {
+                print("no readable data received in response")
+            }
+        }
+        task.resume()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initialPulseAnimation()
@@ -28,12 +63,14 @@ class LoadingViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        sendPostRequest(sent: "enter viewWillAppear ")
         locationManager.delegate = self
         pulsator.start()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        sendPostRequest(sent: "enter viewWillDisappear ")
         locationManager.delegate = nil
         
     }
@@ -56,6 +93,7 @@ class LoadingViewController: UIViewController {
             {
                 self.safePlaces = safePlaces
                 locationManager.startUpdatingLocation()
+                //locationManager.requestLocation()
             }
         }
         
@@ -67,14 +105,14 @@ class LoadingViewController: UIViewController {
         
         if safePlaces.count == 0
         {
-            print("enter2")
+            sendPostRequest(sent: "enter count == 0 ")
             let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
             viewController = instructionViewController
         }
             
         else if let safePlace = calculate(from: safePlaces, currentLocation: currentLocation)
         {
-            print("enter4")
+            sendPostRequest(sent: "enter calculate")
             print(safePlace)
             let mapViewController = storyboard!.instantiateViewController(withIdentifier: "Map Controller") as! MapViewController
             
@@ -86,7 +124,7 @@ class LoadingViewController: UIViewController {
             
         else
         {
-            print("enter1")
+            sendPostRequest(sent: "enter else")
             let instructionViewController = storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
             viewController = instructionViewController
         }
@@ -113,7 +151,7 @@ class LoadingViewController: UIViewController {
     
     private func push(viewController:UIViewController)
     {
-        print("enter3")
+        sendPostRequest(sent: "enter push")
         self.navigationController?.pushViewController(viewController, animated: true)
     }
 }
@@ -121,8 +159,14 @@ class LoadingViewController: UIViewController {
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        manager.stopUpdatingLocation()
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        sendPostRequest(sent: "enter didUpdateLocations")
         guard let currentLocation = locations.first else { return }
         nearestSafePlace(from: self.safePlaces, currentLocation: currentLocation)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }

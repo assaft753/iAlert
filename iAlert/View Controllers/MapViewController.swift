@@ -1,6 +1,5 @@
 //
 //  ViewController.swift
-//  TurnByTurn2
 //
 //  Created by Sapir Kaplan on 10/07/2018.
 //  Copyright © 2018 Sapir Kaplan. All rights reserved.
@@ -36,11 +35,11 @@ class MapViewController: UIViewController {
         initLocationManager()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         showDirections()
         addMapViewLocationButton()
-        mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
+        //mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
     }
     
     @IBAction func finishBtn(_ sender: UIButton) {
@@ -129,9 +128,12 @@ class MapViewController: UIViewController {
     }
     
     func setDirectionsValues() -> MKDirections {
+        
         //This will make zoom in automaticly when running the application
-        let region = MKCoordinateRegion(center: currentCoordinate, span: MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005))
+        let region = MKCoordinateRegion(center: currentCoordinate, span: .init(latitudeDelta: 0.005, longitudeDelta: 0.005))
         mapView.setRegion(region, animated: true)
+        mapView.showsUserLocation = true
+        
         
         let directionsRequest = MKDirectionsRequest()
         
@@ -148,6 +150,7 @@ class MapViewController: UIViewController {
     }
     
     func destination() -> MKMapItem {
+        
         //Create annotation for destination
         let destinationAnnotation = Annotation(coordinate: destinationCoordinate, title: TITLE, subtitle: address)
         mapView.addAnnotation(destinationAnnotation)
@@ -170,6 +173,7 @@ class MapViewController: UIViewController {
     }
     
     func setDirections(){
+        
         //Set text directions
         let initialMessage = "In \(steps[1].distance) meters, \(steps[1].instructions) then in \(steps[2].distance) meters, \(steps[2].instructions)."
         directionsLabel.text = initialMessage

@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  TurnByTurn2
-//
-//  Created by Sapir Kaplan on 10/07/2018.
-//  Copyright © 2018 Sapir Kaplan. All rights reserved.
-//
 
 import UIKit
 import UserNotifications
@@ -19,7 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        sendPostRequest(sent: "finish launch")
         locationManager.requestAlwaysAuthorization()
         Messaging.messaging().delegate = self
         
@@ -48,48 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         {
             if let jsonString = userInfo["coords"] as? String,let safePlaces = SafePlace.parseSafePlaces(from: jsonString)
             {
-                sendPostRequest(sent: "enter calculateAndPush")
                 loadingViewCtrl.calculateAndPush(safePlaces: safePlaces)
             }
             
         }
     }
     
-    
-    private func sendPostRequest(sent from:String)
-    {
-        let url = URL(string: "http://192.168.1.103:3001/")!
-        var request = URLRequest(url: url)
-        request.httpMethod="POST"
-        var headers = request.allHTTPHeaderFields ?? [:]
-        headers["Content-Type"] = "application/json"
-        request.allHTTPHeaderFields = headers
-        let encoder = JSONEncoder()
-        do {
-            let dic:[String:String] = ["method":from]
-            let jsonData = try encoder.encode(dic)
-            request.httpBody = jsonData
-        } catch {
-            print("error in json \(error)")
-        }
-        
-        
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
-        let task = session.dataTask(with: request) { (responseData, response, responseError) in
-            if let error = responseError
-            {
-                print("error in session \(error)")
-            }
-            
-            if let data = responseData, let utf8Representation = String(data: data, encoding: .utf8) {
-                print("response: ", utf8Representation)
-            } else {
-                print("no readable data received in response")
-            }
-        }
-        task.resume()
-    }
 }
 
 extension AppDelegate : MessagingDelegate {
@@ -110,8 +66,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         checkNotification(with: notification.request.content.userInfo)
         completionHandler([])
-        print("finish will")
-        sendPostRequest(sent: "finish will")
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -120,8 +74,6 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         checkNotification(with: response.notification.request.content.userInfo)
         completionHandler()
-        print("finish did")
-        sendPostRequest(sent: "finish did")
     }
 }
 

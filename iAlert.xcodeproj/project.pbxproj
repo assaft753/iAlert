@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		70460E7F2120A29100BA54CA /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460E7E2120A29100BA54CA /* Pulsator.swift */; };
-		707D95AF2124B3FA0087782B /* as.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707D95AE2124B3FA0087782B /* as.swift */; };
 		708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
 		708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BC4211F8A25004EE8F5 /* SafePlace.swift */; };
@@ -27,7 +26,6 @@
 		0943E240E4048E6366EF4A0C /* Pods-iAlert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iAlert.release.xcconfig"; path = "Pods/Target Support Files/Pods-iAlert/Pods-iAlert.release.xcconfig"; sourceTree = "<group>"; };
 		32D0D501EC299D12BEA7BB78 /* Pods_iAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70460E7E2120A29100BA54CA /* Pulsator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pulsator.swift; sourceTree = "<group>"; };
-		707D95AE2124B3FA0087782B /* as.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = as.swift; sourceTree = "<group>"; };
 		708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iAlert.entitlements; sourceTree = "<group>"; };
 		708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 		BA00B38C20F5116D0074C0EB = {
 			isa = PBXGroup;
 			children = (
-				707D95AE2124B3FA0087782B /* as.swift */,
 				BA00B39720F5116D0074C0EB /* iAlert */,
 				BA00B39620F5116D0074C0EB /* Products */,
 				BA00B3BB20F513BD0074C0EB /* Frameworks */,
@@ -276,7 +273,6 @@
 				BA5F02E7211DDBBC00626A00 /* InstructionsViewController.swift in Sources */,
 				708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */,
 				BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */,
-				707D95AF2124B3FA0087782B /* as.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

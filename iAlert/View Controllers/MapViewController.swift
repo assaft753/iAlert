@@ -39,7 +39,6 @@ class MapViewController: UIViewController {
         super.viewWillAppear(animated)
         showDirections()
         addMapViewLocationButton()
-        //mapView.setUserTrackingMode(MKUserTrackingMode.followWithHeading, animated: true)
     }
     
     @IBAction func finishBtn(_ sender: UIButton) {

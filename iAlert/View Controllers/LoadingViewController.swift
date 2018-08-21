@@ -46,9 +46,9 @@ class LoadingViewController: UIViewController {
         pulsator.backgroundColor = UIColor.white.cgColor
     }
     
+    //This function is checing the location authorization and request the device current location
     func calculateAndPush(safePlaces:[SafePlace])
     {
-        //this func responsible to check about location authorization and request the device current location
         if CLLocationManager.locationServicesEnabled()
         {
             let permission = CLLocationManager.authorizationStatus()
@@ -61,9 +61,9 @@ class LoadingViewController: UIViewController {
         
     }
     
+    //This function decide which view controller should appear next (Instruction or Map)
     private func nearestSafePlace(from safePlaces:[SafePlace],currentLocation:CLLocation)
     {
-        //this func responsible to push the relevant VC
         let viewController:UIViewController!
         
         if safePlaces.count == 0
@@ -93,9 +93,9 @@ class LoadingViewController: UIViewController {
         
     }
     
+    //This function is finding the nearest safe place location (according to current location) and return it if it exists
     private func calculate(from safePlaces:[SafePlace],currentLocation:CLLocation)->SafePlace?
     {
-        //this func calculates the distance between the current location to the SafePlaces locations and returns the minimum SafePlace location by the calculation of its distance, if there is one
         var minSafePlace:SafePlace? = nil
         var minDistance:Double = Double.infinity
         for safePlace in safePlaces

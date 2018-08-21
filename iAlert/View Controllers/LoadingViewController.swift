@@ -48,6 +48,7 @@ class LoadingViewController: UIViewController {
     
     func calculateAndPush(safePlaces:[SafePlace])
     {
+        //this func responsible to check about location authorization and request the device current location
         if CLLocationManager.locationServicesEnabled()
         {
             let permission = CLLocationManager.authorizationStatus()
@@ -62,6 +63,7 @@ class LoadingViewController: UIViewController {
     
     private func nearestSafePlace(from safePlaces:[SafePlace],currentLocation:CLLocation)
     {
+        //this func responsible to push the relevant VC
         let viewController:UIViewController!
         
         if safePlaces.count == 0
@@ -93,6 +95,7 @@ class LoadingViewController: UIViewController {
     
     private func calculate(from safePlaces:[SafePlace],currentLocation:CLLocation)->SafePlace?
     {
+        //this func calculates the distance between the current location to the SafePlaces locations and returns the minimum SafePlace location by the calculation of its distance, if there is one
         var minSafePlace:SafePlace? = nil
         var minDistance:Double = Double.infinity
         for safePlace in safePlaces
@@ -116,6 +119,7 @@ class LoadingViewController: UIViewController {
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //get current location once per request
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         guard let currentLocation = locations.first else { return }

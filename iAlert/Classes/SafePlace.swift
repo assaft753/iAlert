@@ -28,7 +28,7 @@ struct SafePlace: Codable {
     }
     
     static func parseSafePlaces(from stringJsonData:String)->[SafePlace]?
-    {
+    {// this func converting String, that represents JSON object, to an array of SafePlace instances
         guard let jsonData = stringJsonData.data(using: .utf8) else {return nil}
         let safePlaces = try? JSONDecoder().decode(SafePlaces.self, from: jsonData)
         return safePlaces

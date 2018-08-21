@@ -37,7 +37,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func checkNotification(with userInfo:[AnyHashable:Any])
     {
         if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
-        {
+        {// If The Current VC of the App is the loading VC,the data that recieved from the Notification payload passed to it
+            //the data that recieved from the Notification payload is a String that represents JSON object
             if let jsonString = userInfo["coords"] as? String,let safePlaces = SafePlace.parseSafePlaces(from: jsonString)
             {
                 loadingViewCtrl.calculateAndPush(safePlaces: safePlaces)

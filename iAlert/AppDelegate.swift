@@ -9,10 +9,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let locationManager = CLLocationManager()
+    static let geoCoder = CLGeocoder()
+    let center = UNUserNotificationCenter.current()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        locationManager.requestAlwaysAuthorization()
         Messaging.messaging().delegate = self
         
         if #available(iOS 10.0, *) {
@@ -31,14 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         application.registerForRemoteNotifications()
+        
+        locationManager.requestAlwaysAuthorization()
+        locationManager.delegate = self
+        locationManager.startMonitoringSignificantLocationChanges()
+        
         return true
     }
     
     private func checkNotification(with userInfo:[AnyHashable:Any])
     {
         if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
-        {// If The Current VC of the App is the loading VC,the data that recieved from the Notification payload passed to it
-            //the data that recieved from the Notification payload is a String that represents JSON object
+        {
             if let jsonString = userInfo["coords"] as? String,let safePlaces = SafePlace.parseSafePlaces(from: jsonString)
             {
                 loadingViewCtrl.calculateAndPush(safePlaces: safePlaces)
@@ -51,11 +56,85 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate : MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+        if let token = UserDefaults.standard.string(forKey: "token")
+        {
+            if token != fcmToken
+            {
+                UserDefaults.standard.set(fcmToken, forKey: "token")
+                print("not the same token!!")
+                iAlertService.shared.fetch(type: .Register(uniqueId: fcmToken, prevId: token)){
+                    data,err in
+                    print("in data!!! \(data)")
+                    print("in err!!! \(err)")
+                }
+            }
+            else
+            {
+                print("same tokens!!!!")
+            }
+        }
+        else
+        {
+            print("upload new Token!!")
+            UserDefaults.standard.set(fcmToken, forKey: "token")
+            iAlertService.shared.fetch(type: .Register(uniqueId: fcmToken, prevId: nil)){
+                data,err in
+                print("in data!!! \(data)")
+                print("in err!!! \(err)")
+            }
+        }
         print("Firebase registration token: \(fcmToken)")
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
         print("Received data message: \(remoteMessage.appData)")
+    }
+}
+
+extension AppDelegate: CLLocationManagerDelegate {
+    
+    func newLocationReceived(_ location: CLLocation, description: String) {
+        
+        iAlertService.shared.fetch(type: .test){
+            data,err in
+            if  data != nil
+            {
+                let content = UNMutableNotificationContent()
+                content.title = "New location sent to server"
+                content.body = "\(description) in coords \(location)"
+                content.sound = UNNotificationSound.default()
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
+                
+                self.center.add(request, withCompletionHandler: nil)
+            }
+            else
+            {
+                let content = UNMutableNotificationContent()
+                content.title = "New location couldnt be sent to server"
+                content.body = "\(description) in coords \(location)"
+                content.sound = UNNotificationSound.default()
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+                let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
+                
+                self.center.add(request, withCompletionHandler: nil)
+            }
+            print("in data!!! \(data)")
+            print("in err!!! \(err)")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let location = locations.first else {
+            return
+        }
+        
+        AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
+            if let place = placemarks?.first {
+                let description = "New Location: \(place)"
+                self.newLocationReceived(location, description: description)
+            }
+        }
     }
 }
 

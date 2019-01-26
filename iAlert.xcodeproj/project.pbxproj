@@ -11,6 +11,10 @@
 		708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
 		708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BC4211F8A25004EE8F5 /* SafePlace.swift */; };
+		70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2A21FCB14E0056361E /* ConstsKey.swift */; };
+		70919E2D21FCB5600056361E /* Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2C21FCB5600056361E /* Idle.swift */; };
+		70919E2F21FCB8280056361E /* Operative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2E21FCB8280056361E /* Operative.swift */; };
+		70919E3221FCC0930056361E /* iAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E3121FCC0930056361E /* iAlertService.swift */; };
 		70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */; };
 		BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39820F5116D0074C0EB /* AppDelegate.swift */; };
 		BA00B39B20F5116D0074C0EB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39A20F5116D0074C0EB /* MapViewController.swift */; };
@@ -30,6 +34,10 @@
 		708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
 		708A2BC4211F8A25004EE8F5 /* SafePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePlace.swift; sourceTree = "<group>"; };
+		70919E2A21FCB14E0056361E /* ConstsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstsKey.swift; sourceTree = "<group>"; };
+		70919E2C21FCB5600056361E /* Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idle.swift; sourceTree = "<group>"; };
+		70919E2E21FCB8280056361E /* Operative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operative.swift; sourceTree = "<group>"; };
+		70919E3121FCC0930056361E /* iAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAlertService.swift; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,8 +69,19 @@
 			children = (
 				70460E7E2120A29100BA54CA /* Pulsator.swift */,
 				708A2BC4211F8A25004EE8F5 /* SafePlace.swift */,
+				70919E2A21FCB14E0056361E /* ConstsKey.swift */,
+				70919E2C21FCB5600056361E /* Idle.swift */,
+				70919E2E21FCB8280056361E /* Operative.swift */,
 			);
 			path = Classes;
+			sourceTree = "<group>";
+		};
+		70919E3021FCC0800056361E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				70919E3121FCC0930056361E /* iAlertService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		70F26CE3211F5FB700BE08ED /* Utilities */ = {
@@ -115,6 +134,7 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
+				70919E3021FCC0800056361E /* Services */,
 				70460E7A2120A23700BA54CA /* Classes */,
 				708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */,
 				70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */,
@@ -267,10 +287,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA00B39B20F5116D0074C0EB /* MapViewController.swift in Sources */,
+				70919E2D21FCB5600056361E /* Idle.swift in Sources */,
 				70460E7F2120A29100BA54CA /* Pulsator.swift in Sources */,
 				BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */,
+				70919E3221FCC0930056361E /* iAlertService.swift in Sources */,
 				708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */,
+				70919E2F21FCB8280056361E /* Operative.swift in Sources */,
 				BA5F02E7211DDBBC00626A00 /* InstructionsViewController.swift in Sources */,
+				70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */,
 				708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */,
 				BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */,
 			);

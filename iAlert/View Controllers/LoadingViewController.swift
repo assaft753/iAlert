@@ -14,7 +14,7 @@ class LoadingViewController: UIViewController {
     @IBOutlet weak var radioTowerImage: UIImageView!
     @IBOutlet weak var pulseContainer: UIView!
     
-    let MAX_DISTANCE:Double = 200
+    let MAX_DISTANCE:Double = 20000
     var safePlaces:[SafePlace]!
     let locationManager = CLLocationManager()
     let pulsator = Pulsator()

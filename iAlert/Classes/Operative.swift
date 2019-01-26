@@ -26,14 +26,26 @@ enum Operative {
         return body
     }
     
-    var requestURL:URL?{
+    var requestURL:URLRequest?{
         var endPoint = "\(ConstsKey.BASE_URL)/\(ConstsKey.OPERATIVE)"
+        var method:String
         switch self {
         case .Arrive:
             endPoint+="/\(ConstsKey.ARRIVE)"
+            method = "POST"
         case .ClosestsShelter:
             endPoint+="/\(ConstsKey.CLOSESTS_SHELTER)"
+            method = "POST"
         }
-        return URL(string: endPoint)
+        if let url = URL(string: endPoint)
+        {
+            var sessionOpt = URLRequest(url: url)
+            sessionOpt.httpMethod = method
+            sessionOpt.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+            guard let bodyData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {return nil}
+            sessionOpt.httpBody = bodyData
+            return sessionOpt
+        }
+        return nil
     }
 }

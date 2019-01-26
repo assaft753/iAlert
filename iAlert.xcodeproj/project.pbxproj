@@ -15,6 +15,7 @@
 		70919E2D21FCB5600056361E /* Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2C21FCB5600056361E /* Idle.swift */; };
 		70919E2F21FCB8280056361E /* Operative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2E21FCB8280056361E /* Operative.swift */; };
 		70919E3221FCC0930056361E /* iAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E3121FCC0930056361E /* iAlertService.swift */; };
+		70DF109D21FCDEA500470612 /* route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 70DF109C21FCDEA500470612 /* route.gpx */; };
 		70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */; };
 		BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39820F5116D0074C0EB /* AppDelegate.swift */; };
 		BA00B39B20F5116D0074C0EB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39A20F5116D0074C0EB /* MapViewController.swift */; };
@@ -38,6 +39,7 @@
 		70919E2C21FCB5600056361E /* Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idle.swift; sourceTree = "<group>"; };
 		70919E2E21FCB8280056361E /* Operative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operative.swift; sourceTree = "<group>"; };
 		70919E3121FCC0930056361E /* iAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAlertService.swift; sourceTree = "<group>"; };
+		70DF109C21FCDEA500470612 /* route.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = route.gpx; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
+				70DF109C21FCDEA500470612 /* route.gpx */,
 				70919E3021FCC0800056361E /* Services */,
 				70460E7A2120A23700BA54CA /* Classes */,
 				708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */,
@@ -227,6 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70DF109D21FCDEA500470612 /* route.gpx in Resources */,
 				BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */,
 				BA00B39E20F5116D0074C0EB /* Main.storyboard in Resources */,
 				708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */,

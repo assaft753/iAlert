@@ -11,50 +11,42 @@ import Foundation
 class iAlertService{
     static var shared = iAlertService()
     
-    public func fetch(type idle:Idle, compilation:@escaping ([String:Any]?,Error?)->Void)
+    public func fetch(type idle:Idle, compilation:(([String:Any]?,Error?)->Void)? = nil)
     {
-        let requestBody = idle.requestBody
-        let requestURL = idle.requestURL
-        if let url = requestURL{
-            var sessionOpt = URLRequest(url: url)
-            sessionOpt.httpMethod = "POST"
-            sessionOpt.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-            guard let bodyData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {return}
-            sessionOpt.httpBody = bodyData
-            self.activate(session: sessionOpt, compilation: compilation)
+        if let requestURL = idle.requestURL{
+            self.activate(session: requestURL, compilation: compilation)
         }
     }
     
-    public func fetch(type operative:Operative, compilation:@escaping ([String:Any]?,Error?)->Void)
+    public func fetch(type operative:Operative, compilation:(([String:Any]?,Error?)->Void)? = nil)
     {
-        let requestBody = operative.requestBody
-        let requestURL = operative.requestURL
-        if let url = requestURL{
-            var sessionOpt = URLRequest(url: url)
-            sessionOpt.httpMethod = "POST"
-            sessionOpt.setValue("Application/json", forHTTPHeaderField: "Content-Type")
-            guard let bodyData = try? JSONSerialization.data(withJSONObject: requestBody, options: []) else {return}
-            sessionOpt.httpBody = bodyData
-            self.activate(session: sessionOpt, compilation: compilation)
+        if let requestURL = operative.requestURL{
+            self.activate(session: requestURL, compilation: compilation)
         }
     }
     
-    private func activate(session sessionOpt:URLRequest,compilation:@escaping ([String:Any]?,Error?)->Void)
+    private func activate(session sessionOpt:URLRequest,compilation:(([String:Any]?,Error?)->Void)?)
     {
         let session = URLSession.shared.dataTask(with: sessionOpt){ (data, response, err) in
-            if let error = err
+            print("in data!!! \(data)")
+            print("in err!!! \(err)")
+            print("in response!!! \(response)")
+            if let compilation = compilation
             {
-                compilation(nil,error)
-            }
-            if let data = data
-            {
-                do{
-                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
-                    compilation(json, nil)
-                }
-                catch let jsonErr
+                if let error = err
                 {
-                    compilation(nil,jsonErr)
+                    compilation(nil,error)
+                }
+                if let data = data
+                {
+                    do{
+                        let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
+                        compilation(json, nil)
+                    }
+                    catch let jsonErr
+                    {
+                        compilation(nil,jsonErr)
+                    }
                 }
             }
         }

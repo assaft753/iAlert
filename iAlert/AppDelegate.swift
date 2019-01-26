@@ -93,11 +93,12 @@ extension AppDelegate : MessagingDelegate {
 
 extension AppDelegate: CLLocationManagerDelegate {
     
-    func newLocationReceived(_ location: CLLocation, description: String) {
+    func newLocationReceived( location: CLLocation,city: String, description: String) {
+        guard let token = UserDefaults.standard.string(forKey: "token") else {return}
         
-        iAlertService.shared.fetch(type: .test){
+        iAlertService.shared.fetch(type: .Update(latitude:location.coordinate.latitude, langitude: location.coordinate.longitude, city: city, uniqueId: token, language: "english")){
             data,err in
-            if  data != nil
+            if  data != nil && err == nil
             {
                 let content = UNMutableNotificationContent()
                 content.title = "New location sent to server"
@@ -131,8 +132,11 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
             if let place = placemarks?.first {
-                let description = "New Location: \(place)"
-                self.newLocationReceived(location, description: description)
+                if let city = place.locality
+                {
+                    let description = "New Location: \(place)"
+                    self.newLocationReceived(location: location,city: city, description: description)
+                }
             }
         }
     }

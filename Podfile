@@ -9,5 +9,6 @@ target 'iAlert' do
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'Pulsator'
+pod 'ReachabilitySwift'
 
 end

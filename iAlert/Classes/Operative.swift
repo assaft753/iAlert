@@ -10,6 +10,7 @@ import Foundation
 enum Operative {
     case Arrive(redAlertId:Int,uniqueId:String)
     case ClosestsShelter(uniqueId:String,latitude:Double,longitude:Double,redAlertId:Int)
+    case AllClosestsShelters(uniqueId:String,latitude:Double,longitude:Double)
     
     var requestBody:[String:Any]{
         var body:[String:Any]=[:]
@@ -20,6 +21,10 @@ enum Operative {
         case .ClosestsShelter(let uniqueId,let latitude,let longitude,let redAlertId):
             body[ConstsKey.UNIQUE_ID] = uniqueId
             body[ConstsKey.RED_ALERT_ID] = redAlertId
+            body[ConstsKey.LATITUDE2] = latitude
+            body[ConstsKey.LANGITUDE2] = longitude
+        case .AllClosestsShelters(let uniqueId, let latitude, let longitude):
+            body[ConstsKey.UNIQUE_ID] = uniqueId
             body[ConstsKey.LATITUDE2] = latitude
             body[ConstsKey.LANGITUDE2] = longitude
         }
@@ -35,6 +40,9 @@ enum Operative {
             method = "POST"
         case .ClosestsShelter:
             endPoint+="/\(ConstsKey.CLOSESTS_SHELTER)"
+            method = "POST"
+        case .AllClosestsShelters:
+            endPoint+="/\(ConstsKey.ALL_CLOSESTS_SHELTER)"
             method = "POST"
         }
         if let url = URL(string: endPoint)

@@ -10,12 +10,15 @@
 		70460E7F2120A29100BA54CA /* Pulsator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70460E7E2120A29100BA54CA /* Pulsator.swift */; };
 		708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
-		708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BC4211F8A25004EE8F5 /* SafePlace.swift */; };
 		70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2A21FCB14E0056361E /* ConstsKey.swift */; };
 		70919E2D21FCB5600056361E /* Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2C21FCB5600056361E /* Idle.swift */; };
 		70919E2F21FCB8280056361E /* Operative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2E21FCB8280056361E /* Operative.swift */; };
 		70919E3221FCC0930056361E /* iAlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E3121FCC0930056361E /* iAlertService.swift */; };
-		70DF109D21FCDEA500470612 /* route.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 70DF109C21FCDEA500470612 /* route.gpx */; };
+		709295F121FE555E00CBA12D /* SafePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 709295F021FE555E00CBA12D /* SafePlace.swift */; };
+		709295F421FE562900CBA12D /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 709295F221FE562900CBA12D /* Model.xcdatamodeld */; };
+		70A995C921FF4BE60028F704 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A995C821FF4BE60028F704 /* Reachability.swift */; };
+		70A995CB21FF53890028F704 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A995CA21FF53890028F704 /* Utilities.swift */; };
+		70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 70DF109C21FCDEA500470612 /* ashdod.gpx */; };
 		70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */; };
 		BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39820F5116D0074C0EB /* AppDelegate.swift */; };
 		BA00B39B20F5116D0074C0EB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39A20F5116D0074C0EB /* MapViewController.swift */; };
@@ -34,12 +37,16 @@
 		708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iAlert.entitlements; sourceTree = "<group>"; };
 		708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
-		708A2BC4211F8A25004EE8F5 /* SafePlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafePlace.swift; sourceTree = "<group>"; };
 		70919E2A21FCB14E0056361E /* ConstsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstsKey.swift; sourceTree = "<group>"; };
 		70919E2C21FCB5600056361E /* Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idle.swift; sourceTree = "<group>"; };
 		70919E2E21FCB8280056361E /* Operative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operative.swift; sourceTree = "<group>"; };
 		70919E3121FCC0930056361E /* iAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAlertService.swift; sourceTree = "<group>"; };
-		70DF109C21FCDEA500470612 /* route.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = route.gpx; sourceTree = "<group>"; };
+		709295F021FE555E00CBA12D /* SafePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePlace.swift; sourceTree = "<group>"; };
+		709295F321FE562900CBA12D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		70A995C721FF419A0028F704 /* hadera.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = hadera.gpx; sourceTree = "<group>"; };
+		70A995C821FF4BE60028F704 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		70A995CA21FF53890028F704 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		70DF109C21FCDEA500470612 /* ashdod.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod.gpx; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -69,11 +76,13 @@
 		70460E7A2120A23700BA54CA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				70A995C821FF4BE60028F704 /* Reachability.swift */,
+				709295F021FE555E00CBA12D /* SafePlace.swift */,
 				70460E7E2120A29100BA54CA /* Pulsator.swift */,
-				708A2BC4211F8A25004EE8F5 /* SafePlace.swift */,
 				70919E2A21FCB14E0056361E /* ConstsKey.swift */,
 				70919E2C21FCB5600056361E /* Idle.swift */,
 				70919E2E21FCB8280056361E /* Operative.swift */,
+				70A995CA21FF53890028F704 /* Utilities.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -118,6 +127,7 @@
 		BA00B38C20F5116D0074C0EB = {
 			isa = PBXGroup;
 			children = (
+				709295F221FE562900CBA12D /* Model.xcdatamodeld */,
 				BA00B39720F5116D0074C0EB /* iAlert */,
 				BA00B39620F5116D0074C0EB /* Products */,
 				BA00B3BB20F513BD0074C0EB /* Frameworks */,
@@ -136,7 +146,8 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
-				70DF109C21FCDEA500470612 /* route.gpx */,
+				70A995C721FF419A0028F704 /* hadera.gpx */,
+				70DF109C21FCDEA500470612 /* ashdod.gpx */,
 				70919E3021FCC0800056361E /* Services */,
 				70460E7A2120A23700BA54CA /* Classes */,
 				708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */,
@@ -230,7 +241,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				70DF109D21FCDEA500470612 /* route.gpx in Resources */,
+				70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */,
 				BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */,
 				BA00B39E20F5116D0074C0EB /* Main.storyboard in Resources */,
 				708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */,
@@ -251,6 +262,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -258,6 +270,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -292,6 +305,8 @@
 			files = (
 				BA00B39B20F5116D0074C0EB /* MapViewController.swift in Sources */,
 				70919E2D21FCB5600056361E /* Idle.swift in Sources */,
+				70A995CB21FF53890028F704 /* Utilities.swift in Sources */,
+				709295F121FE555E00CBA12D /* SafePlace.swift in Sources */,
 				70460E7F2120A29100BA54CA /* Pulsator.swift in Sources */,
 				BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */,
 				70919E3221FCC0930056361E /* iAlertService.swift in Sources */,
@@ -299,8 +314,9 @@
 				70919E2F21FCB8280056361E /* Operative.swift in Sources */,
 				BA5F02E7211DDBBC00626A00 /* InstructionsViewController.swift in Sources */,
 				70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */,
-				708A2BC5211F8A25004EE8F5 /* SafePlace.swift in Sources */,
 				BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */,
+				709295F421FE562900CBA12D /* Model.xcdatamodeld in Sources */,
+				70A995C921FF4BE60028F704 /* Reachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -498,6 +514,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		709295F221FE562900CBA12D /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				709295F321FE562900CBA12D /* Model.xcdatamodel */,
+			);
+			currentVersion = 709295F321FE562900CBA12D /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		BA00B39F20F5116D0074C0EB /* iAlert.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

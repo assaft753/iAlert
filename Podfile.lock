@@ -55,11 +55,13 @@ PODS:
   - nanopb/encode (0.3.8)
   - Protobuf (3.6.1)
   - Pulsator (0.5.1)
+  - ReachabilitySwift (4.1.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - Pulsator
+  - ReachabilitySwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -73,6 +75,7 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - Pulsator
+    - ReachabilitySwift
 
 SPEC CHECKSUMS:
   Firebase: 8c957f9cb3852b519180fb378801b7eeeba4d288
@@ -85,7 +88,8 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
 
-PODFILE CHECKSUM: c441d8d750bad2c4ab57834270b67bd3b6adf7db
+PODFILE CHECKSUM: dbd0e13bfb72582ab878644a87c0bb1c242bb31f
 
 COCOAPODS: 1.5.3

@@ -21,13 +21,15 @@ class MapViewController: UIViewController {
     let locationManager = CLLocationManager()
     var currentCoordinate: CLLocationCoordinate2D!
     var destinationCoordinate:CLLocationCoordinate2D!
+    var safePlace:SafePlace!
     let TITLE = "Safe Place"
     var address:String!
+    var isRedAlertId:Bool!
     var steps = [MKRouteStep]()
     let speechSyntheizer = AVSpeechSynthesizer()
     var stepCounter = 0
     var timer:Timer!
-    var countDown = 60
+    var countDown:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,24 @@ class MapViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if !isRedAlertId
+        {
+            timeLeftLabel.alpha = 0
+        }
+        else
+        {
+            if let time = safePlace.time
+            {
+                countDown = time
+                timeLeftLabel.text = "\(time)"
+            }
+            else
+            {
+                timeLeftLabel.text = ""
+            }
+        }
+        destinationCoordinate = safePlace.coordinate
+        address = safePlace.address
         showDirections()
         addMapViewLocationButton()
     }
@@ -97,8 +117,8 @@ class MapViewController: UIViewController {
     
     @objc
     func countDownAction(){
-        countDown -= 1
-        timeLeftLabel.text = "Time left: \(countDown)"
+        countDown! -= 1
+        timeLeftLabel.text = "Time left: \(countDown!)"
         if countDown == 0 {
             timer.invalidate()
         }
@@ -123,7 +143,10 @@ class MapViewController: UIViewController {
         }
         
         //Set time left
-        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countDownAction), userInfo: nil, repeats: true)
+        if isRedAlertId
+        {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(countDownAction), userInfo: nil, repeats: true)
+        }
     }
     
     func setDirectionsValues() -> MKDirections {
@@ -201,6 +224,13 @@ extension MapViewController: CLLocationManagerDelegate{
             speechSyntheizer.speak(speechUtterance)
         }
         else{
+            print("arrived")
+            //ToDo - Fetch arrived to destination
+            if let fcmToken = UserDefaults.standard.string(forKey: "token"),isRedAlertId
+            {
+                print("fetch arrive")
+                iAlertService.shared.fetch(type: .Arrive(redAlertId: safePlace.redAlertId, uniqueId: fcmToken))
+            }
             let message = "Arrived to destination"
             directionsLabel.text = message
             let speechUtterance = AVSpeechUtterance(string: message)

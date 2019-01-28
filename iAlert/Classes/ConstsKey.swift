@@ -20,7 +20,7 @@ struct ConstsKey{
     static let RED_ALERT_ID = "red_alert_id"
     static let LATITUDE2 = "latitude"
     static let LANGITUDE2 = "longitude"
-    static let BASE_URL = "http://3.121.116.91:3000"
+    static let BASE_URL = "http://18.130.17.203:3000"
     static let IDLE = "idle"
     static let OPERATIVE = "operative"
     static let REGISTER = "register"
@@ -28,6 +28,8 @@ struct ConstsKey{
     static let PREFFERED_LANGUAGE = "preferred_language"
     static let ARRIVE = "arrive"
     static let CLOSESTS_SHELTER = "closestSheltersAfterNotification"
+    static let ALL_CLOSESTS_SHELTER = "closestShelters"
+    static let BOUND:Double = 40
     static let TEST = "test"
     
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gc3-Fg-RBp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gc3-Fg-RBp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,10 +31,28 @@
                                             <constraint firstAttribute="height" constant="80" id="hyU-Hk-mnL"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2r-Rb-zBX">
+                                        <rect key="frame" x="108.5" y="555" width="158" height="40"/>
+                                        <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="158" id="dG4-sl-bpS"/>
+                                            <constraint firstAttribute="height" constant="40" id="xOP-Lv-eSG"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <state key="normal" title="Navigate Me">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="navigateBtnPressed:" destination="HcB-GJ-lPg" eventType="touchUpInside" id="DkK-BD-dHu"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
+                                    <constraint firstItem="N2r-Rb-zBX" firstAttribute="centerX" secondItem="fTy-tV-V9p" secondAttribute="centerX" id="9tO-6K-HsL"/>
                                     <constraint firstItem="Zzx-GI-X88" firstAttribute="centerX" secondItem="fTy-tV-V9p" secondAttribute="centerX" id="IZ5-Vs-mgn"/>
                                     <constraint firstItem="Zzx-GI-X88" firstAttribute="centerY" secondItem="fTy-tV-V9p" secondAttribute="centerY" id="cW4-mY-563"/>
+                                    <constraint firstAttribute="bottom" secondItem="N2r-Rb-zBX" secondAttribute="bottom" constant="72" id="iCN-tU-Vpc"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -58,6 +76,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="P8R-zz-AiY"/>
                     <connections>
+                        <outlet property="navigateBtn" destination="N2r-Rb-zBX" id="7VZ-pb-Yiu"/>
                         <outlet property="pulseContainer" destination="A2A-Y2-ZdV" id="jWZ-6s-Cof"/>
                         <outlet property="radioTowerImage" destination="Zzx-GI-X88" id="rbe-Af-JOa"/>
                     </connections>
@@ -168,7 +187,7 @@
                                 <rect key="frame" x="16" y="198" width="343" height="449"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DIo-6p-MtV">
-                                        <rect key="frame" x="154" y="190.5" width="154" height="43.5"/>
+                                        <rect key="frame" x="153.5" y="190.5" width="154" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שכב על הבטן" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlE-Hf-VUK">
                                                 <rect key="frame" x="0.0" y="18.5" width="107.5" height="25"/>
@@ -185,7 +204,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iy9-z1-bPv">
-                                        <rect key="frame" x="15.5" y="264" width="292.5" height="43.5"/>
+                                        <rect key="frame" x="15" y="264" width="292.5" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הגן על הראש באמצעות הידיים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zze-60-CG7">
                                                 <rect key="frame" x="0.0" y="18.5" width="245" height="25"/>
@@ -202,7 +221,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-p2-M6b">
-                                        <rect key="frame" x="36.5" y="43.5" width="271.5" height="43.5"/>
+                                        <rect key="frame" x="36" y="43.5" width="271.5" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="חפש קיר בטון רחוק מזכוכיות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0s-nL-RG2">
                                                 <rect key="frame" x="0.0" y="18.5" width="230" height="25"/>
@@ -219,7 +238,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tTo-22-jNj">
-                                        <rect key="frame" x="31" y="117" width="277" height="43.5"/>
+                                        <rect key="frame" x="30.5" y="117" width="277" height="43.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אם לא קיים, חפש מקום פתוח" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-uK-ZRZ">
                                                 <rect key="frame" x="0.0" y="18.5" width="230.5" height="25"/>
@@ -236,7 +255,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fjY-FG-LGh">
-                                        <rect key="frame" x="28.5" y="337.5" width="279.5" height="68.5"/>
+                                        <rect key="frame" x="28" y="337.5" width="279.5" height="68.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-V4-97i">
                                                 <rect key="frame" x="0.0" y="0.0" width="279.5" height="43.5"/>
@@ -256,7 +275,7 @@
                                                 </subviews>
                                             </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במהירות ובזהירות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-e6-8jJ">
-                                                <rect key="frame" x="68" y="43.5" width="144" height="25"/>
+                                                <rect key="frame" x="67.5" y="43.5" width="144" height="25"/>
                                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                                 <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>

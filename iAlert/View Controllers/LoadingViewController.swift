@@ -11,7 +11,7 @@ import CoreLocation
 
 class LoadingViewController: UIViewController
 {
-    
+    @IBOutlet weak var pickLanguageBtn: UIButton!
     @IBOutlet weak var navigateBtn: UIButton!
     @IBOutlet weak var radioTowerImage: UIImageView!
     @IBOutlet weak var pulseContainer: UIView!
@@ -21,9 +21,11 @@ class LoadingViewController: UIViewController
     let locationManager = CLLocationManager()
     let pulsator = Pulsator()
     var showNavigate:Bool = true
+    var languageSelected:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialLocalized(with: nil)
         toShowNavigateButton()
         initialPulseAnimation()
         toTakeLocation = true
@@ -45,6 +47,38 @@ class LoadingViewController: UIViewController
         
     }
     
+    func initialLocalized(with languageId:String?)
+    {
+        if let languageId = languageId
+        {
+            UserDefaults.standard.set(languageId, forKey: ConstsKey.PREFFERED_LANGUAGE)
+            UserDefaults.standard.synchronize()
+        }
+        let lang = getPickedLanguage()
+        pickLanguageBtn.setTitle(lang, for: .normal)
+        navigateBtn.setTitle("navigateBtn".localized, for: .normal)
+    }
+    
+    func getPickedLanguage() -> String
+    {
+        if let lang = UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE)
+        {
+            let langName = "language".localized
+            if langName != "language"
+            {
+                return langName
+            }
+            
+            UserDefaults.standard.set(ConstsKey.ENGLISH_ID, forKey: ConstsKey.PREFFERED_LANGUAGE)
+            UserDefaults.standard.synchronize()
+            return "language".localized
+        }
+        
+        UserDefaults.standard.set(ConstsKey.ENGLISH_ID, forKey: ConstsKey.PREFFERED_LANGUAGE)
+        UserDefaults.standard.synchronize()
+        return "language".localized
+    }
+    
     func toShowNavigateButton()
     {
         if self.showNavigate
@@ -62,7 +96,29 @@ class LoadingViewController: UIViewController
     }
     
     @IBAction func navigateBtnPressed(_ sender: Any){
-       activateCurrentLocation()
+        activateCurrentLocation()
+    }
+    
+    @IBAction func pickLanguage(_ sender: Any) {
+        showChoices()
+    }
+    func showChoices() {
+        let alert = UIAlertController(title: "pickLanguage".localized, message: "\n\n\n\n\n\n", preferredStyle: .alert)
+        alert.isModalInPopover = true
+        
+        let pickerFrame = UIPickerView(frame: CGRect(x: 5, y: 20, width: 250, height: 140))
+        
+        alert.view.addSubview(pickerFrame)
+        pickerFrame.dataSource = self
+        pickerFrame.delegate = self
+        
+        alert.addAction(UIAlertAction(title: "Cancel".localized, style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default, handler: { (UIAlertAction) in
+            self.initialLocalized(with: self.languageSelected)
+            
+        }))
+        self.languageSelected = ConstsKey.ENGLISH_ID
+        self.present(alert,animated: true, completion: nil )
     }
     
     func activateCurrentLocation()
@@ -196,7 +252,6 @@ class LoadingViewController: UIViewController
         
     }
     
-    
     private func push(to viewController:UIViewController)
     {
         isProccessing = false
@@ -204,6 +259,26 @@ class LoadingViewController: UIViewController
         toShowNavigateButton()
         safePlace = nil
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+}
+
+extension LoadingViewController:UIPickerViewDelegate, UIPickerViewDataSource
+{
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return ConstsKey.LANGUAGE_STRS.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        languageSelected = ConstsKey.LANGUAGE_IDS[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return ConstsKey.LANGUAGE_STRS[row]
     }
 }
 

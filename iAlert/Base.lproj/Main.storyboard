@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gc3-Fg-RBp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gsp-Ds-PNg">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -39,7 +39,7 @@
                                             <constraint firstAttribute="height" constant="40" id="xOP-Lv-eSG"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
-                                        <state key="normal" title="Navigate Me">
+                                        <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="titleShadowColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -47,10 +47,22 @@
                                             <action selector="navigateBtnPressed:" destination="HcB-GJ-lPg" eventType="touchUpInside" id="DkK-BD-dHu"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFr-vL-rVA">
+                                        <rect key="frame" x="280" y="35" width="70" height="39"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <state key="normal" title="English">
+                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="pickLanguage:" destination="HcB-GJ-lPg" eventType="touchUpInside" id="Kgl-4J-NCj"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="N2r-Rb-zBX" firstAttribute="centerX" secondItem="fTy-tV-V9p" secondAttribute="centerX" id="9tO-6K-HsL"/>
+                                    <constraint firstAttribute="trailing" secondItem="OFr-vL-rVA" secondAttribute="trailing" constant="25" id="DKn-sD-47u"/>
                                     <constraint firstItem="Zzx-GI-X88" firstAttribute="centerX" secondItem="fTy-tV-V9p" secondAttribute="centerX" id="IZ5-Vs-mgn"/>
+                                    <constraint firstItem="OFr-vL-rVA" firstAttribute="top" secondItem="fTy-tV-V9p" secondAttribute="top" constant="35" id="bs8-za-oed"/>
                                     <constraint firstItem="Zzx-GI-X88" firstAttribute="centerY" secondItem="fTy-tV-V9p" secondAttribute="centerY" id="cW4-mY-563"/>
                                     <constraint firstAttribute="bottom" secondItem="N2r-Rb-zBX" secondAttribute="bottom" constant="72" id="iCN-tU-Vpc"/>
                                 </constraints>
@@ -77,6 +89,7 @@
                     <navigationItem key="navigationItem" id="P8R-zz-AiY"/>
                     <connections>
                         <outlet property="navigateBtn" destination="N2r-Rb-zBX" id="7VZ-pb-Yiu"/>
+                        <outlet property="pickLanguageBtn" destination="OFr-vL-rVA" id="SyV-DL-Vih"/>
                         <outlet property="pulseContainer" destination="A2A-Y2-ZdV" id="jWZ-6s-Cof"/>
                         <outlet property="radioTowerImage" destination="Zzx-GI-X88" id="rbe-Af-JOa"/>
                     </connections>
@@ -171,140 +184,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="לא נמצא מקום מחסה קרוב" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rra-Xe-i7n">
-                                <rect key="frame" x="84" y="115" width="207.5" height="25"/>
-                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instructions3" translatesAutoresizingMaskIntoConstraints="NO" id="bo9-Ip-JuG">
-                                <rect key="frame" x="0.0" y="20" width="375" height="87"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="87" id="41u-Yf-u7e"/>
-                                </constraints>
-                            </imageView>
-                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-pd-Qqp">
-                                <rect key="frame" x="16" y="198" width="343" height="449"/>
-                                <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DIo-6p-MtV">
-                                        <rect key="frame" x="153.5" y="190.5" width="154" height="43.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שכב על הבטן" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlE-Hf-VUK">
-                                                <rect key="frame" x="0.0" y="18.5" width="107.5" height="25"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="76O-gU-Qvf">
-                                                <rect key="frame" x="117.5" y="0.0" width="36.5" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Iy9-z1-bPv">
-                                        <rect key="frame" x="15" y="264" width="292.5" height="43.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הגן על הראש באמצעות הידיים" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zze-60-CG7">
-                                                <rect key="frame" x="0.0" y="18.5" width="245" height="25"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".4" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RUq-1w-FLZ">
-                                                <rect key="frame" x="255" y="0.0" width="37.5" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qDu-p2-M6b">
-                                        <rect key="frame" x="36" y="43.5" width="271.5" height="43.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="חפש קיר בטון רחוק מזכוכיות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0s-nL-RG2">
-                                                <rect key="frame" x="0.0" y="18.5" width="230" height="25"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDI-nY-kTA">
-                                                <rect key="frame" x="240" y="0.0" width="31.5" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="tTo-22-jNj">
-                                        <rect key="frame" x="30.5" y="117" width="277" height="43.5"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="אם לא קיים, חפש מקום פתוח" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-uK-ZRZ">
-                                                <rect key="frame" x="0.0" y="18.5" width="230.5" height="25"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MnM-Fb-7Fh">
-                                                <rect key="frame" x="240.5" y="0.0" width="36.5" height="43.5"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="fjY-FG-LGh">
-                                        <rect key="frame" x="28" y="337.5" width="279.5" height="68.5"/>
-                                        <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="OF1-V4-97i">
-                                                <rect key="frame" x="0.0" y="0.0" width="279.5" height="43.5"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בהפוגה נסה להגיע לאזור מוגן" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-KL-QA0">
-                                                        <rect key="frame" x="0.0" y="18.5" width="234" height="25"/>
-                                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                        <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4Q-DR-s5Y">
-                                                        <rect key="frame" x="244" y="0.0" width="35.5" height="43.5"/>
-                                                        <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="38"/>
-                                                        <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                </subviews>
-                                            </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="במהירות ובזהירות" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FmM-e6-8jJ">
-                                                <rect key="frame" x="67.5" y="43.5" width="144" height="25"/>
-                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
-                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                    </stackView>
-                                </subviews>
-                                <color key="backgroundColor" red="0.062745098039215685" green="0.47450980392156861" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstItem="tTo-22-jNj" firstAttribute="top" secondItem="qDu-p2-M6b" secondAttribute="bottom" constant="30" id="B5g-L5-HJL"/>
-                                    <constraint firstItem="qDu-p2-M6b" firstAttribute="centerX" secondItem="4J6-pd-Qqp" secondAttribute="centerX" id="BQx-8f-sEB"/>
-                                    <constraint firstItem="tTo-22-jNj" firstAttribute="trailing" secondItem="qDu-p2-M6b" secondAttribute="trailing" id="FLu-q9-Jou"/>
-                                    <constraint firstItem="fjY-FG-LGh" firstAttribute="top" secondItem="Iy9-z1-bPv" secondAttribute="bottom" constant="30" id="NuU-KA-q02"/>
-                                    <constraint firstItem="DIo-6p-MtV" firstAttribute="top" secondItem="tTo-22-jNj" secondAttribute="bottom" constant="30" id="TFI-PY-wF8"/>
-                                    <constraint firstItem="fjY-FG-LGh" firstAttribute="trailing" secondItem="Iy9-z1-bPv" secondAttribute="trailing" id="aIp-kn-fPZ"/>
-                                    <constraint firstItem="qDu-p2-M6b" firstAttribute="top" secondItem="4J6-pd-Qqp" secondAttribute="top" constant="43.5" id="fxi-7l-UmD"/>
-                                    <constraint firstItem="Iy9-z1-bPv" firstAttribute="top" secondItem="DIo-6p-MtV" secondAttribute="bottom" constant="30" id="hS2-5F-YHe"/>
-                                    <constraint firstItem="Iy9-z1-bPv" firstAttribute="trailing" secondItem="DIo-6p-MtV" secondAttribute="trailing" id="mFn-Cl-mwy"/>
-                                    <constraint firstItem="DIo-6p-MtV" firstAttribute="trailing" secondItem="tTo-22-jNj" secondAttribute="trailing" id="tgk-Ji-60T"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="פעל לפי ההוראות הבאות:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts2-Jv-3Lz">
-                                <rect key="frame" x="86.5" y="148" width="202" height="25"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="לא נמצא מקום מחסה קרוב אנא פעל לפי ההוראות:" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ts2-Jv-3Lz">
+                                <rect key="frame" x="16" y="113" width="344" height="50"/>
                                 <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="22"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfU-01-RGY">
-                                <rect key="frame" x="318" y="30" width="54" height="30"/>
+                                <rect key="frame" x="314" y="22" width="54" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3SW-83-hjG"/>
                                 </constraints>
@@ -315,28 +202,87 @@
                                     <action selector="finishBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gd0-Ld-htI"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5AM-tg-RZF">
+                                <rect key="frame" x="49" y="41" width="277" height="67"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="56"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4J6-pd-Qqp">
+                                <rect key="frame" x="16" y="182" width="344" height="465"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="39" translatesAutoresizingMaskIntoConstraints="NO" id="zre-FP-JV6">
+                                        <rect key="frame" x="16" y="7" width="315.5" height="288.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" text="חפש קיר בטון רחוק מזכוכיות" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h0s-nL-RG2">
+                                                <rect key="frame" x="0.0" y="0.0" width="315.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="23"/>
+                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="אם לא קיים, חפש מקום פתוח" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1A6-uK-ZRZ">
+                                                <rect key="frame" x="0.0" y="65.5" width="315.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="23"/>
+                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="שכב על הבטן" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlE-Hf-VUK">
+                                                <rect key="frame" x="0.0" y="131" width="315.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="23"/>
+                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="הגן על הראש באמצעות הידיים" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zze-60-CG7">
+                                                <rect key="frame" x="0.0" y="196.5" width="315.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="23"/>
+                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="בהפוגה נסה להגיע לאזור מוגן" textAlignment="natural" lineBreakMode="clip" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="14" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tHg-KL-QA0">
+                                                <rect key="frame" x="0.0" y="262" width="315.5" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="Georgia-Bold" family="Georgia" pointSize="23"/>
+                                                <color key="textColor" red="0.99355109200000002" green="1" blue="0.98063283800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.062745098039215685" green="0.47450980392156861" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="zre-FP-JV6" firstAttribute="top" secondItem="4J6-pd-Qqp" secondAttribute="top" constant="7" id="Iun-4K-MoB"/>
+                                    <constraint firstAttribute="trailing" secondItem="zre-FP-JV6" secondAttribute="trailing" constant="12.5" id="g1B-7O-OpI"/>
+                                    <constraint firstItem="zre-FP-JV6" firstAttribute="leading" secondItem="4J6-pd-Qqp" secondAttribute="leading" constant="16" id="j5J-KP-qMG"/>
+                                    <constraint firstAttribute="bottom" relation="lessThanOrEqual" secondItem="zre-FP-JV6" secondAttribute="bottom" constant="169.5" id="xAM-Ef-S0F"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.60784313725490191" green="0.80000000000000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="bo9-Ip-JuG" firstAttribute="top" secondItem="n46-lX-ioy" secondAttribute="top" constant="20" id="1mz-B6-fUg"/>
-                            <constraint firstItem="QfU-01-RGY" firstAttribute="top" secondItem="iqY-HR-K9b" secondAttribute="top" constant="10" id="5Uj-Vx-KhG"/>
-                            <constraint firstItem="bo9-Ip-JuG" firstAttribute="trailing" secondItem="iqY-HR-K9b" secondAttribute="trailing" id="97G-OK-EcU"/>
-                            <constraint firstItem="Ts2-Jv-3Lz" firstAttribute="top" secondItem="rra-Xe-i7n" secondAttribute="bottom" constant="8" id="G16-5k-ODm"/>
-                            <constraint firstItem="4J6-pd-Qqp" firstAttribute="top" secondItem="Ts2-Jv-3Lz" secondAttribute="bottom" constant="25" id="GhK-gD-1EG"/>
-                            <constraint firstItem="4J6-pd-Qqp" firstAttribute="leading" secondItem="iqY-HR-K9b" secondAttribute="leading" constant="16" id="Lr4-2q-wHZ"/>
-                            <constraint firstItem="rra-Xe-i7n" firstAttribute="centerX" secondItem="iqY-HR-K9b" secondAttribute="centerX" id="OcJ-2M-Lg8"/>
+                            <constraint firstItem="4J6-pd-Qqp" firstAttribute="leading" secondItem="n46-lX-ioy" secondAttribute="leadingMargin" id="1Ig-hn-ZUg"/>
+                            <constraint firstItem="Ts2-Jv-3Lz" firstAttribute="leading" secondItem="iqY-HR-K9b" secondAttribute="leading" constant="16" id="1b5-uL-W0B"/>
+                            <constraint firstItem="Ts2-Jv-3Lz" firstAttribute="top" secondItem="5AM-tg-RZF" secondAttribute="bottom" constant="5" id="1oA-4P-URr"/>
+                            <constraint firstItem="QfU-01-RGY" firstAttribute="top" secondItem="iqY-HR-K9b" secondAttribute="top" constant="2" id="5Uj-Vx-KhG"/>
+                            <constraint firstItem="iqY-HR-K9b" firstAttribute="trailing" secondItem="4J6-pd-Qqp" secondAttribute="trailing" constant="15" id="9wf-LX-hk0"/>
+                            <constraint firstItem="5AM-tg-RZF" firstAttribute="top" secondItem="iqY-HR-K9b" secondAttribute="top" constant="21" id="P0G-lz-T8o"/>
+                            <constraint firstItem="iqY-HR-K9b" firstAttribute="trailing" secondItem="Ts2-Jv-3Lz" secondAttribute="trailing" constant="15" id="QwL-Vf-gXE"/>
+                            <constraint firstItem="5AM-tg-RZF" firstAttribute="centerX" secondItem="iqY-HR-K9b" secondAttribute="centerX" id="XV7-mL-Xeo"/>
                             <constraint firstItem="QfU-01-RGY" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="n46-lX-ioy" secondAttribute="leading" constant="20" symbolic="YES" id="cge-Qg-MTa"/>
-                            <constraint firstItem="iqY-HR-K9b" firstAttribute="trailing" secondItem="QfU-01-RGY" secondAttribute="trailing" constant="3" id="igR-pp-yBN"/>
-                            <constraint firstItem="Ts2-Jv-3Lz" firstAttribute="centerX" secondItem="iqY-HR-K9b" secondAttribute="centerX" id="jKw-dO-few"/>
-                            <constraint firstItem="iqY-HR-K9b" firstAttribute="trailing" secondItem="4J6-pd-Qqp" secondAttribute="trailing" constant="16" id="lwO-yX-BZc"/>
-                            <constraint firstItem="rra-Xe-i7n" firstAttribute="top" secondItem="bo9-Ip-JuG" secondAttribute="bottom" constant="8" id="n4y-PJ-41y"/>
-                            <constraint firstItem="bo9-Ip-JuG" firstAttribute="leading" secondItem="iqY-HR-K9b" secondAttribute="leading" id="o3G-65-gKn"/>
-                            <constraint firstItem="iqY-HR-K9b" firstAttribute="bottom" secondItem="4J6-pd-Qqp" secondAttribute="bottom" constant="20" id="xip-5X-vE8"/>
+                            <constraint firstItem="4J6-pd-Qqp" firstAttribute="top" secondItem="Ts2-Jv-3Lz" secondAttribute="bottom" constant="19" id="eEg-db-Bkv"/>
+                            <constraint firstAttribute="bottom" secondItem="4J6-pd-Qqp" secondAttribute="bottom" constant="20" symbolic="YES" id="gCN-qn-RI9"/>
+                            <constraint firstItem="iqY-HR-K9b" firstAttribute="trailing" secondItem="QfU-01-RGY" secondAttribute="trailing" constant="7" id="igR-pp-yBN"/>
+                            <constraint firstItem="4J6-pd-Qqp" firstAttribute="leading" secondItem="iqY-HR-K9b" secondAttribute="leading" constant="16" id="m6X-Mu-UQJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iqY-HR-K9b"/>
                     </view>
                     <connections>
+                        <outlet property="descriptionIns" destination="Ts2-Jv-3Lz" id="fbw-Gs-ZZ3"/>
+                        <outlet property="fifthIns" destination="tHg-KL-QA0" id="MjP-bM-5qx"/>
+                        <outlet property="firstIns" destination="h0s-nL-RG2" id="JAv-xK-XlK"/>
+                        <outlet property="fourthIns" destination="zze-60-CG7" id="uab-LN-hRR"/>
+                        <outlet property="instructionLabel" destination="5AM-tg-RZF" id="DET-i4-jGv"/>
                         <outlet property="instructionsView" destination="4J6-pd-Qqp" id="hEA-yo-fok"/>
+                        <outlet property="secondIns" destination="1A6-uK-ZRZ" id="2Tl-mR-s4A"/>
+                        <outlet property="thirdIns" destination="dlE-Hf-VUK" id="iTA-mp-vsn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLD-WW-hwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -367,6 +313,5 @@
     </scenes>
     <resources>
         <image name="fm-icon" width="128" height="128"/>
-        <image name="instructions3" width="227" height="92"/>
     </resources>
 </document>

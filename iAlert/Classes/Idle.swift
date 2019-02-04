@@ -12,8 +12,6 @@ enum Idle {
     case Update(latitude:Double,langitude:Double,city:String,uniqueId:String,language:String)
     case PreferredLanguage(uniqueId:String,language:String)
     
-    case test
-    
     var requestBody:[String:Any]{
         switch self {
         case .Register(let uniqueId,let prevId):
@@ -39,11 +37,6 @@ enum Idle {
             body[ConstsKey.UNIQUE_ID] = uniqueId
             body[ConstsKey.LANGUAGE] = language
             return body
-        case .test:
-            var body:[String:Any] = [:]
-            body[ConstsKey.UNIQUE_ID] = "abcdef"
-            body[ConstsKey.LANGUAGE] = "eng"
-            return body
         }
     }
     
@@ -60,9 +53,6 @@ enum Idle {
         case .Update:
             endPoint+="/\(ConstsKey.UPDATE)"
             method = "PUT"
-        case .test:
-            endPoint+="/\(ConstsKey.TEST)"
-            method = "POST"
         }
         if let url = URL(string: endPoint)
         {

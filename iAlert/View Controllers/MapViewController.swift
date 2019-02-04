@@ -155,8 +155,7 @@ class MapViewController: UIViewController {
         let region = MKCoordinateRegion(center: currentCoordinate, span: .init(latitudeDelta: 0.005, longitudeDelta: 0.005))
         mapView.setRegion(region, animated: true)
         mapView.showsUserLocation = true
-        
-        
+    
         let directionsRequest = MKDirectionsRequest()
         
         directionsRequest.source = source()

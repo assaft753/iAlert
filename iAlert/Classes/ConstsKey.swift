@@ -30,6 +30,11 @@ struct ConstsKey{
     static let CLOSESTS_SHELTER = "closestSheltersAfterNotification"
     static let ALL_CLOSESTS_SHELTER = "closestShelters"
     static let BOUND:Double = 40
-    static let TEST = "test"
+    static let ENGLISH_ID = "en"
+    static let HEBREW_ID = "he"
+    static let ENGLISH_STR = "English"
+    static let HEBREW_STR = "עברית"
+    static let LANGUAGE_STRS = [ENGLISH_STR,HEBREW_STR]
+    static let LANGUAGE_IDS = [ENGLISH_ID,HEBREW_ID]
     
 }

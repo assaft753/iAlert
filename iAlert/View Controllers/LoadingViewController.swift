@@ -15,29 +15,59 @@ class LoadingViewController: UIViewController
     @IBOutlet weak var navigateBtn: UIButton!
     @IBOutlet weak var radioTowerImage: UIImageView!
     @IBOutlet weak var pulseContainer: UIView!
-    var isProccessing:Bool = false
+    @IBOutlet weak var viewsContainer: UIView!
+    
+    var isProccessing:Bool!
     var safePlace:SafePlace?
-    var toTakeLocation:Bool!
     let locationManager = CLLocationManager()
     let pulsator = Pulsator()
-    var showNavigate:Bool = true
     var languageSelected:String!
+    var isLocalShelter:Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isProccessing = false
         initialLocalized(with: nil)
-        toShowNavigateButton()
         initialPulseAnimation()
-        toTakeLocation = true
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        toTakeLocation = true
-        super.viewWillAppear(animated)
-        if !showNavigate
+    func disappearButtons(completion:@escaping (() -> Void))
+    {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.pickLanguageBtn.alpha = 0
+            self.navigateBtn.alpha = 0
+        }) { (_) in
+            completion()
+        }
+    }
+    
+    func appearButtons(animate:Bool = false,completion:(() -> Void)? = nil)
+    {
+        pulsator.stop()
+        if animate == false
         {
-            pulsator.start()
+            pickLanguageBtn.alpha = 1
+            navigateBtn.alpha = 1
+        }
+        else
+        {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.pickLanguageBtn.alpha = 1
+                self.navigateBtn.alpha = 1
+            }) { (_) in
+                completion?()
+            }
+        }
+        
+    }
+    
+    func startProcessingLocationNavigation(isLocalShelter:Bool){
+        if isProccessing == false
+        {
+            self.isLocalShelter = isLocalShelter
+            isProccessing = true
+            disappearButtons{self.takeCurrentLocation()}
         }
     }
     
@@ -61,7 +91,7 @@ class LoadingViewController: UIViewController
     
     func getPickedLanguage() -> String
     {
-        if let lang = UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE)
+        if  UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE) != nil
         {
             let langName = "language".localized
             if langName != "language"
@@ -79,24 +109,10 @@ class LoadingViewController: UIViewController
         return "language".localized
     }
     
-    func toShowNavigateButton()
-    {
-        if self.showNavigate
-        {
-            navigateBtn.alpha = 1
-            toTakeLocation = true
-            navigateBtn.isEnabled = true
-            pulsator.stop()
-        }
-        else
-        {
-            navigateBtn.alpha = 0
-            navigateBtn.isEnabled = false
-        }
-    }
     
     @IBAction func navigateBtnPressed(_ sender: Any){
-        activateCurrentLocation()
+        pulsator.start()
+        startProcessingLocationNavigation(isLocalShelter: true)
     }
     
     @IBAction func pickLanguage(_ sender: Any) {
@@ -121,31 +137,22 @@ class LoadingViewController: UIViewController
         self.present(alert,animated: true, completion: nil )
     }
     
-    func activateCurrentLocation()
-    {
-        isProccessing = true
-        navigateBtn.isEnabled = false
-        self.pulsator.start()
-        UIView.animate(withDuration: 0.5, animations: {
-            self.navigateBtn.alpha = 0
-        }) { (_) in
-            self.takeCurrentLocation()
-        }
-    }
-    
     func findMinDistanceSafePlace(safePlaces:[SafePlace],currentLocation:CLLocation)->SafePlace?
     {
         let currentXY = Utilities.degreeToXY(latitude: currentLocation.coordinate.latitude, longitude: currentLocation.coordinate.longitude)
         var minDistance:Double = -1
         var minSafePlace:SafePlace?
         for safePlace in safePlaces {
-            let distance = Utilities.distanceBetweenTwoPoints(point1: currentXY, point2: safePlace.toXY())
-            if distance <= ConstsKey.BOUND
+            if currentLocation.coordinate.latitude != safePlace.coordinate.latitude, currentLocation.coordinate.longitude != safePlace.coordinate.longitude
             {
-                if minDistance == -1 || distance < minDistance
+                let distance = Utilities.distanceBetweenTwoPoints(point1: currentXY, point2: safePlace.toXY())
+                if distance <= ConstsKey.BOUND
                 {
-                    minSafePlace = safePlace
-                    minDistance = distance
+                    if minDistance == -1 || distance < minDistance
+                    {
+                        minSafePlace = safePlace
+                        minDistance = distance
+                    }
                 }
             }
         }
@@ -154,22 +161,33 @@ class LoadingViewController: UIViewController
     
     func loadShelterLocally(currentLocation:CLLocation)
     {
+        
         print(currentLocation)
         if let safePlaces = iAlertService.shared.loadShelters(),let minSafePlace = findMinDistanceSafePlace(safePlaces: safePlaces, currentLocation: currentLocation)
         {
-            let mapViewController = self.storyboard!.instantiateViewController(withIdentifier: "Map Controller") as! MapViewController
-            mapViewController.safePlace = minSafePlace
-            mapViewController.currentCoordinate = currentLocation.coordinate
-            mapViewController.isRedAlertId = false
-            push(to: mapViewController)
+            let mapBoxViewController = self.storyboard!.instantiateViewController(withIdentifier: "MapBox Controller") as! MapBoxViewController
+            mapBoxViewController.safePlace = minSafePlace
+            mapBoxViewController.currentCoordinate = currentLocation.coordinate
+            mapBoxViewController.isRedAlertId = false
+            push(to: mapBoxViewController)
         }
             
         else{
             let instructionViewController = self.storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
             push(to: instructionViewController)
-            self.showNavigate = true
-            self.toShowNavigateButton()
         }
+    }
+    
+    func showAlreadyInSafeZoneAlert()
+    {
+        isProccessing = false
+        let alert = UIAlertController(title: "safezone".localized, message: "alreadysafezone".localized, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default) { (_) in
+            self.appearButtons(animate: true, completion: nil)
+        })
+
+        self.present(alert, animated: true)
     }
     
     
@@ -183,12 +201,21 @@ class LoadingViewController: UIViewController
                     print("in fetch \(try? JSONSerialization.jsonObject(with: data!, options: []) as? [String:Any] )")
                     
                     var viewCtrl:UIViewController!
+                    
                     if let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [String:Any]
                     {
                         print(result["latitude"] as! Double)
                     }
                     
                     if let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [String:Any], let lat = result["latitude"] as? Double, let long = result["longitude"] as? Double {
+                        
+                        if currentLocation.coordinate.latitude == lat,currentLocation.coordinate.longitude == long
+                        {
+                            DispatchQueue.main.async {
+                                self?.showAlreadyInSafeZoneAlert()
+                            }
+                            return
+                        }
                         
                         if let address = result["address"] as? String
                         {
@@ -201,11 +228,11 @@ class LoadingViewController: UIViewController
                         
                         self?.safePlace!.latitude = lat
                         self?.safePlace!.longitude = long
-                        let mapViewController = self?.storyboard!.instantiateViewController(withIdentifier: "Map Controller") as! MapViewController
-                        mapViewController.safePlace = self?.safePlace!
-                        mapViewController.currentCoordinate = currentLocation.coordinate
-                        mapViewController.isRedAlertId = true
-                        viewCtrl = mapViewController
+                        let mapBoxViewController = self?.storyboard!.instantiateViewController(withIdentifier: "MapBox Controller") as! MapBoxViewController
+                        mapBoxViewController.safePlace = self?.safePlace!
+                        mapBoxViewController.currentCoordinate = currentLocation.coordinate
+                        mapBoxViewController.isRedAlertId = true
+                        viewCtrl = mapBoxViewController
                     }
                     else
                     {
@@ -230,7 +257,10 @@ class LoadingViewController: UIViewController
     
     func initialPulseAnimation()
     {
-        pulsator.position = radioTowerImage.center
+        let x = (radioTowerImage.frame.width/2) - 15
+        let center = CGPoint(x: radioTowerImage.frame.origin.x+x/*-19*/, y: radioTowerImage.frame.origin.y/*-85*/)
+        pulsator.frame.origin.x = radioTowerImage.frame.origin.x
+        pulsator.frame.origin.y = radioTowerImage.frame.origin.y
         pulseContainer.layer.addSublayer(pulsator)
         pulsator.radius = 240.0
         pulsator.numPulse = 5
@@ -243,8 +273,11 @@ class LoadingViewController: UIViewController
         if CLLocationManager.locationServicesEnabled()
         {
             let permission = CLLocationManager.authorizationStatus()
-            if permission == .authorizedAlways || permission == .authorizedWhenInUse,toTakeLocation == true
+            if permission == .authorizedAlways || permission == .authorizedWhenInUse
             {
+                print(pulsator.position)
+                pulsator.start()
+                print(pulsator.position)
                 locationManager.delegate = self
                 locationManager.startUpdatingLocation()
             }
@@ -254,11 +287,11 @@ class LoadingViewController: UIViewController
     
     private func push(to viewController:UIViewController)
     {
-        isProccessing = false
-        showNavigate = true
-        toShowNavigateButton()
-        safePlace = nil
         self.navigationController?.pushViewController(viewController, animated: true)
+        pulsator.stop()
+        isProccessing = false
+        safePlace = nil
+        appearButtons()
     }
 }
 
@@ -285,24 +318,29 @@ extension LoadingViewController:UIPickerViewDelegate, UIPickerViewDataSource
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        toTakeLocation = false
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         guard let currentLocation = locations.first else { return }
-        let reachability = Reachability()!
-        switch reachability.connection {
-        case .none:
-            loadShelterLocally(currentLocation: currentLocation)
-        case .cellular,.wifi:
-            if let fcmToken = UserDefaults.standard.string(forKey: "token")
-            {
-                if self.safePlace != nil{
-                    activateCurrentLocation()
-                    self.loadSheltersRemotelyForNotification(fcmToken: fcmToken, currentLocation: currentLocation)
-                }
-                else
+        if self.isLocalShelter == true
+        {
+            self.loadShelterLocally(currentLocation: currentLocation)
+        }
+        else
+        {
+            let reachability = Reachability()!
+            switch reachability.connection {
+            case .none:
+                self.loadShelterLocally(currentLocation: currentLocation)
+            case .cellular,.wifi:
+                if let fcmToken = UserDefaults.standard.string(forKey: "token")
                 {
-                    loadShelterLocally(currentLocation: currentLocation)
+                    if self.safePlace != nil{
+                        self.loadSheltersRemotelyForNotification(fcmToken: fcmToken, currentLocation: currentLocation)
+                    }
+                    else
+                    {
+                        self.loadShelterLocally(currentLocation: currentLocation)
+                    }
                 }
             }
         }

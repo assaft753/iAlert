@@ -48,18 +48,38 @@ PODS:
   - "GoogleUtilities/NSData+zlib (5.2.2)"
   - GoogleUtilities/Reachability (5.2.2):
     - GoogleUtilities/Logger
+  - Mapbox-iOS-SDK (4.8.0)
+  - MapboxCoreNavigation (0.28.0):
+    - MapboxDirections.swift (~> 0.26.0)
+    - MapboxMobileEvents (~> 0.6.0)
+    - MapboxNavigationNative (~> 3.4.6)
+    - Turf (~> 0.3.0)
+  - MapboxDirections.swift (0.26.1):
+    - Polyline (~> 4.2)
+  - MapboxMobileEvents (0.6.0)
+  - MapboxNavigation (0.28.0):
+    - Mapbox-iOS-SDK (~> 4.3)
+    - MapboxCoreNavigation (= 0.28.0)
+    - MapboxSpeech (~> 0.1.0)
+    - Solar (~> 2.1)
+  - MapboxNavigationNative (3.4.12)
+  - MapboxSpeech (0.1.0)
   - nanopb (0.3.8):
     - nanopb/decode (= 0.3.8)
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Polyline (4.2.0)
   - Protobuf (3.6.1)
   - Pulsator (0.5.1)
   - ReachabilitySwift (4.1.0)
+  - Solar (2.1.0)
+  - Turf (0.3.0)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
+  - MapboxNavigation (~> 0.28.0)
   - Pulsator
   - ReachabilitySwift
 
@@ -72,10 +92,20 @@ SPEC REPOS:
     - FirebaseMessaging
     - GoogleAppMeasurement
     - GoogleUtilities
+    - Mapbox-iOS-SDK
+    - MapboxCoreNavigation
+    - MapboxDirections.swift
+    - MapboxMobileEvents
+    - MapboxNavigation
+    - MapboxNavigationNative
+    - MapboxSpeech
     - nanopb
+    - Polyline
     - Protobuf
     - Pulsator
     - ReachabilitySwift
+    - Solar
+    - Turf
 
 SPEC CHECKSUMS:
   Firebase: 8c957f9cb3852b519180fb378801b7eeeba4d288
@@ -85,11 +115,21 @@ SPEC CHECKSUMS:
   FirebaseMessaging: f67b3719f520ee200da0e20ce577fe2bce0c01d0
   GoogleAppMeasurement: e785bdb86d3d280abc778156cec323a975f11d1d
   GoogleUtilities: 06b66f9567769a7958db20a92f0128b2843e49d5
+  Mapbox-iOS-SDK: 864bc732a20c183d87f04923295e988b504453d9
+  MapboxCoreNavigation: b34af46883ca243b60244aa0e7370aa1558cb5ac
+  MapboxDirections.swift: 514610ac52a9cd080062085f35b8a9fdb27a83cb
+  MapboxMobileEvents: 0218869f556a7fdac9f869e2f9c10e8c6dd7eed5
+  MapboxNavigation: c65f0cceb87924fbe171095eeebe1914940c97ba
+  MapboxNavigationNative: f836f10df1fa8b4aeca554b8593b75ceb72c8150
+  MapboxSpeech: d7569ee91dd8bdca3ef8d19b6828e8754c1073ec
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Polyline: 3d69f75bb136357e27291d439d0436c6ebda57a4
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
   Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
+  Turf: c6bdf62d6a70c647874f295dd1cf4eefc0c3e9e6
 
-PODFILE CHECKSUM: dbd0e13bfb72582ab878644a87c0bb1c242bb31f
+PODFILE CHECKSUM: 0a68efe8cb7fcb70be60fdcfb563ca654127ab63
 
 COCOAPODS: 1.5.3

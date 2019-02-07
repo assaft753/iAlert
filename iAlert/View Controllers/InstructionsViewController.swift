@@ -4,17 +4,24 @@ import UIKit
 class InstructionsViewController: UIViewController {
     
     @IBOutlet weak var instructionsView: UIView!
+    @IBOutlet weak var doneBtn: UIButton!
+    @IBOutlet weak var firstIns: UILabel!
+    @IBOutlet weak var secondIns: UILabel!
+    @IBOutlet weak var thirdIns: UILabel!
+    @IBOutlet weak var fourthIns: UILabel!
+    @IBOutlet weak var fifthIns: UILabel!
+    @IBOutlet weak var instructionLabel: UILabel!
+    @IBOutlet weak var descriptionIns: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UserDefaults.standard.set(ConstsKey.HEBREW_ID, forKey: ConstsKey.PREFFERED_LANGUAGE)
-        UserDefaults.standard.synchronize()
         initInstructions()
         instructionsView.layer.cornerRadius = 10
     }
     
     func initInstructions()
     {
+        doneBtn.setTitle("done".localized, for: .normal)
         let paragraphStyle = NSMutableParagraphStyle()
         if let currentLanguage = UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE)
         {
@@ -39,14 +46,6 @@ class InstructionsViewController: UIViewController {
         fourthIns.attributedText = NSAttributedString(string: "fourthIns".localized, attributes: attributes)
         fifthIns.attributedText = NSAttributedString(string: "fifthIns".localized, attributes: attributes)
     }
-    
-    @IBOutlet weak var firstIns: UILabel!
-    @IBOutlet weak var secondIns: UILabel!
-    @IBOutlet weak var thirdIns: UILabel!
-    @IBOutlet weak var fourthIns: UILabel!
-    @IBOutlet weak var fifthIns: UILabel!
-    @IBOutlet weak var instructionLabel: UILabel!
-    @IBOutlet weak var descriptionIns: UILabel!
     
     
     @IBAction func doneBtn(_ sender: Any) {

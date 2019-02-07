@@ -12,6 +12,7 @@
 		705692A32206C989009B0DFA /* Languages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705692A22206C989009B0DFA /* Languages.swift */; };
 		705692B12206D5BF009B0DFA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 705692B32206D5BF009B0DFA /* Main.storyboard */; };
 		705692B82206D66B009B0DFA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 705692B62206D66B009B0DFA /* Localizable.strings */; };
+		7082E9DB2209AA4E0017F652 /* MapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7082E9DA2209AA4E0017F652 /* MapBoxViewController.swift */; };
 		708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
 		70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2A21FCB14E0056361E /* ConstsKey.swift */; };
@@ -45,8 +46,9 @@
 		705692B72206D66B009B0DFA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = iAlert/Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		705692B92206D68C009B0DFA /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = iAlert/he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		705692BA2206D70F009B0DFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = iAlert/en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7082E9DA2209AA4E0017F652 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
 		708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iAlert.entitlements; sourceTree = "<group>"; };
-		708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; usesTabs = 0; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
 		70919E2A21FCB14E0056361E /* ConstsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstsKey.swift; sourceTree = "<group>"; };
 		70919E2C21FCB5600056361E /* Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Idle.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				BA00B39A20F5116D0074C0EB /* MapViewController.swift */,
 				BA5F02E6211DDBBC00626A00 /* InstructionsViewController.swift */,
 				708A2BBE211F6C31004EE8F5 /* LoadingViewController.swift */,
+				7082E9DA2209AA4E0017F652 /* MapBoxViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -283,17 +286,41 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-iAlert/Pods-iAlert-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
+				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework",
+				"${BUILT_PRODUCTS_DIR}/MapboxDirections.swift/MapboxDirections.framework",
+				"${BUILT_PRODUCTS_DIR}/MapboxMobileEvents/MapboxMobileEvents.framework",
+				"${BUILT_PRODUCTS_DIR}/MapboxNavigation/MapboxNavigation.framework",
+				"${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework",
+				"${PODS_ROOT}/MapboxNavigationNative/MapboxNavigationNative.framework.dSYM",
+				"${BUILT_PRODUCTS_DIR}/MapboxSpeech/MapboxSpeech.framework",
+				"${BUILT_PRODUCTS_DIR}/Polyline/Polyline.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/Solar/Solar.framework",
+				"${BUILT_PRODUCTS_DIR}/Turf/Turf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxCoreNavigation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxDirections.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxMobileEvents.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxNavigation.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxNavigationNative.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/MapboxNavigationNative.framework.dSYM",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxSpeech.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Polyline.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Solar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Turf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,6 +363,7 @@
 				BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */,
 				70919E3221FCC0930056361E /* iAlertService.swift in Sources */,
 				708A2BBF211F6C31004EE8F5 /* LoadingViewController.swift in Sources */,
+				7082E9DB2209AA4E0017F652 /* MapBoxViewController.swift in Sources */,
 				70919E2F21FCB8280056361E /* Operative.swift in Sources */,
 				BA5F02E7211DDBBC00626A00 /* InstructionsViewController.swift in Sources */,
 				70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */,

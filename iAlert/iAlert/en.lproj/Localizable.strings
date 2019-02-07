@@ -17,3 +17,7 @@
 "fifthIns" = "5.In a break, try to reach for a safe zone quikly.";
 "Instructions" = "Instructions";
 "descriptionInst" = "Not found near safe zone please follow the instructions:";
+"done" = "Done";
+"safezone" = "Safe Zone";
+"alreadysafezone" = "You are in a safe place already";
+"OK" = "OK";

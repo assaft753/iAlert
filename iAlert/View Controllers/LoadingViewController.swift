@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+
 class LoadingViewController: UIViewController
 {
     @IBOutlet weak var pickLanguageBtn: UIButton!
@@ -17,16 +18,19 @@ class LoadingViewController: UIViewController
     @IBOutlet weak var pulseContainer: UIView!
     @IBOutlet weak var viewsContainer: UIView!
     
-    var isProccessing:Bool!
+    var isProccessing:Bool = false
     var safePlace:SafePlace?
-    let locationManager = CLLocationManager()
-    let pulsator = Pulsator()
+    var afterWillAppear:Bool = false
+    var locationManager:CLLocationManager!
+    var pulsator:Pulsator!
     var languageSelected:String!
     var isLocalShelter:Bool!
+    var isWillPresent:Bool!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        isProccessing = false
+        locationManager = CLLocationManager()
+        pulsator = Pulsator()
         initialLocalized(with: nil)
         initialPulseAnimation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -34,6 +38,7 @@ class LoadingViewController: UIViewController
     
     func disappearButtons(completion:@escaping (() -> Void))
     {
+        self.pulsator.start()
         UIView.animate(withDuration: 0.5, animations: {
             self.pickLanguageBtn.alpha = 0
             self.navigateBtn.alpha = 0
@@ -72,9 +77,29 @@ class LoadingViewController: UIViewController
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("disappear")
         super.viewWillDisappear(animated)
         locationManager.delegate = nil
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("appear")
+        if let isWillPresent = isWillPresent,isWillPresent == false
+         {
+            startProcessingLocationNavigation(isLocalShelter: false)
+            self.isWillPresent = nil
+         }
+        self.afterWillAppear = true
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        print("did appear")
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        print("did disappear")
     }
     
     func initialLocalized(with languageId:String?)
@@ -111,7 +136,6 @@ class LoadingViewController: UIViewController
     
     
     @IBAction func navigateBtnPressed(_ sender: Any){
-        pulsator.start()
         startProcessingLocationNavigation(isLocalShelter: true)
     }
     
@@ -211,7 +235,7 @@ class LoadingViewController: UIViewController
                         
                         if currentLocation.coordinate.latitude == lat,currentLocation.coordinate.longitude == long
                         {
-                            DispatchQueue.main.async {
+                            DispatchQueue.main.sync {
                                 self?.showAlreadyInSafeZoneAlert()
                             }
                             return
@@ -240,14 +264,14 @@ class LoadingViewController: UIViewController
                         viewCtrl = instructionViewController
                     }
                     
-                    DispatchQueue.main.sync {
-                        self?.push(to: viewCtrl)
+                    DispatchQueue.main.async {
+                    self?.push(to: viewCtrl)
                     }
                 }
                 else
                 {
                     let instructionViewController = self?.storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
-                    DispatchQueue.main.sync {
+                    DispatchQueue.main.async {
                         self?.push(to: instructionViewController!)
                     }
                 }
@@ -257,10 +281,10 @@ class LoadingViewController: UIViewController
     
     func initialPulseAnimation()
     {
-        let x = (radioTowerImage.frame.width/2) - 15
-        let center = CGPoint(x: radioTowerImage.frame.origin.x+x/*-19*/, y: radioTowerImage.frame.origin.y/*-85*/)
-        pulsator.frame.origin.x = radioTowerImage.frame.origin.x
-        pulsator.frame.origin.y = radioTowerImage.frame.origin.y
+        //let x = (radioTowerImage.frame.width/2) - 15
+        //let center = CGPoint(x: radioTowerImage.frame.origin.x-19, y: radioTowerImage.frame.origin.y-85)
+        pulsator.frame.origin.x = radioTowerImage.frame.origin.x+20
+        pulsator.frame.origin.y = radioTowerImage.frame.origin.y+5
         pulseContainer.layer.addSublayer(pulsator)
         pulsator.radius = 240.0
         pulsator.numPulse = 5
@@ -270,14 +294,12 @@ class LoadingViewController: UIViewController
     
     func takeCurrentLocation()
     {
+        pulsator.start()
         if CLLocationManager.locationServicesEnabled()
         {
             let permission = CLLocationManager.authorizationStatus()
             if permission == .authorizedAlways || permission == .authorizedWhenInUse
             {
-                print(pulsator.position)
-                pulsator.start()
-                print(pulsator.position)
                 locationManager.delegate = self
                 locationManager.startUpdatingLocation()
             }
@@ -315,6 +337,7 @@ extension LoadingViewController:UIPickerViewDelegate, UIPickerViewDataSource
     }
 }
 
+
 extension LoadingViewController:CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -349,3 +372,4 @@ extension LoadingViewController:CLLocationManagerDelegate
         print(error)
     }
 }
+//}//delete

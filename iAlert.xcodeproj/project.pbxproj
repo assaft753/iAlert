@@ -60,6 +60,7 @@
 		70A995C821FF4BE60028F704 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		70A995CA21FF53890028F704 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		70DF109C21FCDEA500470612 /* ashdod.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod.gpx; sourceTree = "<group>"; };
+		70EA2CAC22216EBA000CB7BA /* afeka.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = afeka.gpx; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +117,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		70EA2CAD2221865B000CB7BA /* MapBox */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MapBox;
+			sourceTree = "<group>";
+		};
 		70F26CE3211F5FB700BE08ED /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,10 +175,12 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
+				70EA2CAD2221865B000CB7BA /* MapBox */,
 				705692B62206D66B009B0DFA /* Localizable.strings */,
 				709295F221FE562900CBA12D /* Model.xcdatamodeld */,
 				7056929F2206C87D009B0DFA /* Extensions */,
 				70A995C721FF419A0028F704 /* hadera.gpx */,
+				70EA2CAC22216EBA000CB7BA /* afeka.gpx */,
 				70DF109C21FCDEA500470612 /* ashdod.gpx */,
 				70919E3021FCC0800056361E /* Services */,
 				70460E7A2120A23700BA54CA /* Classes */,
@@ -250,6 +260,28 @@
 				Base,
 				he,
 				en,
+				de,
+				ar,
+				"zh-Hans",
+				fa,
+				uk,
+				es,
+				sl,
+				da,
+				it,
+				bg,
+				sv,
+				ko,
+				"zh-Hant",
+				hu,
+				"pt-BR",
+				vi,
+				lt,
+				ru,
+				fr,
+				nl,
+				"pt-PT",
+				ca,
 			);
 			mainGroup = BA00B38C20F5116D0074C0EB;
 			productRefGroup = BA00B39620F5116D0074C0EB /* Products */;
@@ -523,6 +555,11 @@
 				CODE_SIGN_ENTITLEMENTS = iAlert/iAlert.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4CRCLH9JW9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iAlert/MapBox/Mapbox-iOS-SDK/dynamic",
+					"$(PROJECT_DIR)/iAlert/MapBox/MapboxNavigationNative",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/iAlert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -544,6 +581,11 @@
 				CODE_SIGN_ENTITLEMENTS = iAlert/iAlert.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 4CRCLH9JW9;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/iAlert/MapBox/Mapbox-iOS-SDK/dynamic",
+					"$(PROJECT_DIR)/iAlert/MapBox/MapboxNavigationNative",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/iAlert/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = (

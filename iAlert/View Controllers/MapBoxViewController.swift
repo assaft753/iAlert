@@ -24,7 +24,9 @@ class MapBoxViewController: UIViewController {
     var isRedAlertId:Bool!
     var timer:Timer!
     var countDown:Int?
+    var arrived:Bool!
     var language:String!
+    var nav:NavigationViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,17 +35,21 @@ class MapBoxViewController: UIViewController {
         panel.isHidden = true
         self.language = UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE)
         let origin = Waypoint(coordinate: /*CLLocationCoordinate2D(latitude: 31.784159, longitude: 34.634969)*/currentCoordinate)
-        let destination = Waypoint(coordinate:/* CLLocationCoordinate2D(latitude: 31.785882, longitude: 34.633005)*/safePlace.coordinate)
-        
+        let destination = Waypoint(coordinate: /*CLLocationCoordinate2D(latitude: 31.785882, longitude: 34.633005)*/safePlace.coordinate)
+        arrived = false
         let options = NavigationRouteOptions(waypoints: [origin, destination],profileIdentifier: MBDirectionsProfileIdentifier.walking)
         
+        var language = self.language!
         
-        options.locale = Locale(identifier: self.language)
+        if language == "en"{
+            language = "\(language)-au"//for meter metric unit
+        }
+        options.locale = Locale(identifier: language)
         options.distanceMeasurementSystem = .metric
-        Directions.shared.calculate(options) { (waypoints, routes, error) in
+        Directions.shared.calculate(options) {[weak self] (waypoints, routes, error) in
             guard let route = routes?.first else { return }
-            self.route = route
-            self.startEmbeddedNavigation()
+            self?.route = route
+            self?.startEmbeddedNavigation()
             
         }
         
@@ -54,16 +60,21 @@ class MapBoxViewController: UIViewController {
         timeLeftLabel.text = "\(countDown!)"
         if countDown == 0 {
             timer.invalidate()
+            if arrived == false {
+                let instructionViewController = self.storyboard!.instantiateViewController(withIdentifier: "Instruction Controller")
+                self.navigationController?.pushViewController(instructionViewController, animated: true)
+            }
+            
         }
     }
     @IBAction func buttonAction(_ sender: Any) {
-    self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
     
     func startEmbeddedNavigation() {
         guard let route = route else { return }
-        let navigationService = MapboxNavigationService(route: route, simulating:.always)
-        let nav = NavigationViewController(for: route, styles: [CustomDayStyle(), CustomNightStyle()], navigationService: navigationService)
+        let navigationService = MapboxNavigationService(route: route, simulating:.never)
+        nav = NavigationViewController(for: route, styles: [CustomDayStyle(), CustomNightStyle()], navigationService: navigationService)
         nav.mapView?.delegate = self
         nav.delegate = self
         addChildViewController(nav)
@@ -108,13 +119,13 @@ class CustomDayStyle: DayStyle {
     
     override func apply() {
         super.apply()
-        ArrivalTimeLabel.appearance().isHidden = true
+        //ArrivalTimeLabel.appearance().isHidden = true
         //BottomBannerView.appearance().backgroundColor = secondaryBackgroundColor
         //BottomBannerContentView.appearance().backgroundColor = secondaryBackgroundColor
-        BottomBannerView.appearance().isHidden = true
-        BottomBannerContentView.appearance().isHidden = true
+        //BottomBannerView.appearance().isHidden = true
+        //BottomBannerContentView.appearance().isHidden = true
         Button.appearance().textColor = #colorLiteral(red: 0.9842069745, green: 0.9843751788, blue: 0.9841964841, alpha: 1)
-        Button.appearance().isHidden = true
+        //Button.appearance().isHidden = true
         CancelButton.appearance().tintColor = lightGrayColor
         DistanceLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).unitTextColor = secondaryLabelColor
         DistanceLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).valueTextColor = primaryLabelColor
@@ -151,7 +162,7 @@ class CustomDayStyle: DayStyle {
         ResumeButton.appearance().tintColor = blueColor
         SecondaryLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).normalTextColor = secondaryLabelColor
         SecondaryLabel.appearance(whenContainedInInstancesOf: [StepInstructionsView.self]).normalTextColor = darkGrayColor
-        TimeRemainingLabel.appearance().isHidden = true
+        //TimeRemainingLabel.appearance().isHidden = true
         //TimeRemainingLabel.appearance().trafficLowColor = darkBackgroundColor
         //TimeRemainingLabel.appearance().trafficUnknownColor = darkGrayColor
         WayNameLabel.appearance().normalTextColor = blueColor
@@ -177,13 +188,13 @@ class CustomNightStyle: NightStyle {
     
     override func apply() {
         super.apply()
-        ArrivalTimeLabel.appearance().isHidden = true
-       // BottomBannerView.appearance().backgroundColor = secondaryBackgroundColor
-        //BottomBannerContentView.appearance().backgroundColor = secondaryBackgroundColor
-        BottomBannerView.appearance().isHidden = true
-        BottomBannerContentView.appearance().isHidden = true
+        //ArrivalTimeLabel.appearance().isHidden = true
+        BottomBannerView.appearance().backgroundColor = secondaryBackgroundColor
+        BottomBannerContentView.appearance().backgroundColor = secondaryBackgroundColor
+        //BottomBannerView.appearance().isHidden = true
+        //BottomBannerContentView.appearance().isHidden = true
         Button.appearance().textColor = #colorLiteral(red: 0.9842069745, green: 0.9843751788, blue: 0.9841964841, alpha: 1)
-        Button.appearance().isHidden = true
+        //Button.appearance().isHidden = true
         CancelButton.appearance().tintColor = lightGrayColor
         DistanceLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).unitTextColor = secondaryLabelColor
         DistanceLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).valueTextColor = primaryLabelColor
@@ -220,9 +231,9 @@ class CustomNightStyle: NightStyle {
         ResumeButton.appearance().tintColor = blueColor
         SecondaryLabel.appearance(whenContainedInInstancesOf: [InstructionsBannerView.self]).normalTextColor = secondaryLabelColor
         SecondaryLabel.appearance(whenContainedInInstancesOf: [StepInstructionsView.self]).normalTextColor = darkGrayColor
-        TimeRemainingLabel.appearance().isHidden = true
-        //TimeRemainingLabel.appearance().trafficLowColor = darkBackgroundColor
-        //TimeRemainingLabel.appearance().trafficUnknownColor = darkGrayColor
+        //TimeRemainingLabel.appearance().isHidden = true
+        TimeRemainingLabel.appearance().trafficLowColor = darkBackgroundColor
+        TimeRemainingLabel.appearance().trafficUnknownColor = darkGrayColor
         WayNameLabel.appearance().normalTextColor = blueColor
         WayNameView.appearance().backgroundColor = secondaryBackgroundColor
     }
@@ -236,6 +247,7 @@ extension MapBoxViewController:NavigationViewControllerDelegate,MGLMapViewDelega
     }
     
     func navigationViewController(_ navigationViewController: NavigationViewController, didArriveAt waypoint: Waypoint) -> Bool {
+        arrived = true
         if let fcmToken = UserDefaults.standard.string(forKey: "token"),isRedAlertId
         {
             print("fetch arrive")

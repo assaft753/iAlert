@@ -9,6 +9,7 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    var isDid:Bool?
     let locationManager = CLLocationManager()
     static let geoCoder = CLGeocoder()
     let center = UNUserNotificationCenter.current()
@@ -51,6 +52,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    /*func applicationDidBecomeActive(_ application: UIApplication) {
+        print("aaaaa")
+        if let isDid = self.isDid, isDid == true,let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController,let afterWillAppear = loadingViewCtrl.afterWillAppear, afterWillAppear == true
+        {
+            self.isDid = nil
+        loadingViewCtrl.pickLanguageBtn.setTitle(afterWillAppear.description, for: .normal)
+        }
+    }
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        print("app")
+    }*/
+    
+    
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Model")
@@ -114,11 +128,13 @@ extension AppDelegate: CLLocationManagerDelegate {
             data,err,response in
             guard let httpResponse = response as? HTTPURLResponse else {return}
             if httpResponse.statusCode < 400,let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [[String:Any]]{
+                DispatchQueue.main.async {
                 iAlertService.shared.removeAllShelters()
                 iAlertService.shared.saveShelters(shelters: result)
                 if let shelters = iAlertService.shared.loadShelters()
                 {
                     print("final!!!!!!!!!!!!!!!!!!!!!! \(shelters)")
+                }
                 }
             }
         }
@@ -208,14 +224,26 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         return nil
     }
     
-    private func checkNotification(with redAlertId:Int, time:Int)
+    private func checkNotification(with redAlertId:Int, time:Int,isWillPresent:Bool)
     {
         if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
         {
             let safePlace = SafePlace(redAlertId: redAlertId,time: time)
-            //set safe place at loadingViewCtrl
             loadingViewCtrl.safePlace = safePlace
-            loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
+            if isWillPresent == false
+            {
+                loadingViewCtrl.isWillPresent = false
+                if loadingViewCtrl.afterWillAppear == true
+                {
+                    loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
+                    loadingViewCtrl.isWillPresent = nil
+                }
+            }
+            else if isWillPresent == true
+            {
+                loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
+                loadingViewCtrl.isWillPresent = true
+            }
         }
     }
     
@@ -224,11 +252,9 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("will!!!")
-        let l = notification.request.content.userInfo
-        print(l)
         if let redAlertId = convertAlertIdToInt(for: notification.request.content.userInfo),let time = convertTimeToInt(for: notification.request.content.userInfo)
         {
-            checkNotification(with: redAlertId, time: time)
+            checkNotification(with: redAlertId, time: time, isWillPresent: true)
         }
         completionHandler([])
     }
@@ -239,7 +265,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         print("did!!!")
         if let redAlertId = convertAlertIdToInt(for: response.notification.request.content.userInfo),let time = convertTimeToInt(for: response.notification.request.content.userInfo)
         {
-            checkNotification(with: redAlertId, time: time)
+            checkNotification(with: redAlertId, time: time, isWillPresent: false)
         }
         completionHandler()
     }

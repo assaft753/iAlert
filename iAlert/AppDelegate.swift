@@ -4,6 +4,7 @@ import UserNotifications
 import CoreLocation
 import Firebase
 import CoreData
+import GoogleMaps
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -11,23 +12,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var isDid:Bool?
     let locationManager = CLLocationManager()
-    static let geoCoder = CLGeocoder()
     let center = UNUserNotificationCenter.current()
+    var locker:NSObject? = nil
+    //let TO_LOCK_KEY = "lock"
+    
+    static let geoCoder = CLGeocoder()
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "Model")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                print(error)
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self
-        
-        /*let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Shelter")
-        do{
-            let items = try context.fetch(fetchRequest)
-            items.forEach{print($0.value(forKey: "address"))}
-        }
-        catch let err{
-            print(err)
-        }*/
+        Messaging.messaging().delegate = self as MessagingDelegate
+        locationManager.delegate = self
+        GMSServices.provideAPIKey(GMSServices.GMS_MAPS_API_KEY)
         
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().delegate = self
@@ -44,38 +50,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerUserNotificationSettings(settings)
         }
         
-        application.registerForRemoteNotifications()
         
+        application.registerForRemoteNotifications()
         locationManager.requestAlwaysAuthorization()
-        locationManager.delegate = self
         locationManager.startMonitoringSignificantLocationChanges()
+        //TODO: check if launch happend because of a loaction update
+        
+        window = UIWindow()
+        window?.makeKeyAndVisible()
+        window?.rootViewController = /*NavigateViewController()*/ContainerViewController() //TODO: change it back to ContainerViewController
         
         return true
     }
-    /*func applicationDidBecomeActive(_ application: UIApplication) {
-        print("aaaaa")
-        if let isDid = self.isDid, isDid == true,let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController,let afterWillAppear = loadingViewCtrl.afterWillAppear, afterWillAppear == true
-        {
-            self.isDid = nil
-        loadingViewCtrl.pickLanguageBtn.setTitle(afterWillAppear.description, for: .normal)
-        }
-    }
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        print("app")
-    }*/
-    
-    
-    
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "Model")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                print(error)
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
     
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -89,38 +75,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-}
-
-extension AppDelegate : MessagingDelegate {
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-        if let token = UserDefaults.standard.string(forKey: "token")
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        locker = NSObject()
+    }
+    
+    
+    func sendLocalNotificationWith(title:String?,body:String?)
+    {
+        let content = UNMutableNotificationContent()
+        
+        if let title = title
         {
-            if token != fcmToken
-            {
-                UserDefaults.standard.set(fcmToken, forKey: "token")
-                print("not the same token!!")
-                iAlertService.shared.fetch(type: .Register(uniqueId: fcmToken, prevId: token))
-            }
-            else
-            {
-                print("same tokens!!!!")
-            }
+            content.title = title
         }
         else
         {
-            print("upload new Token!!")
-            UserDefaults.standard.set(fcmToken, forKey: "token")
-            iAlertService.shared.fetch(type: .Register(uniqueId: fcmToken, prevId: nil))
+            content.title = ""
         }
-        print("Firebase registration token: \(fcmToken)")
+        
+        if let body = body
+        {
+            content.body = body
+        }
+        else
+        {
+            content.body = ""
+        }
+        content.sound = UNNotificationSound.default()
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+        let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
+        self.center.add(request, withCompletionHandler: nil)
     }
     
-    func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-        print("Received data message: \(remoteMessage.appData)")
-    }
 }
 
-extension AppDelegate: CLLocationManagerDelegate {
+/*extension AppDelegate: CLLocationManagerDelegate {
     
     func newLocationReceived( location: CLLocation,city: String, description: String) {
         guard let token = UserDefaults.standard.string(forKey: "token") else {return}
@@ -129,12 +118,12 @@ extension AppDelegate: CLLocationManagerDelegate {
             guard let httpResponse = response as? HTTPURLResponse else {return}
             if httpResponse.statusCode < 400,let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [[String:Any]]{
                 DispatchQueue.main.async {
-                iAlertService.shared.removeAllShelters()
-                iAlertService.shared.saveShelters(shelters: result)
-                if let shelters = iAlertService.shared.loadShelters()
-                {
-                    print("final!!!!!!!!!!!!!!!!!!!!!! \(shelters)")
-                }
+                    iAlertService.shared.removeAllShelters()
+                    iAlertService.shared.saveShelters(shelters: result)
+                    if let shelters = iAlertService.shared.loadShelters()
+                    {
+                        print("final!!!!!!!!!!!!!!!!!!!!!! \(shelters)")
+                    }
                 }
             }
         }
@@ -184,6 +173,14 @@ extension AppDelegate: CLLocationManagerDelegate {
         self.center.add(request, withCompletionHandler: nil)
         
         AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
+            
+            let content = UNMutableNotificationContent()
+            content.title = "location geocoder"
+            content.sound = UNNotificationSound.default()
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
+            let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
+            self.center.add(request, withCompletionHandler: nil)
+            
             if let place = placemarks?.first {
                 
                 let content = UNMutableNotificationContent()
@@ -201,7 +198,8 @@ extension AppDelegate: CLLocationManagerDelegate {
             }
         }
     }
-}
+}*/
+
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
@@ -226,7 +224,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     
     private func checkNotification(with redAlertId:Int, time:Int,isWillPresent:Bool)
     {
-        if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
+        /*if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
         {
             let safePlace = SafePlace(redAlertId: redAlertId,time: time)
             loadingViewCtrl.safePlace = safePlace
@@ -244,7 +242,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                 loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
                 loadingViewCtrl.isWillPresent = true
             }
-        }
+        }*/
     }
     
     

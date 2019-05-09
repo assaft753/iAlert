@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  iAlert
+
+  Created by Assaf Tayouri on 03/02/2019.
+  Copyright © 2019 Assaf Tayouri. All rights reserved.
+*/
+"navigateBtn" = "Guide Me";
+"language" = "English";
+"pickLanguage" = "Pick Language";
+"Cancel" = "Cancel";
+"OK" = "OK";
+"firstIns" = "1.Search for wall far from glass.";
+"secondIns" = "2.If not exists look for open space.";
+"thirdIns" = "3.Lie on your stomach.";
+"fourthIns" = "4.Protect your head with your hands.";
+"fifthIns" = "5.In a break, try to reach for a safe zone quikly.";
+"Instructions" = "Instructions";
+"descriptionInst" = "Not found near safe zone please follow the instructions:";
+"done" = "Done";
+"safezone" = "Safe Zone";
+"alreadysafezone" = "You are in a safe place already";
+"OK" = "OK";
+"Meter" = "m";

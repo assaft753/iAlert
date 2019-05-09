@@ -8,7 +8,5 @@ target 'iAlert' do
   # Pods for iAlert
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
-pod 'Pulsator'
-pod 'ReachabilitySwift'
-pod 'MapboxNavigation', '~> 0.28.0'
+pod 'GoogleMaps'
 end

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct ConstsKey{
     static let UNIQUE_ID = "unique_id"
@@ -20,7 +21,7 @@ struct ConstsKey{
     static let RED_ALERT_ID = "red_alert_id"
     static let LATITUDE2 = "latitude"
     static let LANGITUDE2 = "longitude"
-    static let BASE_URL = "http://18.130.17.203:3000"
+    static let BASE_URL = "http://109.226.11.202:3000"
     static let IDLE = "idle"
     static let OPERATIVE = "operative"
     static let REGISTER = "register"
@@ -30,11 +31,15 @@ struct ConstsKey{
     static let CLOSESTS_SHELTER = "closestSheltersAfterNotification"
     static let ALL_CLOSESTS_SHELTER = "closestShelters"
     static let BOUND:Double = 40
-    static let ENGLISH_ID = "en"
-    static let HEBREW_ID = "he"
-    static let ENGLISH_STR = "English"
-    static let HEBREW_STR = "עברית"
-    static let LANGUAGE_STRS = [ENGLISH_STR,HEBREW_STR]
-    static let LANGUAGE_IDS = [ENGLISH_ID,HEBREW_ID]
-    
+    static let SOUND:String = "sound"
+    static let CIRCULAR_EXIT_REGION_ID:String = "GMSmap_EXIT_Region"
+    static let CIRCULAR_EXIT_REGION_RADIUS:Double = 300
+    static let CIRCULAR_ENTER_REGION_ID:String = "GMSmap_ENTER_Region"
+    static let CIRCULAR_ENTER_REGION_RADIUS:Double = 1
+    static let GMS_STREET_NUMBER = "street_number"
+    static let GMS_STREET_NAME = "route"
+    static let GMS_CITY = "locality"
+    static let GMS_COUNTRY = "country"
+    static let GMS_TYPE = "types"
+    static let GMS_LONG_NAME = "long_name"
 }

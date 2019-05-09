@@ -11,20 +11,20 @@ import Foundation
 
 extension String {
     var localized: String {
-        var language:String!
+        let languageId:String = Settings.shared.languageId
        
-        if let currentLanguage = UserDefaults.standard.string(forKey: ConstsKey.PREFFERED_LANGUAGE) {
+        /*if let currentLanguage = UserDefaults.standard.string(forKey: Language.PREFFERED_LANGUAGE) {
             language = currentLanguage
         }
         else {
-            UserDefaults.standard.set(Languages.English.languageIdentifier, forKey: ConstsKey.PREFFERED_LANGUAGE)
+            let defaultLanguageId:String = Language.DEFAULT_LANGUAGE.associatedValues.languageId UserDefaults.standard.set(defaultLanguageId, forKey: Language.PREFFERED_LANGUAGE)
             UserDefaults.standard.synchronize()
-            language = Languages.English.languageIdentifier
-        }
+            language = defaultLanguageId
+        }*/
         
-        print("the preffered language is \(language!)")
+        print("the preffered language is \(languageId)")
         
-        let path = Bundle.main.path(forResource: language, ofType: "lproj")
+        let path = Bundle.main.path(forResource: languageId, ofType: "lproj")
         let bundle = Bundle(path: path!)
         
         return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")

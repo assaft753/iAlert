@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController = /*NavigateViewController()*/ContainerViewController() //TODO: change it back to ContainerViewController
+        window?.rootViewController =  /*NavigateViewController()*/ContainerViewController() //TODO: change it back to ContainerViewController
         
         return true
     }
@@ -250,10 +250,23 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("will!!!")
-        if let redAlertId = convertAlertIdToInt(for: notification.request.content.userInfo),let time = convertTimeToInt(for: notification.request.content.userInfo)
+        print(print(notification.request.content.userInfo))
+        print(self.window?.rootViewController)
+        print(self.window?.rootViewController as? ContainerViewController)
+        let userInfo = notification.request.content.userInfo
+        if let dic = userInfo as? [String:Any],
+            let timeStr = dic["max_time_to_arrive_to_shelter"] as? String,
+            let time = Int(timeStr),
+            let redAlertIdStr = dic["redAlertId"] as? String,
+            let redAlertId = Int(redAlertIdStr),
+            let containerVC = self.window?.rootViewController as? ContainerViewController
+        {
+            containerVC.askUserForWishingNavigation(alertId: redAlertId, time: time)
+        }
+        /*if let redAlertId = convertAlertIdToInt(for: notification.request.content.userInfo),let time = convertTimeToInt(for: notification.request.content.userInfo)
         {
             checkNotification(with: redAlertId, time: time, isWillPresent: true)
-        }
+        }*/
         completionHandler([])
     }
     
@@ -261,10 +274,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         print("did!!!")
-        if let redAlertId = convertAlertIdToInt(for: response.notification.request.content.userInfo),let time = convertTimeToInt(for: response.notification.request.content.userInfo)
+        print(response.notification.request.content.userInfo)
+        print(self.window?.rootViewController)
+        print(self.window?.rootViewController as? ContainerViewController)
+        /*if let redAlertId = convertAlertIdToInt(for: response.notification.request.content.userInfo),let time = convertTimeToInt(for: response.notification.request.content.userInfo)
         {
             checkNotification(with: redAlertId, time: time, isWillPresent: false)
-        }
+        }*/
         completionHandler()
     }
 }

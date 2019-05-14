@@ -8,21 +8,24 @@
 
 import Foundation
 enum Operative {
-    case Arrive(redAlertId:Int,uniqueId:String)
+    case Arrived(redAlertId:Int,uniqueId:String)
     case ClosestsShelter(uniqueId:String,latitude:Double,longitude:Double,redAlertId:Int)
     case AllClosestsShelters(uniqueId:String,latitude:Double,longitude:Double)
     
     var requestBody:[String:Any]{
         var body:[String:Any]=[:]
         switch self {
-        case .Arrive(let redAlertId,let uniqueId):
+        
+        case .Arrived(let redAlertId,let uniqueId):
             body[ConstsKey.RED_ALERT_ID] = redAlertId
             body[ConstsKey.UNIQUE_ID] = uniqueId
+        
         case .ClosestsShelter(let uniqueId,let latitude,let longitude,let redAlertId):
             body[ConstsKey.UNIQUE_ID] = uniqueId
             body[ConstsKey.RED_ALERT_ID] = redAlertId
             body[ConstsKey.LATITUDE2] = latitude
             body[ConstsKey.LANGITUDE2] = longitude
+        
         case .AllClosestsShelters(let uniqueId, let latitude, let longitude):
             body[ConstsKey.UNIQUE_ID] = uniqueId
             body[ConstsKey.LATITUDE2] = latitude
@@ -35,7 +38,7 @@ enum Operative {
         var endPoint = "\(ConstsKey.BASE_URL)/\(ConstsKey.OPERATIVE)"
         var method:String
         switch self {
-        case .Arrive:
+        case .Arrived:
             endPoint+="/\(ConstsKey.ARRIVE)"
             method = "POST"
         case .ClosestsShelter:

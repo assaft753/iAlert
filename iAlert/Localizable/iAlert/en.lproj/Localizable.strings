@@ -9,7 +9,6 @@
 "language" = "English";
 "pickLanguage" = "Pick Language";
 "Cancel" = "Cancel";
-"OK" = "OK";
 "firstIns" = "1.Search for wall far from glass.";
 "secondIns" = "2.If not exists look for open space.";
 "thirdIns" = "3.Lie on your stomach.";
@@ -18,7 +17,37 @@
 "Instructions" = "Instructions";
 "descriptionInst" = "Not found near safe zone please follow the instructions:";
 "done" = "Done";
-"safezone" = "Safe Zone";
+"safe place" = "Safe Place";
 "alreadysafezone" = "You are in a safe place already";
 "OK" = "OK";
 "Meter" = "m";
+"arrived" = "you have reached to a safe place";
+"not arrived" = "lay on the ground and protect your head with your hands";
+"search" = "Search Areas";
+"guide dialog title" = "Guide To Safe Place";
+"guide dialog message" = "There is an alert, Do you wish to be guided to Safe Place";
+
+
+"metula" = "Metula";
+"kiryatshmona" = "Kiryat Shmona";
+"zefat" = "Zefat";
+"tiberias" = "Tiberia";
+"haifa" = "Haifa";
+"afula" = "Afula";
+"hadera" = "Hadera";
+"netanya" = "Netanya";
+"raanana" = "Raanana";
+"telavivyafo" = "Tel-Aviv Jafa";
+"ramatgan" = "Ramat-Gan";
+"holon" = "Holon";
+"petahtikva" = "Petah-Tikva";
+"roshhaayin" = "Rosh Haayin";
+"ahiezer" = "Ahiezer";
+"modiin" = "Modiin";
+"rehovot" = "Rehovot";
+"jerusalem" = "Jerusalem";
+"ashkelon" = "Ashkelon";
+"ashdod" = "Ashdod";
+"beersheva" = "Beer-Sheva";
+"eilat" = "Eilat";
+

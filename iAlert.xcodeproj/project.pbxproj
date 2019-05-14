@@ -7,8 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		700F3A892285A5F4002CED33 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 700F3A882285A5F4002CED33 /* beep.mp3 */; };
+		700F3A8F2286029D002CED33 /* AreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A8E2286029D002CED33 /* AreaTableViewCell.swift */; };
+		700F3A9122860632002CED33 /* VKCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A9022860632002CED33 /* VKCheckbox.swift */; };
+		700F3A952286B93D002CED33 /* AreasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A942286B93D002CED33 /* AreasTableViewController.swift */; };
+		700F3A972286DC6F002CED33 /* Management.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A962286DC6F002CED33 /* Management.swift */; };
+		700F3A9922871CB1002CED33 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A9822871CB1002CED33 /* Area.swift */; };
 		702BFB3222724409000C6645 /* iAlertGeoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702BFB3122724409000C6645 /* iAlertGeoCoder.swift */; };
 		70323068227871250042523B /* NSManagedObjectContextExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70323067227871250042523B /* NSManagedObjectContextExtension.swift */; };
+		7042D985228B5A4100FB6127 /* NavigateViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7042D984228B5A4100FB6127 /* NavigateViewControllerDelegate.swift */; };
 		7047A14F2278590F00585B0F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7047A14E2278590F00585B0F /* UIColorExtension.swift */; };
 		7047A15122785A8A00585B0F /* GMSServicesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7047A15022785A8A00585B0F /* GMSServicesExtension.swift */; };
 		7047A1532278676A00585B0F /* UIFontExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7047A1522278676A00585B0F /* UIFontExtension.swift */; };
@@ -61,8 +68,15 @@
 /* Begin PBXFileReference section */
 		0943E240E4048E6366EF4A0C /* Pods-iAlert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iAlert.release.xcconfig"; path = "Pods/Target Support Files/Pods-iAlert/Pods-iAlert.release.xcconfig"; sourceTree = "<group>"; };
 		32D0D501EC299D12BEA7BB78 /* Pods_iAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		700F3A882285A5F4002CED33 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
+		700F3A8E2286029D002CED33 /* AreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTableViewCell.swift; sourceTree = "<group>"; };
+		700F3A9022860632002CED33 /* VKCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKCheckbox.swift; sourceTree = "<group>"; };
+		700F3A942286B93D002CED33 /* AreasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasTableViewController.swift; sourceTree = "<group>"; };
+		700F3A962286DC6F002CED33 /* Management.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Management.swift; sourceTree = "<group>"; };
+		700F3A9822871CB1002CED33 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
 		702BFB3122724409000C6645 /* iAlertGeoCoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAlertGeoCoder.swift; sourceTree = "<group>"; };
 		70323067227871250042523B /* NSManagedObjectContextExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSManagedObjectContextExtension.swift; sourceTree = "<group>"; };
+		7042D984228B5A4100FB6127 /* NavigateViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigateViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7047A14E2278590F00585B0F /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7047A15022785A8A00585B0F /* GMSServicesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMSServicesExtension.swift; sourceTree = "<group>"; };
 		7047A1522278676A00585B0F /* UIFontExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtension.swift; sourceTree = "<group>"; };
@@ -137,9 +151,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		700F3A872285A5CE002CED33 /* Sound Effects */ = {
+			isa = PBXGroup;
+			children = (
+				700F3A882285A5F4002CED33 /* beep.mp3 */,
+			);
+			name = "Sound Effects";
+			path = ..;
+			sourceTree = "<group>";
+		};
 		70460E7A2120A23700BA54CA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				700F3A9022860632002CED33 /* VKCheckbox.swift */,
 				70A995C821FF4BE60028F704 /* Reachability.swift */,
 				70919E2A21FCB14E0056361E /* ConstsKey.swift */,
 			);
@@ -189,13 +213,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7076D116227B146F00614FF3 /* ViewCells */ = {
+		7076D116227B146F00614FF3 /* View Cells */ = {
 			isa = PBXGroup;
 			children = (
 				7076D117227B14A800614FF3 /* SideMenuOptionTableViewCell.swift */,
 				7076D11C227B68CC00614FF3 /* SideMenuSoundOptionTableViewCell.swift */,
+				700F3A8E2286029D002CED33 /* AreaTableViewCell.swift */,
 			);
-			path = ViewCells;
+			path = "View Cells";
 			sourceTree = "<group>";
 		};
 		7076D119227B236A00614FF3 /* Enums */ = {
@@ -206,6 +231,7 @@
 				70919E2E21FCB8280056361E /* Operative.swift */,
 				7076D11A227B23AE00614FF3 /* SideMenuOption.swift */,
 				7076D120227C6C2D00614FF3 /* Direction.swift */,
+				700F3A962286DC6F002CED33 /* Management.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -217,6 +243,7 @@
 				709295F021FE555E00CBA12D /* SafePlace.swift */,
 				702BFB3122724409000C6645 /* iAlertGeoCoder.swift */,
 				7076D129227E1EEB00614FF3 /* Place.swift */,
+				700F3A9822871CB1002CED33 /* Area.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -253,6 +280,7 @@
 				70C17D9D2275D59700D65A49 /* HomeViewController.swift */,
 				70C17D9F2275D5B500D65A49 /* ContainerViewController.swift */,
 				705CC3732283431200289E4C /* NavigateViewController.swift */,
+				700F3A942286B93D002CED33 /* AreasTableViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -262,6 +290,7 @@
 			children = (
 				70CE50F72279CCF9008191B5 /* HomeViewControllerDelegate.swift */,
 				7076D11E227B7FD700614FF3 /* SideMenuViewControllerDelegate.swift */,
+				7042D984228B5A4100FB6127 /* NavigateViewControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -308,9 +337,10 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
+				700F3A872285A5CE002CED33 /* Sound Effects */,
 				7076D122227C70E800614FF3 /* Structs */,
 				7076D119227B236A00614FF3 /* Enums */,
-				7076D116227B146F00614FF3 /* ViewCells */,
+				7076D116227B146F00614FF3 /* View Cells */,
 				7076D113227B02E800614FF3 /* Views */,
 				70CE50F62279CCCF008191B5 /* Protocols */,
 				70C17DA12277371100D65A49 /* Fonts */,
@@ -433,6 +463,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				700F3A892285A5F4002CED33 /* beep.mp3 in Resources */,
 				70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */,
 				70C17DBB2277373C00D65A49 /* Rubik-Light.ttf in Resources */,
 				70C17DB82277373C00D65A49 /* Rubik-Bold.ttf in Resources */,
@@ -524,6 +555,7 @@
 				7076D11D227B68CC00614FF3 /* SideMenuSoundOptionTableViewCell.swift in Sources */,
 				7076D12A227E1EEB00614FF3 /* Place.swift in Sources */,
 				70CE50F82279CCF9008191B5 /* HomeViewControllerDelegate.swift in Sources */,
+				700F3A952286B93D002CED33 /* AreasTableViewController.swift in Sources */,
 				705CC3742283431200289E4C /* NavigateViewController.swift in Sources */,
 				705692A32206C989009B0DFA /* Language.swift in Sources */,
 				7076D124227C70FA00614FF3 /* Settings.swift in Sources */,
@@ -533,6 +565,7 @@
 				705692A12206C89C009B0DFA /* StringExtension.swift in Sources */,
 				70C17D9E2275D59700D65A49 /* HomeViewController.swift in Sources */,
 				7076D11F227B7FD700614FF3 /* SideMenuViewControllerDelegate.swift in Sources */,
+				700F3A8F2286029D002CED33 /* AreaTableViewCell.swift in Sources */,
 				705D965122709C2A00E651DB /* AppDelegateFBMessagingExtension.swift in Sources */,
 				709295F121FE555E00CBA12D /* SafePlace.swift in Sources */,
 				70C17DA02275D5B500D65A49 /* ContainerViewController.swift in Sources */,
@@ -546,7 +579,11 @@
 				70919E2F21FCB8280056361E /* Operative.swift in Sources */,
 				7076D121227C6C2D00614FF3 /* Direction.swift in Sources */,
 				70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */,
+				700F3A9922871CB1002CED33 /* Area.swift in Sources */,
+				700F3A9122860632002CED33 /* VKCheckbox.swift in Sources */,
+				700F3A972286DC6F002CED33 /* Management.swift in Sources */,
 				7076D115227B032C00614FF3 /* TransparentView.swift in Sources */,
+				7042D985228B5A4100FB6127 /* NavigateViewControllerDelegate.swift in Sources */,
 				BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */,
 				709295F421FE562900CBA12D /* Model.xcdatamodeld in Sources */,
 				70A995C921FF4BE60028F704 /* Reachability.swift in Sources */,

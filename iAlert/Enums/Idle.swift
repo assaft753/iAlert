@@ -12,7 +12,7 @@ enum Idle {
     case Update(latitude:Double,langitude:Double,city:String,uniqueId:String,language:String)
     case PreferredLanguage(uniqueId:String,language:String)
     
-    var requestBody:[String:Any]{
+    private var requestBody:[String:Any]{
         switch self {
         case .Register(let uniqueId,let prevId):
             var body:[String:Any] = [:]
@@ -20,7 +20,6 @@ enum Idle {
                 body[ConstsKey.PREV_ID] = prev
             }
             body[ConstsKey.UNIQUE_ID] = uniqueId
-            body[ConstsKey.IS_ANDROID] = false
             return body
             
         case .Update(let latitude,let langitude,let city,let uniqueId,let language):

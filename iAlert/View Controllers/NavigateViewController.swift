@@ -8,10 +8,11 @@
 
 import UIKit
 import GoogleMaps
+import AVFoundation
 
 
 class NavigateViewController: UIViewController {
-
+    
     
     var gmsMapView:GMSMapView?
     var distanceButton:UIButton?
@@ -21,9 +22,20 @@ class NavigateViewController: UIViewController {
     var timeLabel:UILabel?
     var closeButton:UIButton?
     var topView:UIView?
+    weak var delegate:NavigateViewControllerDelegate?
     
-    var safePlace:SafePlace! = SafePlace(longitude: 34.629111, latitude: 31.784373, address: "aaaaaaaaaaaaa")
+    var safePlace:SafePlace! /*= SafePlace(longitude: 34.629111, latitude: 31.784373, address: nil,time: 16)*/
     
+    var timer:Timer?
+    var timeInSeconds:Int!
+    {
+        didSet
+        {
+            setTimeLabel(self.timeInSeconds)
+            makeSoundForTimeLeft(self.timeInSeconds)
+        }
+    }
+    var beepSoundEffect: AVAudioPlayer?
     var toFollow:Bool = true
     let locationManager:CLLocationManager = CLLocationManager()
     var isFirstTimeLocation:Bool = true
@@ -44,20 +56,102 @@ class NavigateViewController: UIViewController {
     }
     
     override var modalPresentationStyle: UIModalPresentationStyle{
-    get {
-        return UIModalPresentationStyle.fullScreen
+        get {
+            return UIModalPresentationStyle.fullScreen
+        }
+        set{
+            self.modalPresentationStyle = newValue
+        }
     }
-    set{
-        self.modalPresentationStyle = newValue
-    }
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setSafePlaceMarkerInGMSMap(for: safePlace.coordinate)
         locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         locationManager.startUpdatingLocation()
+        /*if let timeInSeconds = safePlace.time
+         {
+         self.timeInSeconds = timeInSeconds
+         self.timer = Timer.init(timeInterval: 1.0, repeats: true){
+         [weak self] timer in
+         self?.setTimeLeftInSeconds()
+         }
+         }*/
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let timeInSeconds = safePlace.time
+        {
+            setTimeLabel(timeInSeconds)
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        timer?.invalidate()
+        timer = nil
+        locationManager.stopUpdatingLocation()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let timeInSeconds = safePlace.time
+        {
+            self.timeInSeconds = timeInSeconds
+            self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true){
+                [weak self] _ in
+                self?.setTimeLeftInSeconds()
+            }
+        }
+    }
+    
+    @objc func setTimeLeftInSeconds()
+    {
+        self.timeInSeconds -= 1
+        if self.timeInSeconds == 0
+        {
+            timer?.invalidate()
+            timer = nil
+            
+            let alert = UIAlertController(title: "Instructions".localized, message: "not arrived".localized, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK".localized, style: .default) { [weak self] _ in
+                self?.dismissNavigation()
+            })
+            self.present(alert, animated: true)
+        }
+    }
+    
+    func setTimeLabel(_ timeInSeconds:Int)
+    {
+        let timeStr = generateTimeString(timeInSeconds)
+        timeLabel?.text = timeStr
+    }
+    
+    func generateTimeString(_ timeInSeconds:Int)->String
+    {
+        let minutes:Int = timeInSeconds / 60
+        let seconds:Int = timeInSeconds % 60
+        var str = "\(minutes):"
+        guard seconds >= 10 else{
+            str += "0\(seconds)"
+            return str
+        }
+        str += "\(seconds)"
+        return str
+        
+    }
+    
+    func makeSoundForTimeLeft(_ timeInSeconds:Int)
+    {
+        guard Settings.shared.sound, (timeInSeconds <= 15 || timeInSeconds % 5 == 0) else {return}
+        let path = Bundle.main.path(forResource: "beep.mp3", ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        self.beepSoundEffect = try? AVAudioPlayer(contentsOf: url)
+        self.beepSoundEffect?.play()
     }
     
     override func loadView() {
@@ -92,14 +186,24 @@ class NavigateViewController: UIViewController {
         let closeButton = UIButton(frame: CGRect.zero)
         
         topView?.addSubview(timeLabel)
-         topView?.addSubview(closeButton)
+        topView?.addSubview(closeButton)
         
         timeLabel.numberOfLines = 1
         timeLabel.minimumScaleFactor = 8;
         timeLabel.adjustsFontSizeToFitWidth = true
-        timeLabel.text = "1:20"
         timeLabel.textColor = .white
         timeLabel.font = UIFont.DEFAULT_FONT.withSize(32)
+        timeLabel.text = "9:90"
+        
+        if let _ = safePlace.time
+        {
+            timeLabel.alpha = 1
+        }
+        else
+        {
+            timeLabel.alpha = 0
+        }
+        
         
         timeLabel.translatesAutoresizingMaskIntoConstraints = false
         timeLabel.centerXAnchor.constraint(equalTo: topView!.centerXAnchor).isActive = true
@@ -120,9 +224,15 @@ class NavigateViewController: UIViewController {
         self.timeLabel = timeLabel
     }
     
+    func dismissNavigation()
+    {
+        self.delegate?.finishNavigation()
+        self.dismiss(animated: true)
+    }
+    
     @objc func close(_ sender:UIButton)
     {
-        self.dismiss(animated: true)
+        dismissNavigation()
     }
     
     func initBottomView()
@@ -169,7 +279,7 @@ class NavigateViewController: UIViewController {
         
         distanceButton.translatesAutoresizingMaskIntoConstraints = false
         
-    distanceButton.addConstraint(NSLayoutConstraint(item: distanceButton, attribute: .height, relatedBy: .equal, toItem: distanceButton, attribute: .width, multiplier: 1, constant: 0))
+        distanceButton.addConstraint(NSLayoutConstraint(item: distanceButton, attribute: .height, relatedBy: .equal, toItem: distanceButton, attribute: .width, multiplier: 1, constant: 0))
         
         distanceButton.centerYAnchor.constraint(equalTo: bottomView!.centerYAnchor,constant: 0).isActive = true
         
@@ -189,7 +299,7 @@ class NavigateViewController: UIViewController {
         }
         else if Settings.shared.direction == Direction.RTL
         {
-                        initRTLBottomViewSubViews()
+            initRTLBottomViewSubViews()
         }
         
         bottomView?.layoutIfNeeded()
@@ -211,11 +321,11 @@ class NavigateViewController: UIViewController {
     {
         
         addressLabel!.textAlignment = .right
-       
+        
         addressLabel!.rightAnchor.constraint(equalTo: bottomView!.rightAnchor, constant: -16).isActive = true
         
         addressLabel!.leftAnchor.constraint(equalTo: distanceButton!.rightAnchor,constant: 8).isActive = true
-       
+        
         
         distanceButton!.leftAnchor.constraint(equalTo: bottomView!.leftAnchor, constant: 16).isActive = true
     }
@@ -313,10 +423,24 @@ extension NavigateViewController:CLLocationManagerDelegate
         distanceStr = "\(distance)"
         if(distance <= 5)
         {
-            //TODO: user arrived to safeplace logic
+            timer?.invalidate()
+            timer = nil
+            
+            if let redAlertId = safePlace.redAlertId
+            {
+                iAlertService.shared.arrived(redAlertId: redAlertId)
+            }
+            
+            let alert = UIAlertController(title: "safe place".localized, message: "arrived".localized, preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "OK".localized, style: .default) { [weak self] _ in
+                self?.dismissNavigation()
+            })
+            self.present(alert, animated: true)
         }
+        
         iAlertGeoCoder(coordinate: source, GMSLanguageCode: Settings.shared.GMSLanguageId).reverseGeocodeCoordinate {
-           [weak self] place in
+            [weak self] place in
             guard let place = place else {return}
             let desc = "\(place)"
             guard desc != "" else{return}
@@ -325,10 +449,6 @@ extension NavigateViewController:CLLocationManagerDelegate
             }
             
         }
-    }
-    
-    func getUnitCharInCurrentLanguage()
-    {
     }
 }
 

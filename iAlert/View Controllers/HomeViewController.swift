@@ -203,6 +203,13 @@ extension HomeViewController:CLLocationManagerDelegate
         guard let location = locations.last else {
             return
         }
+        
+        if location.timestamp.timeIntervalSinceNow < 60
+        {
+            //manager.requestLocation()
+        }
+        
+        
         if firstTimeCircularRegion
         {
             firstTimeCircularRegion = !firstTimeCircularRegion

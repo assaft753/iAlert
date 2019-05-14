@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 protocol HomeViewControllerDelegate:class {
     func toggleMenu()
     func navigateMeButtonPressed()

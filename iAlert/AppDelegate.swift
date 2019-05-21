@@ -13,8 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var isDid:Bool?
     let locationManager = CLLocationManager()
     let center = UNUserNotificationCenter.current()
-    var locker:NSObject? = nil
-    //let TO_LOCK_KEY = "lock"
     
     static let geoCoder = CLGeocoder()
     
@@ -58,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        window?.rootViewController =  /*NavigateViewController()*/ContainerViewController() //TODO: change it back to ContainerViewController
+        window?.rootViewController = ContainerViewController()
         
         return true
     }
@@ -74,11 +72,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        locker = NSObject()
-    }
-    
     
     func sendLocalNotificationWith(title:String?,body:String?)
     {
@@ -109,164 +102,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
-/*extension AppDelegate: CLLocationManagerDelegate {
-    
-    func newLocationReceived( location: CLLocation,city: String, description: String) {
-        guard let token = UserDefaults.standard.string(forKey: "token") else {return}
-        iAlertService.shared.fetch(type: .AllClosestsShelters(uniqueId: token, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)){
-            data,err,response in
-            guard let httpResponse = response as? HTTPURLResponse else {return}
-            if httpResponse.statusCode < 400,let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [[String:Any]]{
-                DispatchQueue.main.async {
-                    iAlertService.shared.removeAllShelters()
-                    iAlertService.shared.saveShelters(shelters: result)
-                    if let shelters = iAlertService.shared.loadShelters()
-                    {
-                        print("final!!!!!!!!!!!!!!!!!!!!!! \(shelters)")
-                    }
-                }
-            }
-        }
-        
-        iAlertService.shared.fetch(type: .Update(latitude:location.coordinate.latitude, langitude: location.coordinate.longitude, city: city, uniqueId: token, language: "english")){
-            data,err,response in
-            if let httpResponse = response as? HTTPURLResponse
-            {
-                let title:String = "status code \(httpResponse.statusCode)"
-                var body:String = ""
-                if let data = data
-                {
-                    body = "with data: \(String(data: data, encoding: .utf8)!)"
-                }
-                else if let error = err
-                {
-                    body = "with error: \(error)"
-                }
-                let content = UNMutableNotificationContent()
-                content.title = title
-                content.body = "\(description) with body \(body)"
-                content.sound = UNNotificationSound.default()
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-                self.center.add(request, withCompletionHandler: nil)
-            }
-            
-            if let data = data
-            {
-                print("in data!!! \(String.init(data: data, encoding: String.Encoding.utf8))")
-            }
-            print("in err!!! \(err)")
-            print("in response!!! \(response as? HTTPURLResponse)")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let location = locations.first else {
-            return
-        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "location recv"
-        content.sound = UNNotificationSound.default()
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-        let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-        self.center.add(request, withCompletionHandler: nil)
-        
-        AppDelegate.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
-            
-            let content = UNMutableNotificationContent()
-            content.title = "location geocoder"
-            content.sound = UNNotificationSound.default()
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-            let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-            self.center.add(request, withCompletionHandler: nil)
-            
-            if let place = placemarks?.first {
-                
-                let content = UNMutableNotificationContent()
-                content.title = "\(place)"
-                content.sound = UNNotificationSound.default()
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false)
-                let request = UNNotificationRequest(identifier: "\(Date().timeIntervalSince1970)", content: content, trigger: trigger)
-                self.center.add(request, withCompletionHandler: nil)
-                
-                if let city = place.locality
-                {
-                    let description = "New Location: \(place)"
-                    self.newLocationReceived(location: location, city: city, description: description)
-                }
-            }
-        }
-    }
-}*/
-
 
 @available(iOS 10, *)
 extension AppDelegate : UNUserNotificationCenterDelegate {
-    
-    private func convertAlertIdToInt(for userInfo: [AnyHashable : Any]) -> Int?
-    {
-        if let dic = userInfo as? [String:Any], let redAlertIdStr = dic["redAlertId"] as? String, let redAlertId = Int(redAlertIdStr)
-        {
-            return redAlertId
-        }
-        return nil
-    }
-    
-    private func convertTimeToInt(for userInfo: [AnyHashable : Any]) -> Int?
-    {
-        if let dic = userInfo as? [String:Any], let timeStr = dic["max_time_to_arrive_to_shelter"] as? String, let time = Int(timeStr)
-        {
-            return time
-        }
-        return nil
-    }
-    
-    private func checkNotification(with redAlertId:Int, time:Int,isWillPresent:Bool)
-    {
-        /*if let navCtrl = self.window?.rootViewController as? UINavigationController,let loadingViewCtrl = navCtrl.topViewController as? LoadingViewController
-        {
-            let safePlace = SafePlace(redAlertId: redAlertId,time: time)
-            loadingViewCtrl.safePlace = safePlace
-            if isWillPresent == false
-            {
-                loadingViewCtrl.isWillPresent = false
-                if loadingViewCtrl.afterWillAppear == true
-                {
-                    loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
-                    loadingViewCtrl.isWillPresent = nil
-                }
-            }
-            else if isWillPresent == true
-            {
-                loadingViewCtrl.startProcessingLocationNavigation(isLocalShelter: false)
-                loadingViewCtrl.isWillPresent = true
-            }
-        }*/
-    }
-    
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("will!!!")
-        print(print(notification.request.content.userInfo))
-        print(self.window?.rootViewController)
-        print(self.window?.rootViewController as? ContainerViewController)
         let userInfo = notification.request.content.userInfo
         if let dic = userInfo as? [String:Any],
-            let timeStr = dic["max_time_to_arrive_to_shelter"] as? String,
-            let time = Int(timeStr),
             let redAlertIdStr = dic["redAlertId"] as? String,
             let redAlertId = Int(redAlertIdStr),
             let containerVC = self.window?.rootViewController as? ContainerViewController
         {
-            containerVC.askUserForWishingNavigation(alertId: redAlertId, time: time)
+            containerVC.askUserForWishingNavigation(alertId: redAlertId)
         }
-        /*if let redAlertId = convertAlertIdToInt(for: notification.request.content.userInfo),let time = convertTimeToInt(for: notification.request.content.userInfo)
-        {
-            checkNotification(with: redAlertId, time: time, isWillPresent: true)
-        }*/
         completionHandler([])
     }
     
@@ -274,13 +125,14 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                                 didReceive response: UNNotificationResponse,
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         print("did!!!")
-        print(response.notification.request.content.userInfo)
-        print(self.window?.rootViewController)
-        print(self.window?.rootViewController as? ContainerViewController)
-        /*if let redAlertId = convertAlertIdToInt(for: response.notification.request.content.userInfo),let time = convertTimeToInt(for: response.notification.request.content.userInfo)
+        let userInfo = response.notification.request.content.userInfo
+        if let dic = userInfo as? [String:Any],
+            let redAlertIdStr = dic["redAlertId"] as? String,
+            let redAlertId = Int(redAlertIdStr),
+            let containerVC = self.window?.rootViewController as? ContainerViewController
         {
-            checkNotification(with: redAlertId, time: time, isWillPresent: false)
-        }*/
+            containerVC.remoteNavigationToSafePlace(redAlertId: redAlertId)
+        }
         completionHandler()
     }
 }

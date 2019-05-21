@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import CoreData
 import CoreLocation
+import Reachability
+import GoogleMaps
 
 class iAlertService{
     static var shared = iAlertService()
@@ -18,14 +20,14 @@ class iAlertService{
         return appDelegate.persistentContainer.viewContext
     }
     
-   private func fetch(type idle:Idle, compilation:((Data?,Error?,URLResponse?)->Void)? = nil)
+    private func fetch(type idle:Idle, compilation:((Data?,Error?,URLResponse?)->Void)? = nil)
     {
         if let requestURL = idle.requestURL{
             self.activate(session: requestURL, compilation: compilation)
         }
     }
     
-   private func fetch(type operative:Operative, compilation:((Data?,Error?,URLResponse?)->Void)? = nil)
+    private func fetch(type operative:Operative, compilation:((Data?,Error?,URLResponse?)->Void)? = nil)
     {
         if let requestURL = operative.requestURL{
             self.activate(session: requestURL, compilation: compilation)
@@ -44,11 +46,6 @@ class iAlertService{
         URLSession.shared.dataTask(with: sessionOpt){ (data, response, err) in
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.sendLocalNotificationWith(title: "4", body: nil)
-            print(sessionOpt)
-            print(response)
-            print(err)
-            if let data = data
-            { print(String(data: data, encoding: .utf8))}
             compilation?(data,err,response)
             
             }.resume()
@@ -56,57 +53,83 @@ class iAlertService{
     
     func getAndSaveAllClosestsSafePlaces(for coordinate:CLLocationCoordinate2D,completion:(([SafePlace]?)->Void)? = nil)
     {
-        guard let token = UserDefaults.standard.string(forKey: "token") else {
-            completion?(nil)
-            return
-        }
-        
-        fetch(type: .AllClosestsShelters(uniqueId: token, latitude: coordinate.latitude, longitude: coordinate.longitude)){
-            data,err,response in
-            if let data = data
+        DispatchQueue.global(qos: .default).async
             {
-                print("getAndSaveAllClosestsSafePlaces \(String(decoding: data, as: UTF8.self)) \(err) \(response)")
-            }
-            else
-            {
-                print("getAndSaveAllClosestsSafePlaces \(err) \(response)")
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode < 300,let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [[String:Any]]{
-                SafePlace.removeAllSafePlaces()
-                SafePlace.saveShelters(shelters: result)
-                if let completion = completion
+                if let reachability = Reachability(),reachability.connection == .none
                 {
-                    let SafePlaces = SafePlace.loadSafePlaces()
-                    completion(SafePlaces)
+                    guard let safePlaces = SafePlace.loadSafePlaces() else{
+                        completion?(nil)
+                        return
+                    }
+                    
+                    completion?(safePlaces.filter{ GMSGeometryDistance($0.coordinate,coordinate) <= 400 })
                 }
-            }
-            else
-            {
-                completion?(nil)
-            }
+                    
+                else
+                {
+                    guard let token = UserDefaults.standard.string(forKey: "token") else {
+                        completion?(nil)
+                        return
+                    }
+                    
+                    self.fetch(type: .AllClosestsShelters(uniqueId: token, latitude: coordinate.latitude, longitude: coordinate.longitude)){
+                        data,err,response in
+                        if let httpResponse = response as? HTTPURLResponse,httpResponse.statusCode < 300,let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let element = dicJson as? [String:Any],let result = element["result"] as? [[String:Any]]{
+                            SafePlace.removeAllSafePlaces()
+                            SafePlace.saveShelters(shelters: result)
+                            if let completion = completion
+                            {
+                                let SafePlaces = SafePlace.loadSafePlaces()
+                                completion(SafePlaces)
+                            }
+                        }
+                        else
+                        {
+                            completion?(nil)
+                        }
+                    }
+                }
         }
     }
     
-    func getSelfClosestSafePlace(for coordinate:CLLocationCoordinate2D,completion:@escaping ((SafePlace?)->Void))
+    func getSelfClosestSafePlace(for coordinate:CLLocationCoordinate2D,completion:@escaping ((SafePlace?,Error?)->Void))
     {
-        guard let token = UserDefaults.standard.string(forKey: "token") else {
-            completion(nil)
-            return
-        }
-        
-        fetch(type: .AllClosestsShelters(uniqueId: token, latitude: coordinate.latitude, longitude: coordinate.longitude)){
-            data,err,response in
-            if let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),
-                let element = dicJson as? [String:Any],
-                let result = element["result"] as? [[String:Any]]
+        DispatchQueue.global(qos: .default).async {
+            if let reachability = Reachability(),reachability.connection == .none
             {
-                let safePlace = SafePlace.getClosestSafePlace(of: SafePlace.convertToSafePlaces(result), for: coordinate)
-                completion(safePlace)
+                guard let safePlaces = SafePlace.loadSafePlaces() else{
+                    completion(nil,nil)
+                    return
+                }
+                completion(SafePlace.getClosestSafePlace(of: safePlaces,for: coordinate),nil)
             }
             else
             {
-                completion(nil)
+                guard let token = UserDefaults.standard.string(forKey: "token") else {
+                    completion(nil,NSError())
+                    return
+                }
+                
+                self.fetch(type: .AllClosestsShelters(uniqueId: token, latitude: coordinate.latitude, longitude: coordinate.longitude)){
+                    data,err,response in
+                    if let err = err
+                    {
+                        completion(nil,err)
+                        return
+                    }
+                    
+                    if let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),
+                        let element = dicJson as? [String:Any],
+                        let result = element["result"] as? [[String:Any]]
+                    {
+                        let safePlace = SafePlace.getClosestSafePlace(of: SafePlace.convertToSafePlaces(result), for: coordinate)
+                        completion(safePlace,nil)
+                    }
+                    else
+                    {
+                        completion(nil,nil)
+                    }
+                }
             }
         }
     }
@@ -140,10 +163,10 @@ class iAlertService{
     {
         if let token = UserDefaults.standard.string(forKey: "token")
         {
-            fetch(type: .Update(latitude: coordinate.latitude, langitude: coordinate.longitude, city: city, uniqueId:token , language: Language.LANGUAGE_PRESENTAION[Settings.shared.languageId] ?? "")){
+            fetch(type: .Update(latitude: coordinate.latitude, langitude: coordinate.longitude, city: city, uniqueId:token , language: Language.LANGUAGE_PRESENTAION[Settings.shared.languageId] ?? "english")){
                 data,err,response in
                 completion?((response as? HTTPURLResponse)?.statusCode,data,err)
-            }//TODO: update to english
+            }
         }
     }
     
@@ -165,8 +188,8 @@ class iAlertService{
                 {
                     var areasDic:[Int:Area] = [:]
                     elements.forEach{
-                       guard let areaCode = $0[ConstsKey.AREA_CODE] as? Int
-                        else{return}
+                        guard let areaCode = $0[ConstsKey.AREA_CODE] as? Int
+                            else{return}
                         guard let city = $0["city"] as? String
                             else{return}
                         let cities:[String] = city.components(separatedBy: ",").map{
@@ -187,8 +210,8 @@ class iAlertService{
                         if let data = data, let dicJson = try? JSONSerialization.jsonObject(with: data, options: []),let elements = dicJson as? [[String:Any]]
                         {
                             elements.forEach{
-                               guard let areaCode = $0[ConstsKey.AREA_CODE] as? Int
-                                else {return}
+                                guard let areaCode = $0[ConstsKey.AREA_CODE] as? Int
+                                    else {return}
                                 guard let area = areasDic[areaCode] else{return}
                                 area.isPreffered = true
                             }
@@ -202,7 +225,7 @@ class iAlertService{
                             
                             compilation?(areas)
                         }
-                        
+                            
                         else {
                             compilation?(nil)
                             return
@@ -238,7 +261,7 @@ class iAlertService{
         }
     }
     
-    func getSafePlaceAfterNotification(redAlertId:Int, coordinate:CLLocationCoordinate2D,completion: @escaping ((Double?,Double?,Int?,Error?)->Void))
+    func getSafePlaceAfterNotification(redAlertId:Int, coordinate:CLLocationCoordinate2D,completion: @escaping ((Double?,Double?,Int?,Bool,Error?)->Void))
     {
         if let token = UserDefaults.standard.string(forKey: "token")
         {
@@ -247,7 +270,7 @@ class iAlertService{
                 
                 if let error = error
                 {
-                    completion(nil,nil,nil,error)
+                    completion(nil,nil,nil,false,error)
                     return
                 }
                 
@@ -259,15 +282,14 @@ class iAlertService{
                     let latitude = dic["latitude"] as? Double,
                     let longitude = dic["longitude"] as? Double
                 {
-                    completion(latitude,longitude,time,nil)
+                    completion(latitude,longitude,time,true,nil)
                     return
                 }
                 else
                 {
-                    completion(nil,nil,nil,NSError())
+                    completion(nil,nil,nil,false,nil)
                     return
                 }
-                
             }
         }
     }

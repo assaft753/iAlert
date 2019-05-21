@@ -9,4 +9,5 @@ target 'iAlert' do
 pod 'Firebase/Core'
 pod 'Firebase/Messaging'
 pod 'GoogleMaps'
+pod 'ReachabilitySwift'
 end

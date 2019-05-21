@@ -370,13 +370,15 @@ extension NavigateViewController:GMSMapViewDelegate
     func setSafePlaceMarkerInGMSMap(for coordinate:CLLocationCoordinate2D)
     {
         let safePlaceMarker:GMSMarker = GMSMarker(position: coordinate)
+        let icon = #imageLiteral(resourceName: "marker")
+        safePlaceMarker.icon = icon
         safePlaceMarker.map = gmsMapView
     }
     
     func drawPolygon(from source:CLLocationCoordinate2D, to destination:CLLocationCoordinate2D)
     {
         gmsMapView?.clear()
-        setGMSCircle(for: safePlace.coordinate)
+        //setGMSCircle(for: safePlace.coordinate)
         setSafePlaceMarkerInGMSMap(for: safePlace.coordinate)
         let path = GMSMutablePath()
         path.addLatitude(source.latitude, longitude: source.longitude)
@@ -406,12 +408,14 @@ extension NavigateViewController:CLLocationManagerDelegate
             isFirstTimeLocation = !isFirstTimeLocation
             gmsMapView?.camera = GMSCameraPosition.camera(withTarget:coordinate , zoom: 15.8)
         }
+            
         else if toFollow
         {
             let camera = GMSCameraPosition.camera(withTarget: coordinate, zoom: gmsMapView!.camera.zoom)
             gmsMapView?.animate(to: camera)
             gmsMapView?.camera = camera
         }
+        
         drawPolygon(from: coordinate,to: safePlace.coordinate)
         setDistanceAndLocation(for: coordinate)
     }

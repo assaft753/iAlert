@@ -9,11 +9,6 @@
 "language" = "English";
 "pickLanguage" = "Pick Language";
 "Cancel" = "Cancel";
-"firstIns" = "1.Search for wall far from glass.";
-"secondIns" = "2.If not exists look for open space.";
-"thirdIns" = "3.Lie on your stomach.";
-"fourthIns" = "4.Protect your head with your hands.";
-"fifthIns" = "5.In a break, try to reach for a safe zone quikly.";
 "Instructions" = "Instructions";
 "descriptionInst" = "Not found near safe zone please follow the instructions:";
 "done" = "Done";
@@ -21,11 +16,15 @@
 "alreadysafezone" = "You are in a safe place already";
 "OK" = "OK";
 "Meter" = "m";
+"Areas" = "Areas";
+"not found" = "No Safe Place was found nearby";
+"error" = "An error occurred, please try later";
 "arrived" = "you have reached to a safe place";
 "not arrived" = "lay on the ground and protect your head with your hands";
 "search" = "Search Areas";
 "guide dialog title" = "Guide To Safe Place";
 "guide dialog message" = "There is an alert, Do you wish to be guided to Safe Place";
+"wait" = "Please wait";
 
 
 "metula" = "Metula";

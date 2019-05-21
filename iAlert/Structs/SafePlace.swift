@@ -89,13 +89,8 @@ extension SafePlace
         {
             return nil
         }
-            
-        else if safePlaces.count == 1
-        {
-            return safePlaces.first
-        }
         
-        return safePlaces.sorted {  GMSGeometryDistance($0.coordinate,coordinate) > GMSGeometryDistance($1.coordinate,coordinate)
+        return safePlaces.filter{ GMSGeometryDistance($0.coordinate,coordinate) <= 100 }.sorted {  GMSGeometryDistance($0.coordinate,coordinate) < GMSGeometryDistance($1.coordinate,coordinate)
             }.first
     }
 }

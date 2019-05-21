@@ -35,20 +35,10 @@ struct iAlertGeoCoder
     
     public func reverseGeocodeCoordinate(completionHandler:@escaping ((Place?)->Void))
     {
-        //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        //appDelegate.sendLocalNotificationWith(title: "77", body: nil)
-        
-        
         if let gmsUrl = GMSGeoCoderUrl
         {
-            //appDelegate.sendLocalNotificationWith(title: "\(gmsUrl)", body: nil)
             URLSession.shared.dataTask(with: gmsUrl){
                 (data, response, error)  in
-                //let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                //appDelegate.sendLocalNotificationWith(title: "error", body: "\(error)")
-                //appDelegate.sendLocalNotificationWith(title: "data", body: "\(String(data:data ?? Data(),encoding: .utf8))")
-                //appDelegate.sendLocalNotificationWith(title: "response", body: "\(response)")
-                
                 guard error != nil else{
                     guard let data = data else {
                         completionHandler(nil)

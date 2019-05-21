@@ -86,10 +86,6 @@ class HomeViewController: UIViewController {
         gmsMapView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         self.gmsMapView = gmsMapView
-        
-        
-        //TODO: add GMSMarker
-        
     }
     
     func initNavigationBarView(){
@@ -160,6 +156,8 @@ extension HomeViewController{
         if let safePlaces = safePlaces,safePlaces.count > 0 {
             safePlaces.forEach{
                 let marker = GMSMarker(position: $0.coordinate)
+                let icon = #imageLiteral(resourceName: "marker")
+                marker.icon = icon
                 marker.map = googleMap
             }
         }
@@ -204,9 +202,9 @@ extension HomeViewController:CLLocationManagerDelegate
             return
         }
         
-        if location.timestamp.timeIntervalSinceNow < 60
+        if location.timestamp.timeIntervalSinceNow > 60
         {
-            //manager.requestLocation()
+            return
         }
         
         
@@ -247,11 +245,11 @@ extension HomeViewController:CLLocationManagerDelegate
     func setGMSCircle(for center:CLLocationCoordinate2D)
     {
         gmsMapView?.clear()
-        let gmsCircle = GMSCircle(position: center, radius: ConstsKey.CIRCULAR_EXIT_REGION_RADIUS)
+        /*let gmsCircle = GMSCircle(position: center, radius: ConstsKey.CIRCULAR_EXIT_REGION_RADIUS)
         gmsCircle.fillColor = .red
         gmsCircle.strokeColor = .red
         gmsCircle.strokeWidth = 5
-        gmsCircle.map = gmsMapView
+        gmsCircle.map = gmsMapView*/
         updateSafePlaces(for: center)
     }
     

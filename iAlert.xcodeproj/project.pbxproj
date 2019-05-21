@@ -109,6 +109,8 @@
 		70919E3121FCC0930056361E /* iAlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iAlertService.swift; sourceTree = "<group>"; };
 		709295F021FE555E00CBA12D /* SafePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SafePlace.swift; sourceTree = "<group>"; };
 		709295F321FE562900CBA12D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		709ABD89228D657A00D466F9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		709ABD8A228D657A00D466F9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = iAlert/ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		70A995C721FF419A0028F704 /* hadera.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = hadera.gpx; sourceTree = "<group>"; };
 		70A995C821FF4BE60028F704 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		70C17D9D2275D59700D65A49 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -425,28 +427,7 @@
 				Base,
 				he,
 				en,
-				de,
-				ar,
-				"zh-Hans",
-				fa,
-				uk,
-				es,
-				sl,
-				da,
-				it,
-				bg,
-				sv,
-				ko,
-				"zh-Hant",
-				hu,
-				"pt-BR",
-				vi,
-				lt,
 				ru,
-				fr,
-				nl,
-				"pt-PT",
-				ca,
 			);
 			mainGroup = BA00B38C20F5116D0074C0EB;
 			productRefGroup = BA00B39620F5116D0074C0EB /* Products */;
@@ -495,12 +476,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-iAlert/Pods-iAlert-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -600,6 +583,7 @@
 				705692B22206D5BF009B0DFA /* Base */,
 				705692B42206D5F3009B0DFA /* en */,
 				705692B52206D616009B0DFA /* he */,
+				709ABD89228D657A00D466F9 /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -610,6 +594,7 @@
 				705692B72206D66B009B0DFA /* Base */,
 				705692B92206D68C009B0DFA /* he */,
 				705692BA2206D70F009B0DFA /* en */,
+				709ABD8A228D657A00D466F9 /* ru */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

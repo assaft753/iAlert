@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  iAlert
+
+  Created by Assaf Tayouri on 03/02/2019.
+  Copyright © 2019 Assaf Tayouri. All rights reserved.
+*/
+
+"navigateBtn" = "Веди меня";
+"language" = "русский";
+"pickLanguage" = "Выберите язык";
+"Cancel" = "отменить";
+"Instructions" = "инструкции";
+"safe place" = "Безопасное место";
+"alreadysafezone" = "ты уже в безопасном месте";
+"OK" = "Хорошо";
+"Areas" = "районы";
+"Language" = "язык";
+"Sound" = "звук";
+"Meter" = "м";
+"arrived" = "Вы достигли безопасного места";
+"not arrived" = "ложись на землю и защищай голову руками";
+"search" = "Области поиска";
+"guide dialog title" = "Руководство по безопасному месту";
+"guide dialog message" = "Есть предупреждение, Вы хотите, чтобы направиться в безопасное место";
+"error" = "Произошла ошибка, попробуйте позже";
+"not found" = "Укрытия поблизости не найдено";
+"wait" = "Пожалуйста подождите";
+
+
+
+
+"metula" = "Metula";
+"kiryatshmona" = "Кирьят Шмона";
+"zefat" = "Цфат";
+"tiberias" = "Тверия";
+"haifa" = "Хайфа";
+"afula" = "Афула";
+"hadera" = "Хадера";
+"netanya" = "Нетания";
+"raanana" = "Раанана";
+"telavivyafo" = "Тель-Авив Яффо";
+"ramatgan" = "Рамат-Ган";
+"holon" = "Холон";
+"petahtikva" = "Петах Тиква";
+"roshhaayin" = "Рош ха-Аин";
+"ahiezer" = "Achiezer";
+"modiin" = "Модиин";
+"rehovot" = "Реховот";
+"jerusalem" = "Иерусалим";
+"ashkelon" = "Ашкелон";
+"ashdod" = "Ашдоде";
+"beersheva" = "Беэр Шева";
+"eilat" = "Эйлат";

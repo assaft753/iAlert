@@ -21,9 +21,14 @@ enum Language{
     private static let HEBREW_STR = "עברית"
     private static let HEBREW_PRESENTAION = "hebrew"
     
-    static let LANGUAGE_STRS = [ENGLISH_STR,HEBREW_STR]
-    static let LANGUAGE_IDS = [ENGLISH_ID,HEBREW_ID]
-    static let LANGUAGE_PRESENTAION = [ENGLISH_ID:ENGLISH_PRESENTAION,HEBREW_ID:HEBREW_PRESENTAION]
+    static let RUSSIAN_ID = "ru"
+    private static let RUSSIAN_ID_GMS = "ru"
+    private static let RUSSIAN_STR = "Russian"
+    private static let RUSSIAN_PRESENTAION = "russian"
+    
+    static let LANGUAGE_STRS = [ENGLISH_STR,HEBREW_STR,RUSSIAN_STR]
+    static let LANGUAGE_IDS = [ENGLISH_ID,HEBREW_ID,RUSSIAN_ID]
+    static let LANGUAGE_PRESENTAION = [ENGLISH_ID:ENGLISH_PRESENTAION,HEBREW_ID:HEBREW_PRESENTAION,RUSSIAN_ID:RUSSIAN_PRESENTAION]
     
     static let PREFFERED_LANGUAGE = "preferred_language"
     
@@ -31,15 +36,16 @@ enum Language{
     
     case English(RawValue)
     case Hebrew(RawValue)
+    case Russian(RawValue)
     
-    var languageIdentifier:String{//TODO: delete
+    /*var languageIdentifier:String{//TODO: delete
         switch self {
         case .English:
             return Language.ENGLISH_ID
         case.Hebrew:
             return Language.HEBREW_ID
         }
-    }
+    }*/
     
     
     static func getLanguage(of languageId:String)->Language?
@@ -49,6 +55,8 @@ enum Language{
             return Language.English((direction:.LTR,languageId:ENGLISH_ID,GMSLanguageId:ENGLISH_ID_GMS))
         case HEBREW_ID:
             return Language.Hebrew((direction:.RTL,languageId:HEBREW_ID,GMSLanguageId:HEBREW_ID_GMS))
+        case RUSSIAN_ID:
+            return Language.Russian((direction:.LTR,languageId:RUSSIAN_ID,GMSLanguageId:RUSSIAN_ID_GMS))
         default:
             return nil
         }
@@ -58,8 +66,10 @@ enum Language{
     {
         switch self {
         case .English(let direction, let languageId, let GMSLanguageId):
-            return (direction:direction,languageId:languageId,GMSLanguageId:GMSLanguageId)
+            return RawValue(direction,languageId,GMSLanguageId)
         case .Hebrew(let direction, let languageId, let GMSLanguageId):
+            return RawValue(direction,languageId,GMSLanguageId)
+        case .Russian(let direction, let languageId, let GMSLanguageId):
             return RawValue(direction,languageId,GMSLanguageId)
         }
     

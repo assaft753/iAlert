@@ -12,18 +12,7 @@ import UIKit
 extension AppDelegate: CLLocationManagerDelegate {
     
     func newLocationReceived( location: CLLocation, city: String, description: String) {
-//                let token = UserDefaults.standard.string(forKey: "token")
-//
-//                let update = Idle.Update(latitude: location.coordinate.latitude, langitude: location.coordinate.longitude, city: city, uniqueId:token! , language: "english")
-//                URLSession.shared.dataTask(with: update.requestURL!){ (data, response, err) in
-//                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//                    appDelegate.sendLocalNotificationWith(title: "44", body: nil)
-//                    print(response)
-//                    print(err)
-//        }.resume()
-        
-        
-        
+
         iAlertService.shared.update(coordinate: location.coordinate, city: city){
             statusCode,data,err in
             self.sendLocalNotificationWith(title: "fetch", body: nil)
@@ -42,8 +31,6 @@ extension AppDelegate: CLLocationManagerDelegate {
             self.sendLocalNotificationWith(title:title,body:contentBody)
         }
         
-        //if locker == nil
-        // {
         iAlertService.shared.getAndSaveAllClosestsSafePlaces(for: location.coordinate){
             _ in
             self.sendLocalNotificationWith(title: "safeplaces saved", body: nil)
@@ -58,8 +45,6 @@ extension AppDelegate: CLLocationManagerDelegate {
         self.sendLocalNotificationWith(title: title, body: nil)
         
         iAlertGeoCoder(coordinate: location.coordinate, GMSLanguageCode: Language.ENGLISH_ID).reverseGeocodeCoordinate{place in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.sendLocalNotificationWith(title: "77", body: nil)
             guard let place = place else{return}
             
             let description = "New Location: \(place)"

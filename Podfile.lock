@@ -68,11 +68,13 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.7.0)
+  - ReachabilitySwift (4.3.1)
 
 DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - GoogleMaps
+  - ReachabilitySwift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -87,6 +89,7 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - Protobuf
+    - ReachabilitySwift
 
 SPEC CHECKSUMS:
   Firebase: fa80b9d987ca014a1ba9357496ef2a0178b28b12
@@ -100,7 +103,8 @@ SPEC CHECKSUMS:
   GoogleUtilities: f1faafc033ea203adf1783ce00af455bb99d0e5b
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 7a877b7f3e5964e3fce995e2eb323dbc6831bb5a
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
 
-PODFILE CHECKSUM: 634ef367c69952e7f28898e223050eea3c2a8800
+PODFILE CHECKSUM: 225e2046f148ebd062f535451710b23dbef61171
 
 COCOAPODS: 1.5.3

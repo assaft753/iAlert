@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		700F3A892285A5F4002CED33 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 700F3A882285A5F4002CED33 /* beep.mp3 */; };
 		700F3A8F2286029D002CED33 /* AreaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A8E2286029D002CED33 /* AreaTableViewCell.swift */; };
 		700F3A9122860632002CED33 /* VKCheckbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A9022860632002CED33 /* VKCheckbox.swift */; };
 		700F3A952286B93D002CED33 /* AreasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700F3A942286B93D002CED33 /* AreasTableViewController.swift */; };
@@ -58,6 +57,7 @@
 		70CE50F82279CCF9008191B5 /* HomeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CE50F72279CCF9008191B5 /* HomeViewControllerDelegate.swift */; };
 		70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 70DF109C21FCDEA500470612 /* ashdod.gpx */; };
 		70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */; };
+		70F9EA9322957FBD00105CE9 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70F9EA9222957FBD00105CE9 /* beep.mp3 */; };
 		BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39820F5116D0074C0EB /* AppDelegate.swift */; };
 		BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39F20F5116D0074C0EB /* iAlert.xcdatamodeld */; };
 		BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA00B3A220F5116E0074C0EB /* Assets.xcassets */; };
@@ -68,7 +68,6 @@
 /* Begin PBXFileReference section */
 		0943E240E4048E6366EF4A0C /* Pods-iAlert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iAlert.release.xcconfig"; path = "Pods/Target Support Files/Pods-iAlert/Pods-iAlert.release.xcconfig"; sourceTree = "<group>"; };
 		32D0D501EC299D12BEA7BB78 /* Pods_iAlert.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iAlert.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		700F3A882285A5F4002CED33 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		700F3A8E2286029D002CED33 /* AreaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaTableViewCell.swift; sourceTree = "<group>"; };
 		700F3A9022860632002CED33 /* VKCheckbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKCheckbox.swift; sourceTree = "<group>"; };
 		700F3A942286B93D002CED33 /* AreasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +130,7 @@
 		70E2525D22847FE8005FA9B8 /* ashdod4.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod4.gpx; sourceTree = "<group>"; };
 		70EA2CAC22216EBA000CB7BA /* afeka.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = afeka.gpx; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		70F9EA9222957FBD00105CE9 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA00B3A020F5116D0074C0EB /* TurnByTurn2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TurnByTurn2.xcdatamodel; sourceTree = "<group>"; };
@@ -153,15 +153,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		700F3A872285A5CE002CED33 /* Sound Effects */ = {
-			isa = PBXGroup;
-			children = (
-				700F3A882285A5F4002CED33 /* beep.mp3 */,
-			);
-			name = "Sound Effects";
-			path = ..;
-			sourceTree = "<group>";
-		};
 		70460E7A2120A23700BA54CA /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +300,14 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		70F9EA9122957F8C00105CE9 /* Sounds Effects */ = {
+			isa = PBXGroup;
+			children = (
+				70F9EA9222957FBD00105CE9 /* beep.mp3 */,
+			);
+			path = "Sounds Effects";
+			sourceTree = "<group>";
+		};
 		AD898588F3D6DCB9EE4B2489 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,7 +338,7 @@
 		BA00B39720F5116D0074C0EB /* iAlert */ = {
 			isa = PBXGroup;
 			children = (
-				700F3A872285A5CE002CED33 /* Sound Effects */,
+				70F9EA9122957F8C00105CE9 /* Sounds Effects */,
 				7076D122227C70E800614FF3 /* Structs */,
 				7076D119227B236A00614FF3 /* Enums */,
 				7076D116227B146F00614FF3 /* View Cells */,
@@ -444,10 +443,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				700F3A892285A5F4002CED33 /* beep.mp3 in Resources */,
 				70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */,
 				70C17DBB2277373C00D65A49 /* Rubik-Light.ttf in Resources */,
 				70C17DB82277373C00D65A49 /* Rubik-Bold.ttf in Resources */,
+				70F9EA9322957FBD00105CE9 /* beep.mp3 in Resources */,
 				705692B82206D66B009B0DFA /* Localizable.strings in Resources */,
 				BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */,
 				70C17DB62277373C00D65A49 /* Rubik-Black.ttf in Resources */,

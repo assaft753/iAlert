@@ -71,7 +71,7 @@ profile
 ####
 # CocoaPods
 Pods/
-!Podfile
+Podfile
 !Podfile.lock
 
 ####

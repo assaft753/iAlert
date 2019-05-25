@@ -5,28 +5,29 @@
   Created by Assaf Tayouri on 03/02/2019.
   Copyright © 2019 Assaf Tayouri. All rights reserved.
 */
-"navigateBtn" = "הכוון אותי";
+"navigateBtn" = "נווט למקום הבטוח הקרוב";
 "language" = "עברית";
 "pickLanguage" = "בחר שפה";
 "Cancel" = "ביטול";
-"OK" = "אישור";
+"OK" = "בסדר";
 "Instructions" = "הוראות";
 "descriptionInst" = "לא נמצא מקום מחסה קרוב אנא פעל לפי ההוראות:";
 "done" = "סיים";
 "safe place" = "מקום בטוח";
 "alreadysafezone" = "הנך כבר במקום בטוח";
 "Language" = "שפות";
-"Areas" = "איזורים";
-"Sound" = "שמע";
+"Areas" = "אזורים";
+"Sound" = "צלילים";
 "Meter" = "מ";
 "arrived" = "הגעת למקום בטוח";
-"not arrived" = "שכב על האדמה והגן על ראשך עם הידיים";
-"search" = "חפש איזורים";
+"not arrived" = "שכב על הקרקע ולהגן על הראש באמצעות הידיים";
+"search" = "חפש עיר";
 "guide dialog title" = "הכוונה למקום בטוח";
 "guide dialog message" = "ישנה התראה, האם להכווין למקום בטוח?";
 "error" = "אירעה שגיאה, אנא נסה מאוחר יותר";
 "not found" = "לא נמצא מקום מחסה קרוב";
 "wait" = "אנא המתן";
+"maximum cities" = "לא ניתן להירשם ליותר מ10 ערים";
 
 
 

@@ -33,6 +33,7 @@
 		7076D121227C6C2D00614FF3 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D120227C6C2D00614FF3 /* Direction.swift */; };
 		7076D124227C70FA00614FF3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D123227C70FA00614FF3 /* Settings.swift */; };
 		7076D12A227E1EEB00614FF3 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D129227E1EEB00614FF3 /* Place.swift */; };
+		70853F3A229985C800898B8F /* AreasDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70853F39229985C800898B8F /* AreasDelegate.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
 		70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2A21FCB14E0056361E /* ConstsKey.swift */; };
 		70919E2D21FCB5600056361E /* Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2C21FCB5600056361E /* Idle.swift */; };
@@ -98,6 +99,7 @@
 		7076D127227DED9A00614FF3 /* ashdod2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod2.gpx; sourceTree = "<group>"; };
 		7076D128227DF16300614FF3 /* ashdod3.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod3.gpx; sourceTree = "<group>"; };
 		7076D129227E1EEB00614FF3 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		70853F39229985C800898B8F /* AreasDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasDelegate.swift; sourceTree = "<group>"; };
 		708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iAlert.entitlements; sourceTree = "<group>"; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
 		70919E2A21FCB14E0056361E /* ConstsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstsKey.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				70CE50F72279CCF9008191B5 /* HomeViewControllerDelegate.swift */,
 				7076D11E227B7FD700614FF3 /* SideMenuViewControllerDelegate.swift */,
 				7042D984228B5A4100FB6127 /* NavigateViewControllerDelegate.swift */,
+				70853F39229985C800898B8F /* AreasDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				70323068227871250042523B /* NSManagedObjectContextExtension.swift in Sources */,
 				702BFB3222724409000C6645 /* iAlertGeoCoder.swift in Sources */,
 				7047A14F2278590F00585B0F /* UIColorExtension.swift in Sources */,
+				70853F3A229985C800898B8F /* AreasDelegate.swift in Sources */,
 				7076D11B227B23AE00614FF3 /* SideMenuOption.swift in Sources */,
 				7047A1532278676A00585B0F /* UIFontExtension.swift in Sources */,
 				70919E2F21FCB8280056361E /* Operative.swift in Sources */,

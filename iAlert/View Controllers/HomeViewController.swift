@@ -30,8 +30,8 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-        initGMSMapView()
         initBottomButtonView()
+        initGMSMapView()
         initNavigationBarView()
     }
     
@@ -77,6 +77,12 @@ class HomeViewController: UIViewController {
         gmsMapView.delegate = self
         view.addSubview(gmsMapView)
         view.sendSubview(toBack: gmsMapView)
+        navigateMeButtonView?.layoutIfNeeded()
+        navigateMeButtonView?.layoutSubviews()
+        let bottomPadding = navigateMeButtonView!.frame.height + 40
+        print(bottomPadding)
+        let mapInsets = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(bottomPadding), right: 0)
+        gmsMapView.padding = mapInsets
         gmsMapView.isMyLocationEnabled = true
         gmsMapView.settings.myLocationButton = true
         gmsMapView.translatesAutoresizingMaskIntoConstraints = false

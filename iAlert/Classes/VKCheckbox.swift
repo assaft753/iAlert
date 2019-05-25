@@ -44,12 +44,12 @@ class VKCheckbox: UIView
      - See: isOn()
      */
     fileprivate var on: Bool = false
-    {
-        didSet
+    /*{
+        /*didSet
         {
             self.checkboxValueChangedBlock?(on)
-        }
-    }
+        }*/
+    }*/
     
     /**
      Closure which called when property 'on' is changed
@@ -199,19 +199,20 @@ extension VKCheckbox
      Function allows you to set checkbox state
      - Parameter on Checkbox state
      */
-    func setOn(_ on: Bool)
+    /*func setOn(_ on: Bool)
     {
         self.setOn(on, animated: false)
-    }
+    }*/
     
     /**
      Function allows you to set checkbox state with animation
      - Parameter on Checkbox state
      - Parameter animated Enable anomation
      */
-    func setOn(_ on: Bool, animated: Bool)
+    func setOn(_ on: Bool, execCallback:Bool = true, animated: Bool = false)
     {
         self.on = on
+        
         self.showCheckmark(on, animated: animated)
         
         if animated
@@ -219,12 +220,28 @@ extension VKCheckbox
             UIView.animate(withDuration: 0.275, animations:
             {
                 self.setBackground(on ? self.bgColorSelected : self.bgColor)
-            })
+            }){ _ in
+                if execCallback
+                {
+                    self.checkboxValueChangedBlock?(on)
+                }
+            }
         }
         else
         {
             self.setBackground(on ? self.bgColorSelected : self.bgColor)
+            if execCallback
+            {
+                self.checkboxValueChangedBlock?(on)
+            }
         }
+    }
+    
+    func reset()
+    {
+        self.on = false
+        self.showCheckmark(false, animated: false)
+        self.setBackground(self.bgColor)
     }
     
     /**

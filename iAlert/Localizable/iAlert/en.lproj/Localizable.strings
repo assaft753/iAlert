@@ -5,7 +5,7 @@
   Created by Assaf Tayouri on 03/02/2019.
   Copyright © 2019 Assaf Tayouri. All rights reserved.
 */
-"navigateBtn" = "Guide Me";
+"navigateBtn" = "Navigate to a safe location";
 "language" = "English";
 "pickLanguage" = "Pick Language";
 "Cancel" = "Cancel";
@@ -21,10 +21,11 @@
 "error" = "An error occurred, please try later";
 "arrived" = "you have reached to a safe place";
 "not arrived" = "lay on the ground and protect your head with your hands";
-"search" = "Search Areas";
+"search" = "Search for a city";
 "guide dialog title" = "Guide To Safe Place";
 "guide dialog message" = "There is an alert, Do you wish to be guided to Safe Place";
 "wait" = "Please wait";
+"maximum cities" = "It is not possible to sign to more than 10 cities";
 
 
 "metula" = "Metula";

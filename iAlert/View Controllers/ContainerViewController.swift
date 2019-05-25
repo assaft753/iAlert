@@ -228,7 +228,7 @@ class ContainerViewController: UIViewController {
     func showNotFoundDialog()
     {
         hideLoaderView{ [weak self] in
-            self?.showAlert(title: "safe place".localized, message: "not found".localized){
+            self?.showAlert(title: "safe place".localized, message: "not arrived".localized){
                 self?.isAvailable = true
             }
         }

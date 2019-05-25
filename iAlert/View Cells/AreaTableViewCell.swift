@@ -34,23 +34,31 @@ class AreaTableViewCell: UITableViewCell {
         let checkbox = VKCheckbox(frame: CGRect.zero)
         checkbox.line = .thin
         checkbox.bgColorSelected = UIColor.SECONDARY_COLOR
-        checkbox.bgColor = UIColor.white
+        //checkbox.bgColor = UIColor.white
         checkbox.color = UIColor.white
         checkbox.borderColor = UIColor.SECONDARY_COLOR
         checkbox.borderWidth = 1.3
         return checkbox
     }()
     
+    weak var delegate:AreasDelegate?
+    
     func valueChanged(isOn:Bool)
     {
-        area.isPreffered = isOn
-        if area.isPreffered
+        if isOn,let delegate = delegate,!delegate.checkMaximumCurrentSafePlaces()
         {
+            
+        area.isPreffered = isOn
            iAlertService.shared.setPrefferedArea(areaCode: area.areaCode)
+        }
+        else if !isOn
+        {
+            area.isPreffered = isOn
+            iAlertService.shared.deletePrefferedArea(areaCode: area.areaCode)
         }
         else
         {
-            iAlertService.shared.deletePrefferedArea(areaCode: area.areaCode)
+            checkbox.reset();
         }
     }
     

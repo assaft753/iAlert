@@ -76,8 +76,6 @@ class AreasTableViewController: UITableViewController {
         dismiss(animated: true)
     }
     
-    // MARK: - Table view data source
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -93,11 +91,44 @@ class AreasTableViewController: UITableViewController {
         cell.areaCodeLabel.text = "\(area.areaCode)"
         cell.cityNameLabel.text = "\(area)"
         cell.area = area
-        cell.checkbox.checkboxValueChangedBlock = nil
-        cell.checkbox.setOn(area.isPreffered)
+        cell.delegate = self
+        cell.checkbox.setOn(area.isPreffered,execCallback: false)
         cell.checkbox.checkboxValueChangedBlock = cell.valueChanged
+        
         return cell
     }
+}
+
+extension AreasTableViewController:AreasDelegate
+{
+    func checkMaximumCurrentSafePlaces() -> Bool {
+        var count = 0
+        self.allAreas.forEach{ area in
+            if count >= 10
+            {
+                return
+            }
+            count += area.isPreffered == true ? 1 : 0
+        }
+        if count >= 10
+        {
+            showAlert(title: "Areas".localized, message: "maximum cities".localized,completion: nil)
+            return true;
+        }
+        
+        return false
+    }
+    
+    func showAlert(title:String?,message:String?,completion:(()->Void)?){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "OK".localized, style: .default,handler:{_ in
+            completion?()
+        }))
+        present(alert, animated: true, completion: completion)
+    }
+    
+    
 }
 
 extension AreasTableViewController: UISearchResultsUpdating {

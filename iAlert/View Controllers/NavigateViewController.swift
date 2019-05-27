@@ -390,11 +390,11 @@ extension NavigateViewController:GMSMapViewDelegate
     
     func setGMSCircle(for center:CLLocationCoordinate2D)
     {
-        let gmsCircle = GMSCircle(position: center, radius: ConstsKey.CIRCULAR_ENTER_REGION_RADIUS)
+        /*let gmsCircle = GMSCircle(position: center, radius: ConstsKey.CIRCULAR_ENTER_REGION_RADIUS)
         gmsCircle.fillColor = .red
         gmsCircle.strokeColor = .red
         gmsCircle.strokeWidth = 5
-        gmsCircle.map = gmsMapView
+        gmsCircle.map = gmsMapView*/
     }
 }
 

@@ -141,15 +141,28 @@ extension HomeViewController{
     
     private func updateRTLUI()
     {
-        navigationItem.leftBarButtonItem = nil
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+        if(UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft) {
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+        }
+        
+        else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+            navigationItem.leftBarButtonItem = nil
+        }
     }
     
     private func updateLTRUI()
     {
-        navigationItem.rightBarButtonItem = nil
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+        if(UIApplication.shared.userInterfaceLayoutDirection == .rightToLeft) {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+            navigationItem.leftBarButtonItem = nil
+        }
         
+        else {
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "menu").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(toggleMenu))
+        }
         updateNonDirectionalsUI()
     }
     

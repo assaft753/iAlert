@@ -85,6 +85,7 @@ struct Settings {
     {
         UserDefaults.standard.set(languageId, forKey: Language.PREFFERED_LANGUAGE)
         UserDefaults.standard.synchronize()
+        iAlertService.shared.setPreferredLanguage(with: Language.LANGUAGE_PRESENTAION[languageId] ?? "english")
     }
     
     private func loadSoundConfiguration()->Bool?

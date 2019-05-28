@@ -33,6 +33,11 @@
 		7076D121227C6C2D00614FF3 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D120227C6C2D00614FF3 /* Direction.swift */; };
 		7076D124227C70FA00614FF3 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D123227C70FA00614FF3 /* Settings.swift */; };
 		7076D12A227E1EEB00614FF3 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7076D129227E1EEB00614FF3 /* Place.swift */; };
+		70790F8A229BCE1A00A174FF /* 4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70790F85229BCE1A00A174FF /* 4.mp3 */; };
+		70790F8B229BCE1A00A174FF /* 5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70790F86229BCE1A00A174FF /* 5.mp3 */; };
+		70790F8C229BCE1A00A174FF /* 3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70790F87229BCE1A00A174FF /* 3.mp3 */; };
+		70790F8E229BCE1A00A174FF /* 2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70790F89229BCE1A00A174FF /* 2.mp3 */; };
+		70790F90229BD19400A174FF /* 6.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70790F8F229BD19400A174FF /* 6.mp3 */; };
 		70853F3A229985C800898B8F /* AreasDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70853F39229985C800898B8F /* AreasDelegate.swift */; };
 		708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */; };
 		70919E2B21FCB14E0056361E /* ConstsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70919E2A21FCB14E0056361E /* ConstsKey.swift */; };
@@ -58,7 +63,6 @@
 		70CE50F82279CCF9008191B5 /* HomeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CE50F72279CCF9008191B5 /* HomeViewControllerDelegate.swift */; };
 		70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 70DF109C21FCDEA500470612 /* ashdod.gpx */; };
 		70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */; };
-		70F9EA9322957FBD00105CE9 /* beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 70F9EA9222957FBD00105CE9 /* beep.mp3 */; };
 		BA00B39920F5116D0074C0EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39820F5116D0074C0EB /* AppDelegate.swift */; };
 		BA00B3A120F5116D0074C0EB /* iAlert.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA00B39F20F5116D0074C0EB /* iAlert.xcdatamodeld */; };
 		BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA00B3A220F5116E0074C0EB /* Assets.xcassets */; };
@@ -99,6 +103,12 @@
 		7076D127227DED9A00614FF3 /* ashdod2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod2.gpx; sourceTree = "<group>"; };
 		7076D128227DF16300614FF3 /* ashdod3.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod3.gpx; sourceTree = "<group>"; };
 		7076D129227E1EEB00614FF3 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		70790F85229BCE1A00A174FF /* 4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 4.mp3; sourceTree = "<group>"; };
+		70790F86229BCE1A00A174FF /* 5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 5.mp3; sourceTree = "<group>"; };
+		70790F87229BCE1A00A174FF /* 3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 3.mp3; sourceTree = "<group>"; };
+		70790F89229BCE1A00A174FF /* 2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 2.mp3; sourceTree = "<group>"; };
+		70790F8F229BD19400A174FF /* 6.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 6.mp3; sourceTree = "<group>"; };
+		70790F91229BE4F900A174FF /* afeka2.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = afeka2.gpx; sourceTree = "<group>"; };
 		70853F39229985C800898B8F /* AreasDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasDelegate.swift; sourceTree = "<group>"; };
 		708A2BBD211F6A64004EE8F5 /* iAlert.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iAlert.entitlements; sourceTree = "<group>"; };
 		708A2BC2211F7AD7004EE8F5 /* LaunchiAlert.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchiAlert.storyboard; sourceTree = "<group>"; };
@@ -129,7 +139,6 @@
 		70E2525D22847FE8005FA9B8 /* ashdod4.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ashdod4.gpx; sourceTree = "<group>"; };
 		70EA2CAC22216EBA000CB7BA /* afeka.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = afeka.gpx; sourceTree = "<group>"; };
 		70F26CE5211F61F000BE08ED /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		70F9EA9222957FBD00105CE9 /* beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = beep.mp3; sourceTree = "<group>"; };
 		BA00B39520F5116D0074C0EB /* iAlert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iAlert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA00B39820F5116D0074C0EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BA00B3A020F5116D0074C0EB /* TurnByTurn2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TurnByTurn2.xcdatamodel; sourceTree = "<group>"; };
@@ -185,6 +194,7 @@
 				7076D127227DED9A00614FF3 /* ashdod2.gpx */,
 				7076D128227DF16300614FF3 /* ashdod3.gpx */,
 				70E2525D22847FE8005FA9B8 /* ashdod4.gpx */,
+				70790F91229BE4F900A174FF /* afeka2.gpx */,
 			);
 			path = GPX;
 			sourceTree = "<group>";
@@ -303,7 +313,11 @@
 		70F9EA9122957F8C00105CE9 /* Sounds Effects */ = {
 			isa = PBXGroup;
 			children = (
-				70F9EA9222957FBD00105CE9 /* beep.mp3 */,
+				70790F8F229BD19400A174FF /* 6.mp3 */,
+				70790F89229BCE1A00A174FF /* 2.mp3 */,
+				70790F87229BCE1A00A174FF /* 3.mp3 */,
+				70790F85229BCE1A00A174FF /* 4.mp3 */,
+				70790F86229BCE1A00A174FF /* 5.mp3 */,
 			);
 			path = "Sounds Effects";
 			sourceTree = "<group>";
@@ -446,17 +460,21 @@
 				70DF109D21FCDEA500470612 /* ashdod.gpx in Resources */,
 				70C17DBB2277373C00D65A49 /* Rubik-Light.ttf in Resources */,
 				70C17DB82277373C00D65A49 /* Rubik-Bold.ttf in Resources */,
-				70F9EA9322957FBD00105CE9 /* beep.mp3 in Resources */,
+				70790F90229BD19400A174FF /* 6.mp3 in Resources */,
 				705692B82206D66B009B0DFA /* Localizable.strings in Resources */,
 				BA00B3A320F5116E0074C0EB /* Assets.xcassets in Resources */,
 				70005C5B229582C700196DB8 /* Main.storyboard in Resources */,
+				70790F8B229BCE1A00A174FF /* 5.mp3 in Resources */,
 				70C17DB62277373C00D65A49 /* Rubik-Black.ttf in Resources */,
 				70C17DB92277373C00D65A49 /* Rubik-BoldItalic.ttf in Resources */,
 				70C17DBE2277373C00D65A49 /* Rubik-MediumItalic.ttf in Resources */,
 				70C17DBC2277373C00D65A49 /* Rubik-LightItalic.ttf in Resources */,
+				70790F8E229BCE1A00A174FF /* 2.mp3 in Resources */,
 				70C17DBF2277373C00D65A49 /* Rubik-Regular.ttf in Resources */,
+				70790F8C229BCE1A00A174FF /* 3.mp3 in Resources */,
 				70C17DBA2277373C00D65A49 /* Rubik-Italic.ttf in Resources */,
 				708A2BC3211F7AD7004EE8F5 /* LaunchiAlert.storyboard in Resources */,
+				70790F8A229BCE1A00A174FF /* 4.mp3 in Resources */,
 				70C17DB72277373C00D65A49 /* Rubik-BlackItalic.ttf in Resources */,
 				70F26CE6211F61F000BE08ED /* GoogleService-Info.plist in Resources */,
 				70C17DBD2277373C00D65A49 /* Rubik-Medium.ttf in Resources */,

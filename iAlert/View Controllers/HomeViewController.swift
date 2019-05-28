@@ -211,7 +211,7 @@ extension HomeViewController:CLLocationManagerDelegate
         guard status == .authorizedWhenInUse || status == .authorizedAlways else {
             return
         }
-        manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.startUpdatingLocation()
         
     }

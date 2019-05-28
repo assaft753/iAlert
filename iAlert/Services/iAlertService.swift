@@ -294,5 +294,13 @@ class iAlertService{
         }
     }
     
+    func setPreferredLanguage(with language:String)
+    {
+        if let token = UserDefaults.standard.string(forKey: "token")
+        {
+            fetch(type: .PreferredLanguage(uniqueId: token, language: language))
+        }
+    }
+    
 }
 

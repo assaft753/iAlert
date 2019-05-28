@@ -68,7 +68,7 @@ class NavigateViewController: UIViewController {
         super.viewDidLoad()
         setSafePlaceMarkerInGMSMap(for: safePlace.coordinate)
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.startUpdatingLocation()
         /*if let timeInSeconds = safePlace.time
          {
@@ -147,8 +147,32 @@ class NavigateViewController: UIViewController {
     
     func makeSoundForTimeLeft(_ timeInSeconds:Int)
     {
-        guard Settings.shared.sound, (timeInSeconds <= 15 || timeInSeconds % 5 == 0) else {return}
-        let path = Bundle.main.path(forResource: "beep.mp3", ofType:nil)!
+        guard Settings.shared.sound else {return}
+        if timeInSeconds > 30
+        {
+            activateSound(file: "2.mp3")
+        }
+        else if timeInSeconds <= 30 && timeInSeconds > 20
+        {
+            activateSound(file: "4.mp3")
+        }
+        else if timeInSeconds <= 20 && timeInSeconds > 15
+        {
+            activateSound(file: "3.mp3")
+        }
+        else if timeInSeconds <= 15 && timeInSeconds > 5
+        {
+            activateSound(file: "6.mp3")
+        }
+        else if timeInSeconds <= 5 && timeInSeconds > 0
+        {
+            activateSound(file: "5.mp3")
+        }
+    }
+    
+    func activateSound(file name:String)
+    {
+        let path = Bundle.main.path(forResource: name, ofType:nil)!
         let url = URL(fileURLWithPath: path)
         self.beepSoundEffect = try? AVAudioPlayer(contentsOf: url)
         self.beepSoundEffect?.play()
@@ -406,7 +430,7 @@ extension NavigateViewController:CLLocationManagerDelegate
         
         if isFirstTimeLocation {
             isFirstTimeLocation = !isFirstTimeLocation
-            gmsMapView?.camera = GMSCameraPosition.camera(withTarget:coordinate , zoom: 15.8)
+            gmsMapView?.camera = GMSCameraPosition.camera(withTarget:coordinate , zoom: 20)
         }
             
         else if toFollow
@@ -425,7 +449,7 @@ extension NavigateViewController:CLLocationManagerDelegate
     {
         let distance = Int(GMSGeometryDistance(source, safePlace.coordinate))
         distanceStr = "\(distance)"
-        if(distance <= 5)
+        if(distance <= 10)
         {
             timer?.invalidate()
             timer = nil

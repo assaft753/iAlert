@@ -58,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = ContainerViewController()
         
+        application.setMinimumBackgroundFetchInterval(<#T##minimumBackgroundFetchInterval: TimeInterval##TimeInterval#>)
+        
         return true
     }
     

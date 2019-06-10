@@ -15,7 +15,7 @@ extension AppDelegate: CLLocationManagerDelegate {
 
         iAlertService.shared.update(coordinate: location.coordinate, city: city){
             statusCode,data,err in
-            self.sendLocalNotificationWith(title: "fetch", body: nil)
+            //self.sendLocalNotificationWith(title: "fetch", body: nil)
             let title:String = "status code \(statusCode?.description ?? "no status code")"
             var body:String = ""
             if let data = data
@@ -28,12 +28,12 @@ extension AppDelegate: CLLocationManagerDelegate {
             }
             let contentBody = "\(description) with body \(body)"
             
-            self.sendLocalNotificationWith(title:title,body:contentBody)
+            //self.sendLocalNotificationWith(title:title,body:contentBody)
         }
         
         iAlertService.shared.getAndSaveAllClosestsSafePlaces(for: location.coordinate){
             _ in
-            self.sendLocalNotificationWith(title: "safeplaces saved", body: nil)
+            //self.sendLocalNotificationWith(title: "safeplaces saved", body: nil)
         }
     }
     
@@ -42,13 +42,13 @@ extension AppDelegate: CLLocationManagerDelegate {
             return
         }
         let title = "location recv"
-        self.sendLocalNotificationWith(title: title, body: nil)
+        //self.sendLocalNotificationWith(title: title, body: nil)
         
         iAlertGeoCoder(coordinate: location.coordinate, GMSLanguageCode: Language.ENGLISH_ID).reverseGeocodeCoordinate{place in
             guard let place = place else{return}
             
             let description = "New Location: \(place)"
-            self.sendLocalNotificationWith(title: "geoed place", body: description)
+            //self.sendLocalNotificationWith(title: "geoed place", body: description)
             guard let cityName = place.cityName else {return}
             self.newLocationReceived(location: location, city: cityName, description: description)
         }

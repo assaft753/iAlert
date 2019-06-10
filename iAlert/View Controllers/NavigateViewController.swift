@@ -449,7 +449,7 @@ extension NavigateViewController:CLLocationManagerDelegate
     {
         let distance = Int(GMSGeometryDistance(source, safePlace.coordinate))
         distanceStr = "\(distance)"
-        if(distance <= 10)
+        if(distance <= 1)
         {
             timer?.invalidate()
             timer = nil

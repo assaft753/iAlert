@@ -44,8 +44,8 @@ class iAlertService{
     private func activate(session sessionOpt:URLRequest,compilation:((Data?,Error?,URLResponse?)->Void)?)
     {
         URLSession.shared.dataTask(with: sessionOpt){ (data, response, err) in
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.sendLocalNotificationWith(title: "4", body: nil)
+            //let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            //appDelegate.sendLocalNotificationWith(title: "4", body: nil)
             compilation?(data,err,response)
             
             }.resume()
